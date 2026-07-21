@@ -474,9 +474,9 @@ align-items:center;
 }
 
 .logo img{
-height:20px;
-width:auto;
-transition:0.3s;
+    height:60px;
+    width:auto;
+    display:block;
 }
 
 .logo img:hover{
