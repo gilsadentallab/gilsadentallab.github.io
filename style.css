@@ -534,9 +534,11 @@ color:#b8860b;
 }
 
 .service-grid{
-    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:35px;
+    margin-top:70px;
 }
-
 .card{
     position:relative;
     overflow:hidden;
