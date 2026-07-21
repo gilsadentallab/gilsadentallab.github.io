@@ -546,15 +546,18 @@ color:#b8860b;
     content:"";
     position:absolute;
     top:0;
-    left:0;
-    width:100%;
-    height:5px;
-    background:#d4af37;
-    transform:scaleX(0);
-    transform-origin:left;
-    transition:.4s;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;
+    height:4px;
+    background:linear-gradient(90deg,#b8860b,#d4af37,#f5d76e);
+    border-radius:0 0 10px 10px;
+    transition:.4s ease;
 }
 
+.card:hover::before{
+    width:75%;
+}
 .card:hover::before{
     transform:scaleX(1);
 }
