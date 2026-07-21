@@ -70,27 +70,35 @@ letter-spacing:2px;
 }
 
 nav{
-
-display:flex;
-
-gap:35px;
-
+    display:flex;
+    align-items:center;
+    gap:32px;
 }
 
 nav a{
+    position:relative;
+    color:#333;
+    font-weight:600;
+    transition:.3s;
+}
 
-color:#222;
-
-font-size:16px;
-
-transition:.3s;
-
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:2px;
+    background:#d4af37;
+    transition:.3s;
 }
 
 nav a:hover{
+    color:#d4af37;
+}
 
-color:#d4af37;
-
+nav a:hover::after{
+    width:100%;
 }
 
 .hero{
