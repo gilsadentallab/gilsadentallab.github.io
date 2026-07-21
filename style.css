@@ -114,19 +114,12 @@ width:50%;
 }
 
 .hero-text h2{
-
-font-size:52px;
-font-weight:700;
-line-height:1.4;
-margin-bottom:25px;
-}
-
-font-family:Poppins,sans-serif;
-
-line-height:1.2;
-
-margin-bottom:25px;
-
+    font-family:'Vazirmatn',sans-serif;
+    font-size:52px;
+    font-weight:700;
+    color:#1f2937;
+    line-height:1.4;
+    margin-bottom:25px;
 }
 
 .hero-text p{
