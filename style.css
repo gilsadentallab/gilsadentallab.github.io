@@ -444,7 +444,8 @@ transform:scale(1.05);
 color:#b8860b;
 }
 .btn:hover{
-background:#d4af37;
-color:#fff;
-transform:translateY(-4px);
+    background:#d4af37;
+    color:#fff;
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(212,175,55,.35);
 }
