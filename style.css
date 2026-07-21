@@ -619,3 +619,7 @@ color:#b8860b;
     color:#d4af37;
     letter-spacing:1px;
 }
+@font-face{
+    font-family:"IranNastaliq";
+    src:url("fonts/IranNastaliq.ttf") format("truetype");
+}
