@@ -20,6 +20,7 @@ text-decoration:none;
 }
 
 header{
+transition:transform .35s ease;
 
 width:100%;
 
@@ -44,6 +45,8 @@ background:rgba(255,255,255,.96);
 backdrop-filter:blur(12px);
 
 border-bottom:1px solid #e8e8e8;
+    
+}
 
 }
 
