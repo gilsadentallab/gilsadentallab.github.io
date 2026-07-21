@@ -394,13 +394,13 @@ margin-top:50px;
 }
 
 .card{
-background:#1b1e24;
+background:#ffffff;
 padding:30px;
 border-radius:20px;
-border:1px solid rgba(212,175,55,.2);
+border:1px solid #ececec;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 transition:.35s;
 }
-
 .card:hover{
 transform:translateY(-10px);
 border-color:#d4af37;
@@ -413,7 +413,7 @@ margin-bottom:15px;
 }
 
 .card p{
-color:#ccc;
+color:#555;
 line-height:1.8;
 }
 
@@ -433,17 +433,11 @@ border-top:1px solid rgba(255,255,255,.08);
 color:#999;
 }
 .hero-image img{
-
-width:480px;
-
+width:600px;
 max-width:100%;
-
 filter:drop-shadow(0 0 35px rgba(212,175,55,.35));
-
 animation:float 5s ease-in-out infinite;
-
 transition:.4s;
-
 }
 
 .hero-image img:hover{
@@ -458,7 +452,7 @@ filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
 }
 
 .logo img{
-    height:60px;
+    height:70px;
     width:auto;
     display:block;
 }
