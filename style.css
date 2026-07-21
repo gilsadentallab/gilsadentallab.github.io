@@ -239,11 +239,6 @@ filter:blur(40px);
 z-index:-1;
 }
 
-/* ===== Buttons ===== */
-
-.btn{
-box-shadow:0 10px 30px rgba(0,0,0,.3);
-}
 
 .btn.gold:hover{
 background:#f5d76e;
