@@ -573,9 +573,6 @@ color:#b8860b;
     width:75%;
 }
 
-.card:hover::before{
-    transform:scaleX(1);
-}
 
 .card h3{
     color:#1f2937;
