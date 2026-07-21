@@ -605,3 +605,17 @@ color:#b8860b;
 .card:hover::after{
     height:100%;
 }
+.more{
+    display:inline-flex;
+    align-items:center;
+    margin-top:30px;
+    color:#b8860b;
+    font-weight:700;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.more:hover{
+    color:#d4af37;
+    letter-spacing:1px;
+}
