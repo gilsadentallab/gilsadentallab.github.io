@@ -26,3 +26,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// Hide Header On Scroll
+
+let lastScroll = 0;
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", () => {
+
+    let currentScroll = window.pageYOffset;
+
+    if(currentScroll <= 0){
+        header.style.transform = "translateY(0)";
+        return;
+    }
+
+    if(currentScroll > lastScroll){
+        // Scroll Down
+        header.style.transform = "translateY(-120px)";
+    }else{
+        // Scroll Up
+        header.style.transform = "translateY(0)";
+    }
+
+    lastScroll = currentScroll;
+});
