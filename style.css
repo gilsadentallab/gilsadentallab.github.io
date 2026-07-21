@@ -231,14 +231,6 @@ z-index:-2;
 
 /* ===== Hero ===== */
 
-.hero-text h2{
-color:#1f2937;
-font-size:52px;
-font-weight:700;
-line-height:1.4;
-margin-bottom:25px;
-}
-
 .hero-image{
 position:relative;
 }
