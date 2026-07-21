@@ -437,3 +437,24 @@ text-align:center;
 border-top:1px solid rgba(255,255,255,.08);
 color:#999;
 }
+.hero-image img{
+
+width:480px;
+
+max-width:100%;
+
+filter:drop-shadow(0 0 35px rgba(212,175,55,.35));
+
+animation:float 5s ease-in-out infinite;
+
+transition:.4s;
+
+}
+
+.hero-image img:hover{
+
+transform:scale(1.05);
+
+filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
+
+}
