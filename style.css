@@ -564,10 +564,12 @@ color:#b8860b;
 }
 
 .card h3{
+    color:#1f2937;
     font-size:24px;
+    font-weight:700;
+    letter-spacing:.5px;
     margin-bottom:18px;
 }
-
 .card p{
     font-size:17px;
     line-height:1.9;
