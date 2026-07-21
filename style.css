@@ -458,3 +458,17 @@ transform:scale(1.05);
 filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
 
 }
+.logo{
+display:flex;
+align-items:center;
+}
+
+.logo img{
+height:70px;
+width:auto;
+transition:0.3s;
+}
+
+.logo img:hover{
+transform:scale(1.05);
+}
