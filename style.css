@@ -383,7 +383,7 @@ line-height:2.2;
 max-width:900px;
 margin:auto;
 text-align:center;
-color:#ddd;
+color:#555;
 }
 
 .service-grid{
@@ -465,9 +465,6 @@ filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
 
 .logo img:hover{
 transform:scale(1.05);
-}
-.about p{
-color:#555;
 }
 .card h3{
 color:#b8860b;
