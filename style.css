@@ -572,7 +572,7 @@ color:#b8860b;
 .card:hover::before{
     width:75%;
 }
-}
+
 .card:hover::before{
     transform:scaleX(1);
 }
