@@ -426,19 +426,19 @@ transform:scale(1.05);
 filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
 }
 .logo{
-display:flex;
-align-items:center;
-gap:15px;
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
 .logo img{
-    height:70px;
+    height:72px;
     width:auto;
-    display:block;
+    transition:.3s;
 }
 
 .logo img:hover{
-transform:scale(1.05);
+    transform:scale(1.06);
 }
 .card h3{
 color:#b8860b;
