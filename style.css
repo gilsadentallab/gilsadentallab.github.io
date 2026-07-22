@@ -691,4 +691,21 @@ color:#b8860b;
         display: inline-block;
         word-break: break-word;
     }
+/* ===== موبایل‌های خیلی کوچک (عرض کمتر از 480px) ===== */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    .counter-item {
+        width: 100%;
+    }
+    .container, section {
+        padding: 15px 10px;
+    }
 }
