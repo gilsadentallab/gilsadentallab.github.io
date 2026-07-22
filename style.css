@@ -621,3 +621,74 @@ color:#b8860b;
     font-family:"IranNastaliq";
     src:url("fonts/IranNastaliq.ttf") format("truetype");
 }
+/* ===== موبایل (عرض کمتر از 768px) ===== */
+@media (max-width: 768px) {
+
+    /* تنظیم فونت پایه */
+    body {
+        font-size: 15px;
+    }
+
+    /* هدر و ناوبری */
+    header, nav {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav ul {
+        flex-direction: column;
+        padding: 0;
+    }
+    nav ul li {
+        margin: 8px 0;
+    }
+
+    /* بخش‌ها و کانتینرها */
+    .container, section {
+        padding: 20px 15px;
+    }
+
+    /* کارت‌ها و آیتم‌های خدمات */
+    .services-container, .row, .grid {
+        flex-direction: column;
+        display: block;
+    }
+    .card, .service-item, .box {
+        width: 100%;
+        margin: 12px 0;
+    }
+
+    /* دکمه‌ها */
+    button, .btn, a.button {
+        padding: 14px 20px;
+        font-size: 16px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* تصاویر */
+    img, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* شمارنده‌ها (۱۰+ سال، ۵۰۰۰+ و...) */
+    .counter-item {
+        width: 50%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    /* اگه می‌خوای عمودی بشن، این رو جایگزین کن:
+    .counter-item { width: 100%; }
+    */
+
+    /* اطلاعات تماس */
+    .contact-info {
+        text-align: center;
+    }
+    .contact-info a {
+        display: inline-block;
+        word-break: break-word;
+    }
+}
