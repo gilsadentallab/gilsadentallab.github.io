@@ -708,4 +708,16 @@ color:#b8860b;
     .container, section {
         padding: 15px 10px;
     }
+/* ===== استفاده از نستعلیق فقط برای تیترها ===== */
+h1, h2, h3 {
+    font-family: 'Noto Nastaliq Urdu', 'Urdu Typesetting', 'Arial', sans-serif;
+    font-weight: normal; /* نستعلیق معمولاً سنگین (bold) خوب دیده نمیشه */
+    line-height: 1.6; /* برای زیبایی و خوانایی بهتر */
+    direction: rtl; /* راست‌چین */
+    text-align: right; /* تراز راست */
+}
+
+/* اگه می‌خوای بعضی تیترها نستعلیق نشن، این کلاس رو بساز */
+.not-nastaliq {
+    font-family: 'Vazir', 'Tahoma', sans-serif;
 }
