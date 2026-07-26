@@ -311,3 +311,147 @@ logout.addEventListener("click",function(){
 });
 
 }
+/*====================================
+        REGISTER
+====================================*/
+
+const registerBtn = document.getElementById("registerBtn");
+
+if(registerBtn){
+
+registerBtn.addEventListener("click",function(){
+
+    const user={
+
+        type:document.getElementById("registerType").value,
+
+        fullName:document.getElementById("fullName").value.trim(),
+
+        workPlace:document.getElementById("workPlace").value.trim(),
+
+        mobile:document.getElementById("mobile").value.trim(),
+
+        workPhone:document.getElementById("workPhone").value.trim(),
+
+        city:document.getElementById("city").value.trim(),
+
+        address:document.getElementById("address").value.trim(),
+
+        username:document.getElementById("registerUsername").value.trim(),
+
+        password:document.getElementById("registerPassword").value,
+
+        password2:document.getElementById("registerPassword2").value
+
+    };
+
+    if(
+
+        user.fullName==="" ||
+
+        user.mobile==="" ||
+
+        user.username==="" ||
+
+        user.password===""
+
+    ){
+
+        alert("لطفاً تمام فیلدهای ضروری را تکمیل کنید.");
+
+        return;
+
+    }
+
+    if(user.password!==user.password2){
+
+        alert("رمز عبور و تکرار آن یکسان نیست.");
+
+        return;
+
+    }
+
+    localStorage.setItem(
+
+        "gilsaUsers",
+
+        JSON.stringify([user])
+
+    );
+
+    localStorage.setItem(
+
+        "gilsaUser",
+
+        JSON.stringify(user)
+
+    );
+
+    alert("ثبت نام با موفقیت انجام شد.");
+
+    closeAuthModal();
+
+    openDashboard(user);
+
+    loadProfile(user);
+
+});
+
+}
+
+
+/*====================================
+        LOGIN
+====================================*/
+
+const loginBtn=document.getElementById("loginBtn");
+
+if(loginBtn){
+
+loginBtn.addEventListener("click",function(){
+
+    const username=document.getElementById("loginUsername").value.trim();
+
+    const password=document.getElementById("loginPassword").value;
+
+    const users=
+
+    JSON.parse(
+
+        localStorage.getItem("gilsaUsers")
+
+    ) || [];
+
+    const user=users.find(u=>
+
+        u.username===username &&
+
+        u.password===password
+
+    );
+
+    if(!user){
+
+        alert("نام کاربری یا رمز عبور اشتباه است.");
+
+        return;
+
+    }
+
+    localStorage.setItem(
+
+        "gilsaUser",
+
+        JSON.stringify(user)
+
+    );
+
+    closeAuthModal();
+
+    openDashboard(user);
+
+    loadProfile(user);
+
+});
+
+}
