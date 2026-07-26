@@ -542,3 +542,27 @@ fileInput.addEventListener("change", function(){
 
 
 }
+/*====================================
+        ORDER CODE
+====================================*/
+
+function generateOrderCode(){
+
+    const today = new Date();
+
+    const year = today.getFullYear();
+
+    let lastNumber =
+    Number(localStorage.getItem("gilsaOrderNumber")) || 0;
+
+    lastNumber++;
+
+    localStorage.setItem(
+        "gilsaOrderNumber",
+        lastNumber
+    );
+
+    return "GL-" + year + "-" +
+    String(lastNumber).padStart(4,"0");
+
+}
