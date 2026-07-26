@@ -606,7 +606,77 @@ orderModal.classList.remove("show");
 
 
 }
+/*=========================================
+        LOGIN MODAL
+=========================================*/
 
+const loginModal = document.getElementById("loginModal");
+
+const openLogin = document.querySelectorAll(".open-login");
+
+const closeLogin = document.querySelector(".close-login");
+
+
+
+/*---------- OPEN ----------*/
+
+openLogin.forEach(btn=>{
+
+    btn.addEventListener("click",(e)=>{
+
+        e.preventDefault();
+
+        loginModal.classList.add("show");
+
+        document.body.style.overflow="hidden";
+
+    });
+
+});
+
+
+
+/*---------- CLOSE ----------*/
+
+closeLogin.addEventListener("click",()=>{
+
+    loginModal.classList.remove("show");
+
+    document.body.style.overflow="";
+
+});
+
+
+
+/*---------- CLICK OUTSIDE ----------*/
+
+loginModal.addEventListener("click",(e)=>{
+
+    if(e.target===loginModal){
+
+        loginModal.classList.remove("show");
+
+        document.body.style.overflow="";
+
+    }
+
+});
+
+
+
+/*---------- ESC KEY ----------*/
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+
+        loginModal.classList.remove("show");
+
+        document.body.style.overflow="";
+
+    }
+
+});
 
 
 });
