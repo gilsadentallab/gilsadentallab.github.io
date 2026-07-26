@@ -94,3 +94,38 @@ function openDashboard(user){
         ? "دندانپزشک"
         : "لابراتوار";
 }
+/*==============================
+        REGISTER
+==============================*/
+
+const registerBtn = document.getElementById("registerBtn");
+
+registerBtn.addEventListener("click", function () {
+
+    const user = {
+
+        type: document.getElementById("registerType").value,
+
+        fullName: document.getElementById("fullName").value,
+
+        workPlace: document.getElementById("workPlace").value,
+
+        mobile: document.getElementById("mobile").value,
+
+        city: document.getElementById("city").value,
+
+        address: document.getElementById("address").value,
+
+        username: document.getElementById("registerUsername").value,
+
+        password: document.getElementById("registerPassword").value
+
+    };
+
+    localStorage.setItem("gilsaUser", JSON.stringify(user));
+
+    closeAuthModal();
+
+    openDashboard(user);
+
+});
