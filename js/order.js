@@ -308,6 +308,11 @@ fileInput.addEventListener("change",function(){
         reader.readAsDataURL(file);
 
     }
+const file =
+document.getElementById("workFile").files[0];
 
+
+const fileName =
+file ? file.name : "ندارد";
 
 });
