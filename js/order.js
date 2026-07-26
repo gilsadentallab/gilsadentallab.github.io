@@ -49,6 +49,55 @@ document.addEventListener("keydown", function (e) {
     }
 
 });
+/*=========================================
+        REGISTER MODAL
+=========================================*/
+
+const registerModal =
+document.getElementById("registerModal");
+
+const registerForm =
+document.getElementById("registerForm");
+
+const openRegister =
+document.querySelectorAll(".open-register");
+
+const closeRegister =
+document.querySelector(".close-register");
+
+openRegister.forEach(button=>{
+
+    button.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        registerModal.classList.add("show");
+
+        document.body.style.overflow="hidden";
+
+    });
+
+});
+
+function closeRegisterModal(){
+
+    registerModal.classList.remove("show");
+
+    document.body.style.overflow="auto";
+
+}
+
+closeRegister.addEventListener("click",closeRegisterModal);
+
+registerModal.addEventListener("click",function(e){
+
+    if(e.target===registerModal){
+
+        closeRegisterModal();
+
+    }
+
+});
 // ===== Gilsa Order System =====
 
 
