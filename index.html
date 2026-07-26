@@ -1028,720 +1028,109 @@ alt="Gallery Image">
 
 
 </div>
-<!-- ================= ORDER MODAL ================= -->
-
+<!--==============================
+        ORDER MODAL
+===============================-->
 
 <div class="order-modal" id="orderModal">
 
+    <div class="order-box">
 
-<div class="order-box">
 
+        <span class="close-order">
+            &times;
+        </span>
 
-<span class="close-order">
 
-&times;
 
-</span>
+        <div class="order-header">
 
+            <h2>
+                ثبت سفارش آنلاین
+            </h2>
 
+            <p>
+                برای شروع نوع همکاری را انتخاب کنید
+            </p>
 
+        </div>
 
-<div class="order-header">
 
 
-<h2>
+        <div class="order-step" id="stepOne">
 
-ثبت سفارش آنلاین
 
-</h2>
+            <label class="radio-card">
 
+                <input 
+                type="radio"
+                name="userType"
+                value="dentist"
+                checked>
 
-<p>
 
-لطفاً اطلاعات سفارش را وارد کنید
+                <div>
 
-</p>
+                    <span class="icon">
+                        🦷
+                    </span>
 
+                    <h3>
+                        دندانپزشک
+                    </h3>
 
-</div>
+                    <p>
+                        ثبت سفارش مستقیم بیمار
+                    </p>
 
+                </div>
 
 
+            </label>
 
 
 
-<!-- STEP 1 -->
 
 
-<div class="order-step">
+            <label class="radio-card">
 
 
+                <input 
+                type="radio"
+                name="userType"
+                value="lab">
 
-<label class="radio-card">
 
+                <div>
 
-<input
-type="radio"
-name="userType"
-value="dentist"
-checked>
+                    <span class="icon">
+                        🏢
+                    </span>
 
 
+                    <h3>
+                        همکار لابراتوار
+                    </h3>
 
-<div>
 
-🦷
+                    <p>
+                        سفارش همکاری
+                    </p>
 
-<h3>
 
-دندانپزشک
+                </div>
 
-</h3>
 
+            </label>
 
-<p>
 
-ثبت سفارش مستقیم
 
-</p>
+        </div>
 
 
-</div>
 
+        <button class="next-step">
 
-</label>
+            ادامه →
 
-
-
-
-
-<label class="radio-card">
-
-
-<input
-type="radio"
-name="userType"
-value="lab">
-
-
-
-<div>
-
-🏢
-
-<h3>
-
-همکار لابراتوار
-
-</h3>
-
-
-<p>
-
-سفارش همکاری
-
-</p>
-
-
-</div>
-
-
-</label>
-
-
-
-</div>
-
-
-
-
-
-<button class="next-step">
-
-ادامه →
-
-</button>
-
-
-
-
-
-
-
-
-<!-- STEP 2 -->
-
-
-<div class="order-form">
-
-
-<h2>
-
-اطلاعات سفارش
-
-</h2>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-نام پزشک / همکار
-
-</label>
-
-
-<input
-type="text"
-id="customerName"
-placeholder="مثال: دکتر احمدی">
-
-
-</div>
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-شماره تماس
-
-</label>
-
-
-<input
-type="tel"
-id="customerPhone"
-placeholder="09xxxxxxxxx">
-
-
-</div>
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-نوع کار
-
-</label>
-
-
-<select id="workType">
-
-
-<option value="">
-
-انتخاب کنید
-
-</option>
-
-
-
-<option value="zirconia">
-
-روکش زیرکونیا
-
-</option>
-
-
-
-<option value="pfm">
-
-روکش PFM
-
-</option>
-
-
-
-<option value="implant">
-
-ایمپلنت
-
-</option>
-
-
-
-<option value="emax">
-
-E.max
-
-</option>
-
-
-
-<option value="laminate">
-
-لمینیت
-
-</option>
-
-
-
-<option value="repair">
-
-تعمیر
-
-</option>
-
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-تعداد واحد
-
-</label>
-
-
-<input
-type="number"
-id="workCount"
-min="1"
-value="1">
-
-
-</div>
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-تاریخ تحویل
-
-</label>
-
-
-<input
-type="date"
-id="deliveryDate">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-شماره دندان
-
-</label>
-
-
-<input
-type="text"
-id="toothNumber"
-placeholder="مثال: 11,12,21">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-رنگ دندان (Shade)
-
-</label>
-
-
-
-<select id="shade">
-
-
-<option value="">
-
-انتخاب کنید
-
-</option>
-
-
-<option>
-
-A1
-
-</option>
-
-
-<option>
-
-A2
-
-</option>
-
-
-<option>
-
-A3
-
-</option>
-
-
-<option>
-
-B1
-
-</option>
-
-
-<option>
-
-BL2
-
-</option>
-
-
-</select>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-نوع متریال
-
-</label>
-
-
-
-<select id="material">
-
-
-<option value="">
-
-انتخاب کنید
-
-</option>
-
-
-<option>
-
-Zirconia HT
-
-</option>
-
-
-<option>
-
-Zirconia Multilayer
-
-</option>
-
-
-<option>
-
-E.max Press
-
-</option>
-
-
-<option>
-
-E.max CAD
-
-</option>
-
-
-<option>
-
-PFM
-
-</option>
-
-
-</select>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-آپلود عکس یا فایل
-
-</label>
-
-
-
-<div class="file-upload">
-
-
-<input
-type="file"
-id="workFile"
-accept="image/*,.stl">
-
-
-
-<div id="filePreview">
-
-فایلی انتخاب نشده
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-توضیحات
-
-</label>
-
-
-<textarea
-id="notes"
-rows="5"
-placeholder="توضیحات سفارش">
-</textarea>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="price-box">
-
-
-<h3>
-
-مبلغ تقریبی
-
-</h3>
-
-
-
-<div id="totalPrice">
-
---------
-
-</div>
-
-
-
-
-<div class="delivery-info">
-
-
-زمان آماده سازی:
-
-
-<span id="deliveryTime">
-
----
-
-</span>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- STEP 5 -->
-
-
-<div class="confirm-box" id="confirmBox">
-
-
-<h3>
-
-بررسی سفارش
-
-</h3>
-
-
-
-
-<div id="orderPreview">
-
-اطلاعات سفارش اینجا نمایش داده می‌شود
-
-</div>
-
-
-
-
-
-<button class="confirm-send">
-
-تایید و ارسال واتساپ
-
-</button>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="order-buttons">
-
-
-<button class="calc-price">
-
-محاسبه قیمت
-
-</button>
-
-
-
-
-
-<button class="send-order">
-
-بررسی سفارش
-
-</button>
-
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<script src="script.js"></script>
-
-<script src="js/order.js"></script>
-
-
-
-</body>
-
-</html>
+        </button>
