@@ -1421,7 +1421,75 @@ placeholder="توضیحات اضافی سفارش">
 </div>
 
 </div>
+<!-- ================= AUTH MODAL ================= -->
 
+<div class="auth-modal" id="authModal">
+
+    <div class="auth-box">
+
+        <span class="close-auth">&times;</span>
+
+        <div class="auth-header">
+
+            <img src="images/gilsa-logo.png" alt="Gilsa">
+
+            <h2>ورود / ثبت نام</h2>
+
+            <p>
+                برای ثبت سفارش ابتدا وارد حساب کاربری خود شوید
+            </p>
+
+        </div>
+
+        <div class="auth-tabs">
+
+            <button class="tab-btn active" data-tab="login">
+                ورود
+            </button>
+
+            <button class="tab-btn" data-tab="register">
+                ثبت نام
+            </button>
+
+        </div>
+
+        <!-- LOGIN -->
+
+        <div class="tab-content active" id="login">
+
+            <div class="form-group">
+
+                <label>نام کاربری</label>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="نام کاربری">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>رمز عبور</label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="رمز عبور">
+
+            </div>
+
+            <button class="auth-btn" id="loginBtn">
+
+                ورود به حساب
+
+            </button>
+
+        </div>
+
+        <!-- REGISTER -->
+
+        <div class="tab-content" id="register">
 <script src="script.js"></script>
 
 <script src="js/order.js"></script>
