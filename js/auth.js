@@ -6,19 +6,27 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const authModal = document.getElementById("authModal");
-
-const openAuthButtons = document.querySelectorAll(".open-auth");
-
-const closeAuthButton = document.querySelector(".close-auth");
+const authModal =
+document.getElementById("authModal");
 
 
-/*==============================
-        OPEN AUTH
-==============================*/
+const openButtons =
+document.querySelectorAll(".open-auth");
 
 
-openAuthButtons.forEach(btn=>{
+const closeButton =
+document.querySelector(".close-auth");
+
+
+
+
+
+/*====================
+OPEN MODAL
+====================*/
+
+
+openButtons.forEach(btn=>{
 
 
 btn.addEventListener("click",(e)=>{
@@ -43,9 +51,12 @@ document.body.style.overflow="hidden";
 
 
 
-/*==============================
-        CLOSE AUTH
-==============================*/
+
+
+
+/*====================
+CLOSE MODAL
+====================*/
 
 
 function closeAuth(){
@@ -65,9 +76,12 @@ document.body.style.overflow="";
 
 
 
-if(closeAuthButton){
+if(closeButton){
 
-closeAuthButton.addEventListener("click",closeAuth);
+closeButton.addEventListener(
+"click",
+closeAuth
+);
 
 }
 
@@ -75,7 +89,10 @@ closeAuthButton.addEventListener("click",closeAuth);
 
 if(authModal){
 
-authModal.addEventListener("click",(e)=>{
+
+authModal.addEventListener(
+"click",
+(e)=>{
 
 
 if(e.target===authModal){
@@ -93,24 +110,268 @@ closeAuth();
 
 
 
-/*==============================
-        DASHBOARD
-==============================*/
-
-
-const dashboard=document.getElementById("dashboard");
 
 
 
-function openDashboard(user){
+/*====================
+REGISTER
+====================*/
+
+
+const registerBtn =
+document.getElementById("registerBtn");
 
 
 
-const header=document.getElementById("header");
+if(registerBtn){
 
-const main=document.querySelector("main");
 
-const footer=document.querySelector("footer");
+
+registerBtn.addEventListener("click",()=>{
+
+
+
+const fullName =
+document.getElementById("fullName")?.value.trim();
+
+
+
+const mobile =
+document.getElementById("mobile")?.value.trim();
+
+
+
+const username =
+document.getElementById("registerUsername")?.value.trim();
+
+
+
+const password =
+document.getElementById("registerPassword")?.value;
+
+
+
+const type =
+document.getElementById("registerType")?.value;
+
+
+
+const workplace =
+document.getElementById("workPlace")?.value.trim();
+
+
+
+if(
+!fullName ||
+!mobile ||
+!username ||
+!password
+){
+
+
+alert(
+"لطفاً اطلاعات ضروری را کامل کنید"
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+const user={
+
+
+type:type || "dentist",
+
+
+fullName,
+
+mobile,
+
+username,
+
+password,
+
+workplace,
+
+
+created:
+
+new Date().toLocaleDateString("fa-IR")
+
+
+};
+
+
+
+
+
+localStorage.setItem(
+
+"gilsaUser",
+
+JSON.stringify(user)
+
+);
+
+
+
+
+
+alert(
+"ثبت نام با موفقیت انجام شد"
+);
+
+
+
+closeAuth();
+
+
+
+openDashboard(user);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+/*====================
+LOGIN
+====================*/
+
+
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+
+
+if(loginBtn){
+
+
+
+loginBtn.addEventListener("click",()=>{
+
+
+
+const username =
+document.querySelector(
+".auth-box input[type='text']"
+)?.value.trim();
+
+
+
+const password =
+document.querySelector(
+".auth-box input[type='password']"
+)?.value;
+
+
+
+const saved =
+JSON.parse(
+localStorage.getItem("gilsaUser")
+);
+
+
+
+if(!saved){
+
+
+alert(
+"ابتدا ثبت نام کنید"
+);
+
+
+return;
+
+
+}
+
+
+
+if(
+username !== saved.username ||
+password !== saved.password
+
+){
+
+
+alert(
+"نام کاربری یا رمز عبور اشتباه است"
+);
+
+
+return;
+
+
+}
+
+
+
+closeAuth();
+
+
+openDashboard(saved);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+/*====================
+DASHBOARD
+====================*/
+
+
+
+window.openDashboard=function(user){
+
+
+
+const dashboard =
+document.getElementById("dashboard");
+
+
+
+const header =
+document.getElementById("header");
+
+
+
+const main =
+document.querySelector("main");
+
+
+
+const footer =
+document.querySelector("footer");
+
 
 
 
@@ -127,128 +388,51 @@ footer.style.display="none";
 
 
 
+
 if(dashboard){
 
-dashboard.style.display="flex";
 
 dashboard.classList.add("show");
 
+
 }
 
 
 
-document.body.style.overflow="";
 
 
+const name =
+document.getElementById("dashName");
 
-const name=document.getElementById("dashName");
 
 if(name){
 
-name.innerText=user.fullName;
+name.innerText =
+user.fullName;
 
 }
 
 
 
-}
+
+const type =
+document.getElementById("dashType");
 
 
+if(type){
 
-
-function closeDashboard(){
-
-
-
-const header=document.getElementById("header");
-
-const main=document.querySelector("main");
-
-const footer=document.querySelector("footer");
-
-
-
-if(header)
-header.style.display="";
-
-
-if(main)
-main.style.display="";
-
-
-if(footer)
-footer.style.display="";
-
-
-
-if(dashboard){
-
-dashboard.style.display="none";
-
-dashboard.classList.remove("show");
+type.innerText =
+user.type==="lab"
+?
+"لابراتوار"
+:
+"دندانپزشک";
 
 }
 
 
 
 document.body.style.overflow="";
-
-
-
-}
-
-
-
-window.openDashboard=openDashboard;
-
-window.closeDashboard=closeDashboard;
-
-
-
-
-
-/*==============================
-        REGISTER
-==============================*/
-
-
-const registerBtn=document.getElementById("registerBtn");
-
-
-
-if(registerBtn){
-
-
-
-registerBtn.addEventListener("click",()=>{
-
-
-
-const user={
-
-
-type:document.getElementById("registerType")?.value || "",
-
-
-fullName:document.getElementById("fullName")?.value.trim() || "",
-
-
-workPlace:document.getElementById("workPlace")?.value.trim() || "",
-
-
-mobile:document.getElementById("mobile")?.value.trim() || "",
-
-
-city:document.getElementById("city")?.value.trim() || "",
-
-
-address:document.getElementById("address")?.value.trim() || "",
-
-
-username:document.getElementById("registerUsername")?.value.trim() || "",
-
-
-password:document.getElementById("registerPassword")?.value || ""
 
 
 
@@ -256,118 +440,60 @@ password:document.getElementById("registerPassword")?.value || ""
 
 
 
-if(
-user.fullName==="" ||
-user.mobile==="" ||
-user.username==="" ||
-user.password===""
-){
-
-
-alert("لطفاً اطلاعات ضروری را کامل کنید");
-
-return;
-
-
-}
 
 
 
 
-localStorage.setItem(
-
-"gilsaUser",
-
-JSON.stringify(user)
-
-);
 
 
-alert("ثبت نام با موفقیت انجام شد");
+/*====================
+LOGOUT
+====================*/
 
-closeAuth();
+
+const logout =
+document.getElementById("logoutBtn");
 
 
 
-});
+if(logout){
 
 
-
-}
-
+logout.addEventListener("click",()=>{
 
 
-
-/*==============================
-        LOGIN
-==============================*/
-
-
-const loginBtn=document.getElementById("loginBtn");
-
-
-
-if(loginBtn){
-
-
-loginBtn.addEventListener("click",()=>{
-
-
-
-const user=JSON.parse(
-
-localStorage.getItem("gilsaUser")
-
+localStorage.removeItem(
+"gilsaUser"
 );
 
 
 
-if(!user){
-
-
-alert("ابتدا ثبت نام کنید");
-
-return;
-
-
-}
+const dashboard =
+document.getElementById("dashboard");
 
 
 
-closeAuth();
+if(dashboard){
 
-openDashboard(user);
-
-
-
-});
-
-
+dashboard.classList.remove("show");
 
 }
 
 
 
-
-/*==============================
-        LOGOUT
-==============================*/
-
-
-const logoutBtn=document.getElementById("logoutBtn");
+document.getElementById("header")
+.style.display="";
 
 
 
-if(logoutBtn){
+document.querySelector("main")
+.style.display="";
 
 
-logoutBtn.addEventListener("click",()=>{
 
+document.querySelector("footer")
+.style.display="";
 
-localStorage.removeItem("gilsaUser");
-
-
-closeDashboard();
 
 
 });
@@ -378,3 +504,6 @@ closeDashboard();
 
 
 
+
+
+});
