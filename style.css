@@ -349,10 +349,13 @@ gap:70px;
 }
 
 .hero-image img{
-    width:650px;
-    max-width:100%;
-    filter:drop-shadow(0 0 35px rgba(212,175,55,.35));
-    animation:float 5s ease-in-out infinite;
+
+width:430px;
+
+max-width:100%;
+
+animation:float 5s ease-in-out infinite;
+
     transition:var(--transition);
 }
 
