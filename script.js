@@ -6,17 +6,15 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-/*====================
-PRELOADER
-====================*/
+/*====================================
+        PRELOADER
+====================================*/
 
 
-const preloader =
-document.getElementById("preloader");
+const preloader=document.getElementById("preloader");
 
 
 window.addEventListener("load",()=>{
-
 
 if(preloader){
 
@@ -24,33 +22,28 @@ setTimeout(()=>{
 
 preloader.classList.add("hide");
 
-},700);
+},800);
 
 }
-
 
 });
 
 
 
+/*====================================
+        HEADER SCROLL
+====================================*/
 
 
-/*====================
-HEADER SCROLL
-====================*/
-
-
-const header =
-document.getElementById("header");
+const header=document.getElementById("header");
 
 
 window.addEventListener("scroll",()=>{
 
 
-if(!header) return;
+if(header){
 
-
-if(window.scrollY > 50){
+if(window.scrollY>50){
 
 header.classList.add("scrolled");
 
@@ -60,25 +53,21 @@ header.classList.remove("scrolled");
 
 }
 
+}
+
 
 });
 
 
 
+/*====================================
+        MOBILE MENU
+====================================*/
 
 
-/*====================
-MOBILE MENU
-====================*/
+const menuBtn=document.querySelector(".menu-toggle");
 
-
-const menuBtn =
-document.querySelector(".menu-toggle");
-
-
-const nav =
-document.querySelector("nav");
-
+const nav=document.querySelector("nav");
 
 
 if(menuBtn && nav){
@@ -86,22 +75,17 @@ if(menuBtn && nav){
 
 menuBtn.addEventListener("click",()=>{
 
-
 nav.classList.toggle("open");
-
 
 });
 
 
-
-nav.querySelectorAll("a").forEach(link=>{
+document.querySelectorAll("nav a").forEach(link=>{
 
 
 link.addEventListener("click",()=>{
 
-
 nav.classList.remove("open");
-
 
 });
 
@@ -114,20 +98,15 @@ nav.classList.remove("open");
 
 
 
+/*====================================
+        REVEAL ANIMATION
+====================================*/
 
 
-/*====================
-REVEAL ANIMATION
-====================*/
+const reveals=document.querySelectorAll(".reveal");
 
 
-const reveals =
-document.querySelectorAll(".reveal");
-
-
-
-const observer =
-new IntersectionObserver((entries)=>{
+const observer=new IntersectionObserver((entries)=>{
 
 
 entries.forEach(entry=>{
@@ -145,158 +124,42 @@ entry.target.classList.add("show");
 
 },{
 threshold:.15
+});
+
+
+reveals.forEach(el=>{
+
+observer.observe(el);
 
 });
 
 
 
-reveals.forEach(item=>{
 
-observer.observe(item);
 
-});
+/*====================================
+        BACK TO TOP
+====================================*/
 
 
-
-
-
-
-
-/*====================
-COUNTER
-====================*/
-
-
-const counters =
-document.querySelectorAll(".counter");
-
-
-
-let counterStarted=false;
-
-
-
-function startCounter(){
-
-
-if(counterStarted) return;
-
-
-counters.forEach(counter=>{
-
-
-let target =
-Number(counter.dataset.target);
-
-
-
-let current=0;
-
-
-
-let step =
-Math.ceil(target/100);
-
-
-
-let timer =
-setInterval(()=>{
-
-
-current += step;
-
-
-
-if(current>=target){
-
-
-current=target;
-
-clearInterval(timer);
-
-
-}
-
-
-
-counter.innerText =
-current.toLocaleString("fa-IR");
-
-
-
-},20);
-
-
-
-});
-
-
-
-counterStarted=true;
-
-
-}
-
-
-
-const stats =
-document.getElementById("stats");
-
-
-
-if(stats){
-
-
-const statsObserver =
-new IntersectionObserver((entries)=>{
-
-
-if(entries[0].isIntersecting){
-
-startCounter();
-
-}
-
-
-});
-
-
-
-statsObserver.observe(stats);
-
-
-}
-
-
-
-
-
-
-
-/*====================
-BACK TO TOP
-====================*/
-
-
-const topBtn =
-document.querySelector(".back-to-top");
-
-
-
-if(topBtn){
+const backTop=document.querySelector(".back-to-top");
 
 
 window.addEventListener("scroll",()=>{
 
 
-if(window.scrollY > 500){
+if(backTop){
 
-topBtn.classList.add("show");
 
+if(window.scrollY>500){
+
+backTop.classList.add("show");
 
 }else{
 
-topBtn.classList.remove("show");
+backTop.classList.remove("show");
+
+}
 
 
 }
@@ -305,8 +168,10 @@ topBtn.classList.remove("show");
 });
 
 
+if(backTop){
 
-topBtn.addEventListener("click",()=>{
+
+backTop.addEventListener("click",()=>{
 
 
 window.scrollTo({
@@ -322,90 +187,464 @@ behavior:"smooth"
 
 
 }
+/*====================================
+        AUTH SYSTEM
+====================================*/
+
+
+const authModal =
+document.getElementById("authModal");
+
+
+const openAuthButtons =
+document.querySelectorAll(".open-auth");
+
+
+const closeAuthButton =
+document.querySelector(".close-auth");
+
+
+
+/*==============================
+        OPEN AUTH
+==============================*/
+
+
+openAuthButtons.forEach(btn=>{
+
+
+btn.addEventListener("click",(e)=>{
+
+
+e.preventDefault();
+
+
+if(authModal){
+
+authModal.classList.add("show");
+
+document.body.style.overflow="hidden";
+
+}
+
+
+});
+
+
+});
+
+
+
+/*==============================
+        CLOSE AUTH
+==============================*/
+
+
+function closeAuth(){
+
+
+if(authModal){
+
+authModal.classList.remove("show");
+
+}
+
+
+document.body.style.overflow="";
+
+
+}
+
+
+
+if(closeAuthButton){
+
+
+closeAuthButton.addEventListener(
+"click",
+closeAuth
+);
+
+
+}
+
+
+
+if(authModal){
+
+
+authModal.addEventListener("click",(e)=>{
+
+
+if(e.target===authModal){
+
+closeAuth();
+
+}
+
+
+});
+
+
+}
+
+
+
+
+/*==============================
+        REGISTER
+==============================*/
+
+
+const registerBtn =
+document.getElementById("registerBtn");
+
+
+
+if(registerBtn){
+
+
+registerBtn.addEventListener("click",()=>{
+
+
+const user = {
+
+
+fullName:
+
+document.getElementById("fullName")?.value.trim() || "",
+
+
+mobile:
+
+document.getElementById("mobile")?.value.trim() || "",
+
+
+clinic:
+
+document.getElementById("clinic")?.value.trim() || "",
+
+
+city:
+
+document.getElementById("city")?.value.trim() || "",
+
+
+address:
+
+document.getElementById("address")?.value.trim() || "",
+
+
+username:
+
+document.getElementById("registerUsername")?.value.trim() || "",
+
+
+password:
+
+document.getElementById("registerPassword")?.value || ""
+
+
+};
+
+
+
+if(
+
+user.fullName===""
+
+||
+
+user.mobile===""
+
+||
+
+user.username===""
+
+||
+
+user.password===""
+
+){
+
+
+alert("لطفاً اطلاعات ضروری را کامل کنید");
+
+
+return;
+
+
+}
+
+
+
+
+localStorage.setItem(
+
+"gilsaUser",
+
+JSON.stringify(user)
+
+);
+
+
+
+alert(
+
+"ثبت نام با موفقیت انجام شد"
+
+);
+
+
+
+closeAuth();
+
+
+
+openDashboard(user);
+
+
+
+});
+
+
+}
 
 
 
 
 
+/*==============================
+        LOGIN
+==============================*/
 
 
-/*====================
-GALLERY LIGHTBOX
-====================*/
-
-
-const galleryImages =
-document.querySelectorAll(".gallery-item img");
-
-
-
-if(galleryImages.length){
+const loginBtn =
+document.getElementById("loginBtn");
 
 
 
-const lightbox =
-document.createElement("div");
+if(loginBtn){
 
 
-lightbox.className="lightbox";
+loginBtn.addEventListener("click",()=>{
+
+
+const user = JSON.parse(
+
+localStorage.getItem("gilsaUser")
+
+);
 
 
 
-lightbox.innerHTML=`
+if(!user){
 
-<img src="">
 
-<span class="close-lightbox">
-×
-</span>
+alert(
+
+"ابتدا ثبت نام کنید"
+
+);
+
+
+return;
+
+
+}
+
+
+
+closeAuth();
+
+
+openDashboard(user);
+
+
+
+});
+
+
+}
+
+
+
+
+
+/*==============================
+        AUTO LOGIN
+==============================*/
+
+
+const savedUser = JSON.parse(
+
+localStorage.getItem("gilsaUser")
+
+);
+
+
+
+if(savedUser){
+
+
+setTimeout(()=>{
+
+
+openDashboard(savedUser);
+
+
+},500);
+
+
+}
+
+
+/*====================================
+        DASHBOARD SYSTEM
+====================================*/
+
+
+const dashboard = 
+document.getElementById("dashboard");
+
+
+
+function openDashboard(user){
+
+
+
+const header =
+document.getElementById("header");
+
+
+const main =
+document.querySelector("main");
+
+
+const footer =
+document.querySelector("footer");
+
+
+
+if(header)
+header.style.display="none";
+
+
+if(main)
+main.style.display="none";
+
+
+if(footer)
+footer.style.display="none";
+
+
+
+if(dashboard){
+
+
+dashboard.classList.add("show");
+
+
+dashboard.style.display="flex";
+
+
+}
+
+
+
+
+document.body.style.overflow="auto";
+
+document.body.classList.add(
+"dashboard-active"
+);
+
+
+
+/* USER NAME */
+
+
+const dashName =
+document.getElementById("dashName");
+
+
+if(dashName){
+
+dashName.innerText =
+user.fullName || "کاربر گیلسا";
+
+}
+
+
+
+/* USER TYPE */
+
+
+const dashType =
+document.getElementById("dashType");
+
+
+if(dashType){
+
+dashType.innerText =
+"همکار گیلسا";
+
+}
+
+
+
+/* PROFILE */
+
+
+const profile =
+document.getElementById("profileInfo");
+
+
+
+if(profile){
+
+
+profile.innerHTML = `
+
+
+<p>
+<strong>نام:</strong>
+${user.fullName}
+</p>
+
+
+<p>
+<strong>موبایل:</strong>
+${user.mobile}
+</p>
+
+
+<p>
+<strong>محل فعالیت:</strong>
+${user.clinic || "-"}
+</p>
+
+
+<p>
+<strong>شهر:</strong>
+${user.city || "-"}
+</p>
+
+
+<p>
+<strong>آدرس:</strong>
+${user.address || "-"}
+</p>
+
 
 `;
 
 
-
-document.body.appendChild(lightbox);
-
-
-
-const lightImage =
-lightbox.querySelector("img");
-
-
-
-galleryImages.forEach(img=>{
-
-
-img.addEventListener("click",()=>{
-
-
-lightImage.src =
-img.src;
-
-
-lightbox.classList.add("show");
-
-
-});
-
-
-});
-
-
-
-lightbox.addEventListener("click",(e)=>{
-
-
-if(e.target===lightbox ||
-e.target.classList.contains("close-lightbox")){
-
-
-lightbox.classList.remove("show");
-
-
 }
 
 
-});
+
+loadOrders();
 
 
 
@@ -414,67 +653,247 @@ lightbox.classList.remove("show");
 
 
 
+function closeDashboard(){
 
 
 
-/*====================
-DASHBOARD TABS
-====================*/
+const header =
+document.getElementById("header");
 
 
-const dashboardItems =
-document.querySelectorAll(".dashboard-sidebar li[data-page]");
+const main =
+document.querySelector("main");
 
 
-
-const pages =
-document.querySelectorAll(".dashboard-page");
-
-
-
-dashboardItems.forEach(item=>{
-
-
-item.addEventListener("click",()=>{
-
-
-let page =
-item.dataset.page;
+const footer =
+document.querySelector("footer");
 
 
 
-dashboardItems.forEach(i=>{
-
-i.classList.remove("active");
-
-});
+if(header)
+header.style.display="";
 
 
+if(main)
+main.style.display="";
 
-item.classList.add("active");
+
+if(footer)
+footer.style.display="";
 
 
 
-pages.forEach(p=>{
+if(dashboard){
 
+
+dashboard.classList.remove("show");
+
+
+dashboard.style.display="none";
+
+
+}
+
+
+
+document.body.classList.remove(
+"dashboard-active"
+);
+
+
+
+}
+
+
+
+
+window.openDashboard =
+openDashboard;
+
+
+window.closeDashboard =
+closeDashboard;
+
+
+
+
+
+/*====================================
+        DASHBOARD MENU
+====================================*/
+
+
+const dashboardLinks =
+document.querySelectorAll(
+".dashboard-sidebar li[data-page]"
+);
+
+
+
+dashboardLinks.forEach(link=>{
+
+
+link.addEventListener("click",()=>{
+
+
+const page =
+link.dataset.page;
+
+
+
+document
+.querySelectorAll(".dashboard-page")
+.forEach(p=>{
 
 p.classList.remove("active");
 
+});
 
-if(p.id===page){
 
-p.classList.add("active");
+
+const target =
+document.getElementById(page);
+
+
+
+if(target){
+
+target.classList.add("active");
 
 }
 
 
+
+
+dashboardLinks.forEach(item=>{
+
+item.classList.remove("active");
+
 });
 
 
+link.classList.add("active");
+
+
+
 });
 
 
+
 });
+
+
+
+
+
+
+/*====================================
+        LOGOUT
+====================================*/
+
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+
+
+if(logoutBtn){
+
+
+logoutBtn.addEventListener("click",()=>{
+
+
+localStorage.removeItem(
+"gilsaUser"
+);
+
+
+
+closeDashboard();
+
+
+
+alert(
+"با موفقیت خارج شدید"
+);
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+/*====================================
+        LOAD ORDERS
+====================================*/
+
+
+function loadOrders(){
+
+
+const table =
+document.getElementById(
+"ordersTable"
+);
+
+
+
+if(!table)
+return;
+
+
+
+const orders = JSON.parse(
+
+localStorage.getItem(
+"gilsaOrders"
+)
+
+) || [];
+
+
+
+table.innerHTML="";
+
+
+
+orders.forEach(order=>{
+
+
+table.innerHTML += `
+
+<tr>
+
+<td>
+${order.code || "-"}
+</td>
+
+
+<td>
+${order.work || "-"}
+</td>
+
+
+<td>
+${order.status || "در انتظار"}
+</td>
+
+
+</tr>
+
+`;
+
+
+});
+
+
+}
 
 
 
