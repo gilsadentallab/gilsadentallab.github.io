@@ -79,7 +79,31 @@ calcButton.addEventListener("click", function(){
 
 
 
-    finalPrice = prices[workType] * count;
+ let price = basePrices[workType];
+
+
+
+let material =
+document.getElementById("material").value;
+
+
+
+let extra =
+materialExtra[material] || 0;
+
+
+
+finalPrice = (price + extra) * count;
+
+
+
+// تخفیف تعداد بالا
+
+if(count >= 5){
+
+    finalPrice = finalPrice * 0.9;
+
+}
 
 
 
