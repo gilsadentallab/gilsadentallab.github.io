@@ -107,10 +107,14 @@ if(count >= 5){
 
 
 
-    document.getElementById("totalPrice").innerHTML =
+  document.getElementById("totalPrice").innerHTML =
 
-    finalPrice.toLocaleString() + " تومان";
 
+finalPrice.toLocaleString() 
++ 
+" تومان"
++
+"<br><small>تخفیف تعداد در صورت سفارش بالا اعمال شد</small>";
 
 
 });
