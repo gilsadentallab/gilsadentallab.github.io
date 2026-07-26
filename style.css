@@ -1249,3 +1249,27 @@ bottom:20px;
 }
 
 }
+.progress-bar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:0;
+
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        #b8860b,
+        #d4af37,
+        #f5d76e
+    );
+
+    z-index:9999;
+
+    transition:width .15s linear;
+
+}
