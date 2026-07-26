@@ -607,28 +607,29 @@ orderModal.classList.remove("show");
 
 }
 /*=========================================
-        LOGIN MODAL
+        LOGIN + DASHBOARD SYSTEM
 =========================================*/
 
-const loginModal = document.getElementById("loginModal");
 
-const openLogin = document.querySelectorAll(".open-login");
+const authModal = document.getElementById("authModal");
 
-const closeLogin = document.querySelector(".close-login");
+const openAuth = document.querySelectorAll(".open-auth");
+
+const closeAuth = document.querySelector(".close-auth");
 
 
+/* OPEN LOGIN */
 
-/*---------- OPEN ----------*/
+openAuth.forEach(btn=>{
 
-openLogin.forEach(btn=>{
+    btn.addEventListener("click",()=>{
 
-    btn.addEventListener("click",(e)=>{
+        if(authModal){
 
-        e.preventDefault();
+            authModal.classList.add("show");
+            document.body.style.overflow="hidden";
 
-        loginModal.classList.add("show");
-
-        document.body.style.overflow="hidden";
+        }
 
     });
 
@@ -636,50 +637,47 @@ openLogin.forEach(btn=>{
 
 
 
-/*---------- CLOSE ----------*/
+/* CLOSE LOGIN */
 
-closeLogin.addEventListener("click",()=>{
+if(closeAuth){
 
-    loginModal.classList.remove("show");
+closeAuth.addEventListener("click",()=>{
 
+    authModal.classList.remove("show");
     document.body.style.overflow="";
 
 });
 
+}
 
 
-/*---------- CLICK OUTSIDE ----------*/
 
-loginModal.addEventListener("click",(e)=>{
+/* CLICK OUTSIDE */
 
-    if(e.target===loginModal){
+if(authModal){
 
-        loginModal.classList.remove("show");
+authModal.addEventListener("click",(e)=>{
 
+    if(e.target === authModal){
+
+        authModal.classList.remove("show");
         document.body.style.overflow="";
 
     }
 
 });
 
+}
 
 
-/*---------- ESC KEY ----------*/
 
-document.addEventListener("keydown",(e)=>{
 
-    if(e.key==="Escape"){
-
-        loginModal.classList.remove("show");
-
-        document.body.style.overflow="";
-
-    }
 /*==============================
-        DASHBOARD FIX
+        DASHBOARD
 ==============================*/
 
-const dashboard = document.querySelector(".dashboard");
+
+const dashboard = document.getElementById("dashboard");
 
 
 if(dashboard){
@@ -689,34 +687,92 @@ if(dashboard){
 }
 
 
+
 window.openDashboard = function(){
 
-    document.body.classList.add("dashboard-active");
 
-    document.querySelector("header").style.display="none";
-    document.querySelector("main").style.display="none";
-    document.querySelector("footer").style.display="none";
+    const header=document.querySelector("header");
+    const main=document.querySelector("main");
+    const footer=document.querySelector("footer");
 
-    dashboard.style.display="flex";
+
+    if(authModal){
+        authModal.classList.remove("show");
+    }
+
+
+    document.body.style.overflow="";
+
+
+    if(header)
+        header.style.display="none";
+
+
+    if(main)
+        main.style.display="none";
+
+
+    if(footer)
+        footer.style.display="none";
+
+
+    if(dashboard)
+        dashboard.style.display="flex";
+
 
     window.scrollTo(0,0);
 
-}
+};
 
 
 
-window.closeDashboard = function(){
+window.closeDashboard=function(){
 
-    document.body.classList.remove("dashboard-active");
 
-    document.querySelector("header").style.display="";
-    document.querySelector("main").style.display="";
-    document.querySelector("footer").style.display="";
+    const header=document.querySelector("header");
+    const main=document.querySelector("main");
+    const footer=document.querySelector("footer");
 
-    dashboard.style.display="none";
 
-}
+
+    if(header)
+        header.style.display="";
+
+
+    if(main)
+        main.style.display="";
+
+
+    if(footer)
+        footer.style.display="";
+
+
+    if(dashboard)
+        dashboard.style.display="none";
+
+};
+
+
+
+
+/*==============================
+        LOGOUT
+==============================*/
+
+
+const logoutBtn=document.getElementById("logoutBtn");
+
+
+if(logoutBtn){
+
+
+logoutBtn.addEventListener("click",()=>{
+
+
+    closeDashboard();
+
+
 });
 
 
-});
+}
