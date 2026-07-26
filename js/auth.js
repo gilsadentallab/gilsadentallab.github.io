@@ -384,25 +384,3 @@ closeDashboard();
 
 
 
-/*==============================
-        AUTO LOGIN
-==============================*/
-
-
-const savedUser=
-
-JSON.parse(localStorage.getItem("gilsaUser"));
-
-
-
-if(savedUser){
-
-
-openDashboard(savedUser);
-
-
-}
-
-
-
-});
