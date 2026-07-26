@@ -2094,4 +2094,31 @@ height:46px;
 
 }
 
+/* File Upload */
+
+input[type="file"]{
+
+    padding:12px;
+
+    background:#fafafa;
+
+    cursor:pointer;
+
+}
+
+
+input[type="file"]::file-selector-button{
+
+    background:#d4af37;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
 }
