@@ -229,3 +229,46 @@ navLinks.forEach(link=>{
     });
 
 });
+/*=========================================
+            LIGHTBOX
+=========================================*/
+
+const galleryItems =
+document.querySelectorAll(".gallery-item img");
+
+const lightbox =
+document.querySelector(".lightbox");
+
+const lightboxImg =
+document.getElementById("lightbox-img");
+
+const closeLightbox =
+document.querySelector(".close-lightbox");
+
+galleryItems.forEach(img=>{
+
+    img.addEventListener("click",()=>{
+
+        lightbox.classList.add("show");
+
+        lightboxImg.src=img.src;
+
+    });
+
+});
+
+closeLightbox.addEventListener("click",()=>{
+
+    lightbox.classList.remove("show");
+
+});
+
+lightbox.addEventListener("click",(e)=>{
+
+    if(e.target===lightbox){
+
+        lightbox.classList.remove("show");
+
+    }
+
+});
