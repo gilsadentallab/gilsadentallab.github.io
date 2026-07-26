@@ -3354,3 +3354,10 @@ body.dashboard-active footer{
 body.dashboard-active .dashboard{
     display:flex;
 }
+.dashboard{
+    display:none;
+}
+
+.dashboard.active{
+    display:flex;
+}
