@@ -747,10 +747,9 @@ window.closeDashboard=function(){
         footer.style.display="";
 
 
-    if(dashboard)
-        dashboard.style.display="none";
-
-};
+  if(dashboard){
+    dashboard.classList.remove("active");
+}
 
 
 
