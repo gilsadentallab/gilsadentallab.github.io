@@ -1105,7 +1105,141 @@ rel="stylesheet">
 
 </div>
 
+<!-- ================= DASHBOARD ================= -->
 
+<section class="dashboard" id="dashboard">
+
+    <div class="dashboard-sidebar">
+
+        <div class="dashboard-user">
+
+            <img src="images/gilsa-logo.png" alt="Gilsa">
+
+            <h3 id="dashName">
+                خوش آمدید
+            </h3>
+
+            <span id="dashType">
+                کاربر
+            </span>
+
+        </div>
+
+        <ul>
+
+            <li class="active" data-page="home">
+                🏠 داشبورد
+            </li>
+
+            <li data-page="newOrder">
+                📦 سفارش جدید
+            </li>
+
+            <li data-page="orders">
+                📋 سفارش‌های من
+            </li>
+
+            <li data-page="profile">
+                👤 اطلاعات حساب
+            </li>
+
+            <li id="logoutBtn">
+                🚪 خروج
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <div class="dashboard-content">
+
+        <div class="dashboard-page active" id="home">
+
+            <h2>
+                پنل کاربری گیلسا
+            </h2>
+
+            <p>
+
+                به سیستم مدیریت سفارشات خوش آمدید.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="dashboard-page" id="newOrder">
+
+            <h2>
+
+                ثبت سفارش جدید
+
+            </h2>
+
+            <p>
+
+                از این قسمت سفارش جدید ثبت خواهید کرد.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="dashboard-page" id="orders">
+
+            <h2>
+
+                سفارش‌های من
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>کد</th>
+
+                        <th>نوع کار</th>
+
+                        <th>وضعیت</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <div class="dashboard-page" id="profile">
+
+            <h2>
+
+                اطلاعات حساب
+
+            </h2>
+
+            <div id="profileInfo">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 <script src="script.js"></script>
 
