@@ -1,497 +1,588 @@
-// ===== Order Modal =====
-
-const orderModal = document.getElementById("orderModal");
-
-const openButtons = document.querySelectorAll(".open-order");
-
-const closeButton = document.querySelector(".close-order");
-
-openButtons.forEach(button => {
-
-    button.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        orderModal.classList.add("show");
-
-        document.body.style.overflow = "hidden";
-
-    });
-
-});
-
-function closeOrderModal() {
-
-    orderModal.classList.remove("show");
-
-    document.body.style.overflow = "auto";
-
-}
-
-closeButton.addEventListener("click", closeOrderModal);
-
-orderModal.addEventListener("click", function (e) {
-
-    if (e.target === orderModal) {
-
-        closeOrderModal();
-
-    }
-
-});
-
-document.addEventListener("keydown", function (e) {
-
-    if (e.key === "Escape") {
-
-        closeOrderModal();
-
-    }
-
-});
-/*=========================================
-        REGISTER MODAL
-=========================================*/
-
-const registerModal =
-document.getElementById("registerModal");
-
-const registerForm =
-document.getElementById("registerForm");
-
-const openRegister =
-document.querySelectorAll(".open-register");
-
-const closeRegister =
-document.querySelector(".close-register");
-
-openRegister.forEach(button=>{
-
-    button.addEventListener("click",function(e){
-
-        e.preventDefault();
-
-        registerModal.classList.add("show");
-
-        document.body.style.overflow="hidden";
-
-    });
-
-});
-
-function closeRegisterModal(){
-
-    registerModal.classList.remove("show");
-
-    document.body.style.overflow="auto";
-
-}
-
-closeRegister.addEventListener("click",closeRegisterModal);
-
-registerModal.addEventListener("click",function(e){
-
-    if(e.target===registerModal){
-
-        closeRegisterModal();
-
-    }
-
-});
-// ===== Gilsa Order System =====
+/*=====================================
+        GILSA ORDER SYSTEM FINAL
+=====================================*/
 
 
-// قیمت پایه هر کار
+document.addEventListener("DOMContentLoaded",()=>{
 
-const basePrices = {
 
-    zirconia: 2500000,
 
-    pfm: 1800000,
 
-    implant: 3500000,
 
-    emax: 3000000,
+/*=====================================
+        PRICE LIST
+=====================================*/
 
-    laminate: 4000000,
 
-    repair: 500000
+const basePrices={
+
+
+zirconia:2500000,
+
+implant:3500000,
+
+pfm:1800000,
+
+emax:3000000
+
 
 };
 
 
 
-// قیمت اضافه متریال
 
-const materialExtra = {
+const materialExtra={
 
-    "Zirconia HT": 0,
 
-    "Zirconia Multilayer": 700000,
+"Zirconia HT":0,
 
-    "E.max Press": 1000000,
+"Zirconia Multilayer":700000,
 
-    "E.max CAD": 800000,
+"E.max Press":1000000,
 
-    "PFM": 0
+"E.max CAD":800000,
+
+"PFM":0
+
 
 };
 
 
 
-let finalPrice = 0;
+
+let finalPrice=0;
 
 
 
-const calcButton =
+
+
+
+
+
+
+/*=====================================
+        CALCULATE PRICE
+=====================================*/
+
+
+const calcBtn =
 document.querySelector(".calc-price");
 
 
-const sendButton =
+
+if(calcBtn){
+
+
+calcBtn.addEventListener("click",()=>{
+
+
+
+const work =
+document.getElementById("workType")?.value;
+
+
+
+const count =
+Number(
+document.getElementById("workCount")?.value
+);
+
+
+
+const material =
+document.getElementById("material")?.value;
+
+
+
+
+
+if(!work || !count){
+
+
+alert(
+"نوع کار و تعداد را وارد کنید"
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+finalPrice =
+(
+basePrices[work]
++
+(materialExtra[material] || 0)
+
+)
+*
+count;
+
+
+
+
+
+if(count>=5){
+
+finalPrice*=0.9;
+
+}
+
+
+
+
+
+const priceBox =
+document.getElementById("totalPrice");
+
+
+
+if(priceBox){
+
+
+priceBox.innerHTML =
+finalPrice.toLocaleString("fa-IR")
++
+" تومان";
+
+
+}
+
+
+
+
+
+
+
+const delivery =
+document.getElementById("deliveryTime");
+
+
+
+if(delivery){
+
+
+delivery.innerText =
+getDeliveryTime(
+count,
+work
+);
+
+
+}
+
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+/*=====================================
+        DELIVERY
+=====================================*/
+
+
+function getDeliveryTime(count,work){
+
+
+if(work==="implant"){
+
+return "۷ تا ۱۰ روز کاری";
+
+}
+
+
+if(count>=5){
+
+return "۵ تا ۷ روز کاری";
+
+}
+
+
+return "۳ تا ۵ روز کاری";
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=====================================
+        SEND ORDER PREVIEW
+=====================================*/
+
+
+const sendBtn =
 document.querySelector(".send-order");
 
-
-const confirmButton =
-document.querySelector(".confirm-send");
 
 
 const confirmBox =
 document.getElementById("confirmBox");
-// ===== Calculate Price =====
-
-
-calcButton.addEventListener("click", function(){
-
-
-    const workType =
-    document.getElementById("workType").value;
-
-
-    const count =
-    Number(document.getElementById("workCount").value);
 
 
 
-    const material =
-    document.getElementById("material").value;
+if(sendBtn){
+
+
+sendBtn.addEventListener("click",()=>{
 
 
 
-    if(workType === ""){
-
-        alert("لطفاً نوع کار را انتخاب کنید");
-
-        return;
-
-    }
+if(finalPrice===0){
 
 
-
-    let basePrice =
-    basePrices[workType];
-
-
-
-    let extra =
-    materialExtra[material] || 0;
+alert(
+"ابتدا قیمت را محاسبه کنید"
+);
 
 
-
-    finalPrice =
-    (basePrice + extra) * count;
-
-
-
-    // تخفیف سفارش تعداد بالا
-
-    if(count >= 5){
-
-        finalPrice =
-        finalPrice * 0.9;
-
-    }
-
-
-
-    document.getElementById("totalPrice").innerHTML =
-
-    finalPrice.toLocaleString()
-    +
-    " تومان"
-    +
-    "<br><small>تخفیف تعداد بالا اعمال می‌شود</small>";
-
-
-
-    // زمان تحویل
-
-    document.getElementById("deliveryTime").innerHTML =
-
-    calculateDelivery(count, workType);
-
-
-
-});
-
-
-
-
-// ===== Delivery Time =====
-
-
-function calculateDelivery(count, workType){
-
-
-    if(workType === "implant"){
-
-        return "7 تا 10 روز کاری";
-
-    }
-
-
-
-    if(count >= 5){
-
-        return "5 تا 7 روز کاری";
-
-    }
-
-
-
-    return "3 تا 5 روز کاری";
+return;
 
 
 }
-// ===== Order Preview =====
 
 
-sendButton.addEventListener("click", function(){
 
 
-    if(finalPrice === 0){
+const data =
+getOrderData();
 
-        alert("لطفاً ابتدا قیمت را محاسبه کنید");
 
-        return;
 
-    }
 
 
+const preview =
+document.getElementById("orderPreview");
 
-    const name =
-    document.getElementById("customerName").value;
 
 
-    const phone =
-    document.getElementById("customerPhone").value;
+if(preview){
 
 
+preview.innerHTML=`
 
-    const work =
-    document.getElementById("workType");
+<strong>نام:</strong>
+${data.name}
 
+<br>
 
+<strong>موبایل:</strong>
+${data.phone}
 
-    const workName =
-    work.options[work.selectedIndex].text;
+<br>
 
+<strong>نوع کار:</strong>
+${data.workName}
 
+<br>
 
-    const count =
-    document.getElementById("workCount").value;
+<strong>تعداد:</strong>
+${data.count}
 
+<br>
 
+<strong>Shade:</strong>
+${data.shade}
 
-    const date =
-    document.getElementById("deliveryDate").value;
+<br>
 
+<strong>متریال:</strong>
+${data.material}
 
+<br>
 
-    const toothNumber =
-    document.getElementById("toothNumber").value;
+<strong>قیمت:</strong>
+${finalPrice.toLocaleString("fa-IR")}
+تومان
 
+<br>
 
+<strong>توضیحات:</strong>
+${data.notes}
 
-    const shade =
-    document.getElementById("shade").value;
 
+`;
 
+}
 
-    const material =
-    document.getElementById("material").value;
 
 
+if(confirmBox){
 
-    const notes =
-    document.getElementById("notes").value;
+confirmBox.style.display="block";
 
+}
 
 
-    const file =
-    document.getElementById("workFile").files[0];
-
-
-
-    const fileName =
-    file ? file.name : "ندارد";
-
-
-
-
-
-    document.getElementById("orderPreview").innerHTML = `
-
-
-    <strong>نام پزشک:</strong>
-    ${name}
-
-    <br>
-
-
-    <strong>شماره تماس:</strong>
-    ${phone}
-
-    <br>
-
-
-    <strong>نوع کار:</strong>
-    ${workName}
-
-    <br>
-
-
-    <strong>تعداد واحد:</strong>
-    ${count}
-
-    <br>
-
-
-    <strong>شماره دندان:</strong>
-    ${toothNumber}
-
-    <br>
-
-
-    <strong>Shade:</strong>
-    ${shade}
-
-    <br>
-
-
-    <strong>متریال:</strong>
-    ${material}
-
-    <br>
-
-
-    <strong>تاریخ تحویل:</strong>
-    ${date}
-
-    <br>
-
-
-    <strong>زمان آماده سازی:</strong>
-    ${calculateDelivery(count, work.value)}
-
-    <br>
-
-
-    <strong>مبلغ تقریبی:</strong>
-    ${finalPrice.toLocaleString()} تومان
-
-    <br>
-
-
-    <strong>فایل پیوست:</strong>
-    ${fileName}
-
-    <br>
-
-
-    <strong>توضیحات:</strong>
-    ${notes}
-
-
-    `;
-
-
-
-    confirmBox.style.display = "block";
 
 
 });
-// ===== Confirm & Send WhatsApp =====
-
-
-confirmButton.addEventListener("click", function(){
-
-
-    const text =
-    document.getElementById("orderPreview").innerText;
 
 
 
-    const whatsappNumber = "989140503522";
+}
 
 
 
-    const url =
 
-    "https://wa.me/"
-    +
-    whatsappNumber
-    +
-    "?text="
-    +
-    encodeURIComponent(
 
-        "سلام لابراتوار گیلسا\n\n"
-        +
-        text
 
-    );
 
-/*====================================
-        SAVE ORDER
-====================================*/
 
-const order = {
 
-    code: generateOrderCode(),
 
-    customer: name,
+/*=====================================
+        CONFIRM WHATSAPP
+=====================================*/
 
-    phone: phone,
 
-    work: workName,
+const confirmBtn =
+document.querySelector(".confirm-send");
 
-    count: count,
 
-    shade: shade,
 
-    material: material,
+if(confirmBtn){
 
-    tooth: toothNumber,
 
-    delivery: date,
+confirmBtn.addEventListener("click",()=>{
 
-    price: finalPrice,
 
-    status: "در انتظار",
 
-    created: new Date().toLocaleDateString("fa-IR")
+const data =
+getOrderData();
+
+
+
+
+
+saveOrder(data);
+
+
+
+
+
+
+const message =
+
+`
+سلام لابراتوار گیلسا
+
+نام:
+${data.name}
+
+نوع کار:
+${data.workName}
+
+تعداد:
+${data.count}
+
+Shade:
+${data.shade}
+
+متریال:
+${data.material}
+
+قیمت:
+${finalPrice.toLocaleString("fa-IR")}
+تومان
+
+توضیحات:
+${data.notes}
+
+`;
+
+
+
+
+
+
+const number=
+"989140503522";
+
+
+
+const url=
+
+"https://wa.me/"
++
+number
++
+"?text="
++
+encodeURIComponent(message);
+
+
+
+
+window.open(url,"_blank");
+
+
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=====================================
+        GET ORDER DATA
+=====================================*/
+
+
+function getOrderData(){
+
+
+const work =
+document.getElementById("workType");
+
+
+
+return {
+
+
+name:
+document.getElementById("customerName")?.value || "",
+
+
+
+phone:
+document.getElementById("customerPhone")?.value || "",
+
+
+
+work:
+work?.value || "",
+
+
+
+workName:
+work?.options[work.selectedIndex]?.text || "",
+
+
+
+count:
+document.getElementById("workCount")?.value || 0,
+
+
+
+shade:
+document.getElementById("shade")?.value || "",
+
+
+
+material:
+document.getElementById("material")?.value || "",
+
+
+
+notes:
+document.getElementById("notes")?.value || "",
+
+
+
+price:
+finalPrice
+
+
 
 };
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=====================================
+        SAVE ORDER
+=====================================*/
+
+
+function saveOrder(data){
+
+
 
 let orders =
 
 JSON.parse(
 
-localStorage.getItem("gilsaOrders")
+localStorage.getItem(
+"gilsaOrders"
+)
 
-) || [];
+)
+
+|| [];
+
+
+
+
+
+const order={
+
+
+code:
+generateCode(),
+
+
+...data,
+
+
+status:
+"در انتظار",
+
+
+date:
+new Date()
+.toLocaleDateString("fa-IR")
+
+
+};
+
+
+
+
 
 orders.push(order);
+
+
 
 localStorage.setItem(
 
@@ -501,157 +592,232 @@ JSON.stringify(orders)
 
 );
 
-    window.open(url, "_blank");
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=====================================
+        ORDER CODE
+=====================================*/
+
+
+function generateCode(){
+
+
+let number=
+
+Number(
+
+localStorage.getItem(
+"gilsaOrderNumber"
+)
+
+)
+
+||0;
+
+
+
+number++;
+
+
+
+localStorage.setItem(
+
+"gilsaOrderNumber",
+
+number
+
+);
+
+
+
+return "GL-"
++
+String(number).padStart(5,"0");
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*=====================================
+        LOAD ORDERS
+=====================================*/
+
+
+window.loadOrders=function(){
+
+
+
+const table =
+document.getElementById("ordersTable");
+
+
+
+if(!table)
+return;
+
+
+
+
+
+const orders =
+
+JSON.parse(
+
+localStorage.getItem(
+"gilsaOrders"
+)
+
+)
+
+|| [];
+
+
+
+
+
+table.innerHTML="";
+
+
+
+
+orders.forEach(order=>{
+
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${order.code}</td>
+
+<td>${order.workName}</td>
+
+<td>${order.status}</td>
+
+</tr>
+
+`;
 
 
 });
 
 
 
+};
 
-// ===== File Preview =====
+
+
+
+
+loadOrders();
+
+
+
+
+
+
+
+
+
+/*=====================================
+        FILE PREVIEW
+=====================================*/
 
 
 const fileInput =
 document.getElementById("workFile");
 
 
-const filePreview =
+
+const preview =
 document.getElementById("filePreview");
 
 
 
-if(fileInput && filePreview){
-
-
-fileInput.addEventListener("change", function(){
-
-
-    const file = this.files[0];
+if(fileInput && preview){
 
 
 
-    if(!file){
+fileInput.addEventListener("change",()=>{
 
 
-        filePreview.innerHTML =
-        "فایلی انتخاب نشده";
-
-
-        return;
-
-
-    }
+const file=fileInput.files[0];
 
 
 
-    filePreview.innerHTML =
+if(!file){
 
-    `
-    <strong>
-    ${file.name}
-    </strong>
-    `;
+preview.innerHTML=
+"فایلی انتخاب نشده";
 
+return;
 
-
-    // نمایش عکس
-
-    if(file.type.startsWith("image/")){
-
-
-        const reader = new FileReader();
+}
 
 
 
-        reader.onload = function(e){
-
-
-            filePreview.innerHTML +=
-
-            `
-            <br>
-            <img src="${e.target.result}">
-            `;
-
-
-        }
+preview.innerHTML=
+file.name;
 
 
 
-        reader.readAsDataURL(file);
+
+if(file.type.startsWith("image/")){
 
 
-    }
+const reader=new FileReader();
+
+
+
+reader.onload=(e)=>{
+
+
+preview.innerHTML+=`
+
+<br>
+
+<img src="${e.target.result}">
+
+`;
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+
+}
 
 
 
 });
 
 
-}
-/*====================================
-        ORDER CODE
-====================================*/
-
-function generateOrderCode(){
-
-    const today = new Date();
-
-    const year = today.getFullYear();
-
-    let lastNumber =
-    Number(localStorage.getItem("gilsaOrderNumber")) || 0;
-
-    lastNumber++;
-
-    localStorage.setItem(
-        "gilsaOrderNumber",
-        lastNumber
-    );
-
-    return "GL-" + year + "-" +
-    String(lastNumber).padStart(4,"0");
-
-}
-/*====================================
-        LOAD ORDERS
-====================================*/
-
-function loadOrders(){
-
-    const table=document.getElementById("ordersTable");
-
-    if(!table) return;
-
-    table.innerHTML="";
-
-    const orders=
-
-    JSON.parse(
-
-    localStorage.getItem("gilsaOrders")
-
-    ) || [];
-
-    orders.forEach(order=>{
-
-        table.innerHTML += `
-
-        <tr>
-
-            <td>${order.code}</td>
-
-            <td>${order.work}</td>
-
-            <td>${order.status}</td>
-
-        </tr>
-
-        `;
-
-    });
 
 }
 
-loadOrders();
+
+
+
+
+});
