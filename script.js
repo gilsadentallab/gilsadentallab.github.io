@@ -696,10 +696,13 @@ window.openDashboard = function(){
     const footer=document.querySelector("footer");
 
 
-    if(authModal){
-        authModal.classList.remove("show");
-    }
+ if(authModal){
+    authModal.classList.remove("show");
+}
 
+if(orderModal){
+    orderModal.classList.remove("show");
+}
 
     document.body.style.overflow="";
 
