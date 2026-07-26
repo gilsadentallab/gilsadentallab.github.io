@@ -312,10 +312,13 @@ gap:70px;
 }
 
 .hero-text p{
-    font-size:20px;
-    color:var(--gray2);
-    line-height:2;
-    margin-bottom:40px;
+
+font-size:20px;
+
+line-height:2;
+
+max-width:650px;
+
 }
 
 .hero::before{
