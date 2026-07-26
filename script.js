@@ -782,14 +782,15 @@ if(logoutBtn){
 const loginBtn=document.getElementById("loginBtn");
 
 
-if(loginBtn){
+if(logoutBtn){
 
-    loginBtn.addEventListener("click",()=>{
+    logoutBtn.addEventListener("click",()=>{
 
-
-        openDashboard();
-
+        closeDashboard();
 
     });
 
 }
+
+
+});
