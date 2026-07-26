@@ -274,7 +274,9 @@ ${finalPrice.toLocaleString()} تومان
 ${notes}
 `;
 
+document.getElementById("deliveryTime").innerHTML =
 
+calculateDelivery(count,workType);
 
     const whatsappNumber = "989140503522";
 
