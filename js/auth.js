@@ -283,15 +283,9 @@ JSON.stringify(user)
 );
 
 
-
 alert("ثبت نام با موفقیت انجام شد");
 
-
-
 closeAuth();
-
-
-openDashboard(user);
 
 
 
