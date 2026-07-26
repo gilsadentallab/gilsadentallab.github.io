@@ -3115,3 +3115,230 @@ padding:30px 20px;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 
 }
+/*====================================
+        DASHBOARD
+====================================*/
+
+.dashboard{
+
+display:none;
+
+width:100%;
+
+min-height:100vh;
+
+background:#0f1115;
+
+color:#fff;
+
+}
+
+.dashboard.show{
+
+display:flex;
+
+}
+
+.dashboard-sidebar{
+
+width:280px;
+
+background:#151922;
+
+padding:35px 25px;
+
+border-left:1px solid rgba(255,255,255,.08);
+
+}
+
+.dashboard-user{
+
+text-align:center;
+
+margin-bottom:40px;
+
+}
+
+.dashboard-user img{
+
+width:90px;
+
+height:90px;
+
+border-radius:50%;
+
+border:3px solid #d4af37;
+
+margin-bottom:15px;
+
+}
+
+.dashboard-user h3{
+
+margin:0;
+
+font-size:22px;
+
+}
+
+.dashboard-user span{
+
+color:#d4af37;
+
+font-size:14px;
+
+}
+
+.dashboard-sidebar ul{
+
+list-style:none;
+
+padding:0;
+
+margin:35px 0 0;
+
+}
+
+.dashboard-sidebar li{
+
+padding:16px 20px;
+
+margin-bottom:10px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-size:15px;
+
+}
+
+.dashboard-sidebar li:hover{
+
+background:#d4af37;
+
+color:#111;
+
+}
+
+.dashboard-sidebar li.active{
+
+background:#d4af37;
+
+color:#111;
+
+font-weight:bold;
+
+}
+
+.dashboard-content{
+
+flex:1;
+
+padding:50px;
+
+overflow:auto;
+
+}
+
+.dashboard-page{
+
+display:none;
+
+animation:fade .4s;
+
+}
+
+.dashboard-page.active{
+
+display:block;
+
+}
+
+.dashboard-page h2{
+
+margin-bottom:20px;
+
+color:#d4af37;
+
+font-size:32px;
+
+}
+
+.dashboard-page p{
+
+line-height:2;
+
+color:#ddd;
+
+}
+
+.dashboard table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:25px;
+
+}
+
+.dashboard table th{
+
+background:#d4af37;
+
+color:#111;
+
+padding:15px;
+
+}
+
+.dashboard table td{
+
+padding:15px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+text-align:center;
+
+}
+
+#profileInfo{
+
+background:#171b25;
+
+padding:30px;
+
+border-radius:18px;
+
+margin-top:20px;
+
+line-height:2.2;
+
+}
+
+@media(max-width:900px){
+
+.dashboard{
+
+flex-direction:column;
+
+}
+
+.dashboard-sidebar{
+
+width:100%;
+
+border:none;
+
+}
+
+.dashboard-content{
+
+padding:25px;
+
+}
+
+}
