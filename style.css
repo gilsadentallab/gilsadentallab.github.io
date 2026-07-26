@@ -127,7 +127,6 @@ body::after{
     z-index:-2;
 
 }
-
 /*==================================================
                 HEADER
 ==================================================*/
@@ -142,25 +141,89 @@ header{
 
     width:100%;
 
-    z-index:999;
+    height:85px;
 
     display:flex;
 
+    align-items:center;
+
     justify-content:space-between;
+
+    padding:0 7%;
+
+    background:rgba(255,255,255,.96);
+
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(0,0,0,.06);
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+/*==============================
+        MENU BUTTON
+==============================*/
+
+.menu-toggle{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 
     align-items:center;
 
-    padding:22px 8%;
+    gap:6px;
 
-    background:rgba(255,255,255,.95);
+    cursor:pointer;
 
-    backdrop-filter:blur(12px);
+    transition:.3s;
 
-    border-bottom:1px solid var(--border);
-
-    transition:var(--transition);
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
 
 }
+
+.menu-toggle span{
+
+    width:24px;
+
+    height:2px;
+
+    background:#222;
+
+    transition:.3s;
+
+}
+
+.menu-toggle:hover{
+
+    background:var(--gold);
+
+}
+
+.menu-toggle:hover span{
+
+    background:#fff;
+
+}
+
+/*==============================
+            LOGO
+==============================*/
 
 .logo{
 
@@ -168,31 +231,23 @@ header{
 
     align-items:center;
 
-    gap:18px;
+    gap:15px;
 
 }
 
 .logo img{
 
-    height:58px;
+    height:50px;
 
     width:auto;
 
-    transition:var(--transition);
+    transition:.35s;
 
 }
 
 .logo img:hover{
 
-    transform:scale(1.05);
-
-}
-
-@font-face{
-
-    font-family:"IranNastaliq";
-
-    src:url("fonts/IranNastaliq.ttf") format("truetype");
+    transform:rotate(-5deg) scale(1.05);
 
 }
 
@@ -200,13 +255,11 @@ header{
 
     font-family:"IranNastaliq";
 
-     font-size:2.6rem;
+    font-size:2.2rem;
 
     color:var(--gold);
 
-    font-weight:normal;
-
-    text-shadow:0 2px 8px rgba(212,175,55,.35);
+    line-height:1;
 
 }
 
@@ -214,11 +267,93 @@ header{
 
     display:block;
 
-    font-size:13px;
+    font-size:12px;
 
-    color:#999;
+    color:#888;
 
-    letter-spacing:2px;
+    margin-top:4px;
+
+}
+
+/*==============================
+            NAV
+==============================*/
+
+nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+}
+
+nav a{
+
+    position:relative;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#333;
+
+    transition:.3s;
+
+}
+
+nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+
+    right:0;
+
+    width:0;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:var(--gold);
+
+}
+
+nav a:hover::after,
+
+nav a.active::after{
+
+    width:100%;
+
+}
+
+nav a.active{
+
+    color:var(--gold);
+
+}
+
+/*==============================
+      HEADER SCROLL
+==============================*/
+
+header.scrolled{
+
+    height:72px;
+
+    background:rgba(255,255,255,.98);
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
 
 }
 
