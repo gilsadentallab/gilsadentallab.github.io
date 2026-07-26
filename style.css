@@ -2767,3 +2767,158 @@ padding:30px 20px;
     line-height:1.8;
 
 }
+/*==================================================
+                AUTH FORM
+==================================================*/
+
+.auth-tabs{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+}
+
+.tab-btn{
+
+    flex:1;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#f4f4f4;
+
+    color:#555;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.tab-btn.active{
+
+    background:linear-gradient(
+        135deg,
+        #b8860b,
+        #d4af37,
+        #f5d76e
+    );
+
+    color:#fff;
+
+}
+
+.tab-content{
+
+    display:none;
+
+}
+
+.tab-content.active{
+
+    display:block;
+
+}
+
+.auth-box .form-group{
+
+    margin-bottom:18px;
+
+}
+
+.auth-box label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#333;
+
+}
+
+.auth-box input,
+.auth-box select,
+.auth-box textarea{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:#fff;
+
+}
+
+.auth-box input:focus,
+.auth-box select:focus,
+.auth-box textarea:focus{
+
+    outline:none;
+
+    border-color:#d4af37;
+
+    box-shadow:0 0 0 4px rgba(212,175,55,.15);
+
+}
+
+.auth-btn{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #b8860b,
+        #d4af37,
+        #f5d76e
+    );
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.auth-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 35px rgba(212,175,55,.30);
+
+}
