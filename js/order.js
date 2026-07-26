@@ -74,39 +74,31 @@ calcButton.addEventListener("click", function(){
 
 
 // ارسال واتساپ
-
 sendButton.addEventListener("click", function(){
 
 
-    const name =
-    document.getElementById("customerName").value;
+const name =
+document.getElementById("customerName").value;
 
 
-    const phone =
-    document.getElementById("customerPhone").value;
+const phone =
+document.getElementById("customerPhone").value;
 
 
-    const work =
-    document.getElementById("workType");
+const work =
+document.getElementById("workType");
 
 
-    const workName =
-    work.options[work.selectedIndex].text;
+const workName =
+work.options[work.selectedIndex].text;
 
 
-    const count =
-    document.getElementById("workCount").value;
+const count =
+document.getElementById("workCount").value;
 
 
-    const date =
-    document.getElementById("deliveryDate").value;
-
-
-    const notes =
-    document.getElementById("notes").value;
-
-const toothNumber =
-document.getElementById("toothNumber").value;
+const date =
+document.getElementById("deliveryDate").value;
 
 
 const shade =
@@ -116,15 +108,67 @@ document.getElementById("shade").value;
 const material =
 document.getElementById("material").value;
 
-    if(name === "" || phone === ""){
 
-        alert("لطفاً نام و شماره تماس را وارد کنید");
-
-        return;
-
-    }
+const notes =
+document.getElementById("notes").value;
 
 
+
+document.getElementById("orderPreview").innerHTML = `
+
+
+<strong>نام پزشک:</strong>
+${name}
+
+<br>
+
+<strong>شماره تماس:</strong>
+${phone}
+
+<br>
+
+<strong>نوع کار:</strong>
+${workName}
+
+<br>
+
+<strong>تعداد:</strong>
+${count}
+
+<br>
+
+<strong>تاریخ تحویل:</strong>
+${date}
+
+<br>
+
+<strong>Shade:</strong>
+${shade}
+
+<br>
+
+<strong>متریال:</strong>
+${material}
+
+<br>
+
+<strong>مبلغ تقریبی:</strong>
+${finalPrice.toLocaleString()} تومان
+
+<br>
+
+<strong>توضیحات:</strong>
+${notes}
+
+
+`;
+
+
+
+confirmBox.style.display="block";
+
+
+});
 
     const message =
 
