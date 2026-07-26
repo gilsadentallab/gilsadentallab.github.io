@@ -164,3 +164,26 @@ loginBtn.addEventListener("click", function () {
     openDashboard(user);
 
 });
+/*==============================
+        AUTH TABS
+==============================*/
+
+loginTab.addEventListener("click", function(){
+
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
+
+    loginContent.classList.add("active");
+    registerContent.classList.remove("active");
+
+});
+
+registerTab.addEventListener("click", function(){
+
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
+
+    registerContent.classList.add("active");
+    loginContent.classList.remove("active");
+
+});
