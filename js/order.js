@@ -1,3 +1,54 @@
+// ===== Order Modal =====
+
+const orderModal = document.getElementById("orderModal");
+
+const openButtons = document.querySelectorAll(".open-order");
+
+const closeButton = document.querySelector(".close-order");
+
+openButtons.forEach(button => {
+
+    button.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        orderModal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+});
+
+function closeOrderModal() {
+
+    orderModal.classList.remove("show");
+
+    document.body.style.overflow = "auto";
+
+}
+
+closeButton.addEventListener("click", closeOrderModal);
+
+orderModal.addEventListener("click", function (e) {
+
+    if (e.target === orderModal) {
+
+        closeOrderModal();
+
+    }
+
+});
+
+document.addEventListener("keydown", function (e) {
+
+    if (e.key === "Escape") {
+
+        closeOrderModal();
+
+    }
+
+});
 // ===== Gilsa Order System =====
 
 
