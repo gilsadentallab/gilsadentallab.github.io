@@ -366,3 +366,24 @@ const fileName =
 file ? file.name : "ندارد";
 
 });
+function calculateDelivery(count, workType){
+
+
+if(workType === "implant"){
+
+    return "7 تا 10 روز کاری";
+
+}
+
+
+if(count >= 5){
+
+    return "5 تا 7 روز کاری";
+
+}
+
+
+return "3 تا 5 روز کاری";
+
+
+}
