@@ -451,7 +451,55 @@ confirmButton.addEventListener("click", function(){
 
     );
 
+/*====================================
+        SAVE ORDER
+====================================*/
 
+const order = {
+
+    code: generateOrderCode(),
+
+    customer: name,
+
+    phone: phone,
+
+    work: workName,
+
+    count: count,
+
+    shade: shade,
+
+    material: material,
+
+    tooth: toothNumber,
+
+    delivery: date,
+
+    price: finalPrice,
+
+    status: "در انتظار",
+
+    created: new Date().toLocaleDateString("fa-IR")
+
+};
+
+let orders =
+
+JSON.parse(
+
+localStorage.getItem("gilsaOrders")
+
+) || [];
+
+orders.push(order);
+
+localStorage.setItem(
+
+"gilsaOrders",
+
+JSON.stringify(orders)
+
+);
 
     window.open(url, "_blank");
 
