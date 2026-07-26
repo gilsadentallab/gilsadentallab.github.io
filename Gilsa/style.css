@@ -2400,6 +2400,235 @@ nav.open{
     bottom:20px;
 
 }
+/*=========================================
+        LOGIN BUTTON
+=========================================*/
 
+.login-btn{
+
+    padding:13px 26px;
+
+    border:2px solid var(--gold);
+
+    border-radius:40px;
+
+    color:var(--gold);
+
+    font-weight:700;
+
+    transition:.35s;
+
+    margin-right:12px;
+
+}
+
+.login-btn:hover{
+
+    background:var(--gold);
+
+    color:#fff;
+
+}
+
+
+/*=========================================
+        LOGIN MODAL
+=========================================*/
+
+.login-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.65);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:99999;
+
+}
+
+.login-modal.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+
+/*=========================================
+        LOGIN BOX
+=========================================*/
+
+.login-box{
+
+    width:95%;
+
+    max-width:520px;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:45px;
+
+    text-align:center;
+
+    position:relative;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.18);
+
+}
+
+
+
+.login-box h2{
+
+    color:var(--gold);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.login-box p{
+
+    color:#777;
+
+    margin-bottom:35px;
+
+}
+
+
+
+/*=========================================
+        CLOSE BUTTON
+=========================================*/
+
+.close-login{
+
+    position:absolute;
+
+    top:18px;
+
+    left:22px;
+
+    font-size:35px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.close-login:hover{
+
+    color:red;
+
+}
+
+
+
+/*=========================================
+        ACCOUNT CARDS
+=========================================*/
+
+.account-choice{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.account-card{
+
+    border:none;
+
+    background:#fafafa;
+
+    border:2px solid #eee;
+
+    border-radius:22px;
+
+    padding:35px 20px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+
+
+.account-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--gold);
+
+    box-shadow:0 15px 40px rgba(212,175,55,.18);
+
+}
+
+
+
+.account-card h3{
+
+    margin-top:15px;
+
+    color:#333;
+
+    font-size:22px;
+
+}
+
+
+
+.account-card{
+
+    font-size:55px;
+
+}
+
+
+
+/*=========================================
+        MOBILE
+=========================================*/
+
+@media(max-width:650px){
+
+.account-choice{
+
+grid-template-columns:1fr;
+
+}
+
+.login-box{
+
+padding:30px 20px;
+
+}
+
+}
 
 }
