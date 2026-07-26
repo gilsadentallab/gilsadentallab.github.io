@@ -3,7 +3,8 @@
 
 // قیمت پایه هر کار
 
-const prices = {
+const basePrices = {
+
 
     zirconia: 2500000,
 
@@ -16,6 +17,27 @@ const prices = {
     laminate: 4000000,
 
     repair: 500000
+
+
+};
+
+
+
+// افزایش قیمت متریال
+
+const materialExtra = {
+
+
+    "Zirconia HT": 0,
+
+    "Zirconia Multilayer": 700000,
+
+    "E.max Press": 1000000,
+
+    "E.max CAD": 800000,
+
+    "PFM": 0
+
 
 };
 
