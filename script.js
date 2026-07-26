@@ -272,22 +272,18 @@ lightbox.addEventListener("click",(e)=>{
     }
 
 });
-/*=========================================
-            MOBILE MENU
-=========================================*/
+/*=========================
+        MOBILE MENU
+==========================*/
 
-const menuBtn = document.querySelector(".menu-toggle");
+const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
-if(menuBtn){
+menuToggle.addEventListener("click",()=>{
 
-    menuBtn.addEventListener("click",()=>{
+    nav.classList.toggle("open");
 
-        nav.classList.toggle("open");
-
-    });
-
-}
+});
 
 document.querySelectorAll("nav a").forEach(link=>{
 
