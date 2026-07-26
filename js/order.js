@@ -242,3 +242,72 @@ ${notes}
 
 
 });
+// ===== File Preview =====
+
+
+const fileInput =
+document.getElementById("workFile");
+
+
+const filePreview =
+document.getElementById("filePreview");
+
+
+
+fileInput.addEventListener("change",function(){
+
+
+    const file = this.files[0];
+
+
+    if(!file){
+
+        filePreview.innerHTML =
+        "فایلی انتخاب نشده";
+
+        return;
+
+    }
+
+
+
+    filePreview.innerHTML =
+
+    `
+    <strong>
+    ${file.name}
+    </strong>
+    `;
+
+
+
+    // اگر عکس بود نمایش بده
+
+    if(file.type.startsWith("image/")){
+
+
+        const reader = new FileReader();
+
+
+
+        reader.onload=function(e){
+
+
+            filePreview.innerHTML +=
+
+            `
+            <br>
+            <img src="${e.target.result}">
+            `;
+
+
+        }
+
+
+
+        reader.readAsDataURL(file);
+
+    }
+
+
+});
