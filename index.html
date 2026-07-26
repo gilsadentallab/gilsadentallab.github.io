@@ -657,7 +657,136 @@
             ادامه →
 
         </button>
+<!-- STEP 2 -->
 
+<div class="order-form">
+
+    <h2>اطلاعات سفارش</h2>
+
+    <div class="form-group">
+
+        <label>نام پزشک / همکار</label>
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="مثال: دکتر احمدی">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>شماره تماس</label>
+
+        <input
+            type="tel"
+            id="customerPhone"
+            placeholder="09xxxxxxxxx">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>نوع کار</label>
+
+        <select id="workType">
+
+            <option value="">انتخاب کنید</option>
+
+            <option value="zirconia">
+                روکش زیرکونیا
+            </option>
+
+            <option value="pfm">
+                روکش PFM
+            </option>
+
+            <option value="implant">
+                ایمپلنت
+            </option>
+
+            <option value="emax">
+                E.max
+            </option>
+
+            <option value="laminate">
+                لمینیت
+            </option>
+
+            <option value="repair">
+                تعمیر
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>تعداد واحد</label>
+
+        <input
+            type="number"
+            id="workCount"
+            min="1"
+            value="1">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>تاریخ تحویل</label>
+
+        <input
+            type="date"
+            id="deliveryDate">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>توضیحات</label>
+
+        <textarea
+            id="notes"
+            rows="5"
+            placeholder="در صورت نیاز توضیحات سفارش را وارد کنید"></textarea>
+
+    </div>
+
+    <div class="price-box">
+
+        <h3>
+
+            مبلغ تقریبی
+
+        </h3>
+
+        <div id="totalPrice">
+
+            --------
+
+        </div>
+
+    </div>
+
+    <div class="order-buttons">
+
+        <button class="calc-price">
+
+            محاسبه قیمت
+
+        </button>
+
+        <button class="send-order">
+
+            ثبت سفارش در واتساپ
+
+        </button>
+
+    </div>
+
+</div>
     </div>
 
 </div>
