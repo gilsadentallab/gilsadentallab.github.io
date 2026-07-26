@@ -1,39 +1,36 @@
-/*====================================
+/*=====================================
         GILSA MAIN SCRIPT
-====================================*/
+=====================================*/
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-/*====================================
-        PRELOADER
-====================================*/
+/*=====================
+ PRELOADER
+=====================*/
 
-
-const preloader=document.getElementById("preloader");
-
+const preloader = document.getElementById("preloader");
 
 window.addEventListener("load",()=>{
 
-if(preloader){
+    if(preloader){
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
-preloader.classList.add("hide");
+            preloader.classList.add("hide");
 
-},800);
+        },800);
 
-}
+    }
 
 });
 
 
 
-/*====================================
-        HEADER SCROLL
-====================================*/
-
+/*=====================
+ HEADER SCROLL
+=====================*/
 
 const header=document.getElementById("header");
 
@@ -43,15 +40,15 @@ window.addEventListener("scroll",()=>{
 
 if(header){
 
-if(window.scrollY>50){
+    if(window.scrollY>50){
 
-header.classList.add("scrolled");
+        header.classList.add("scrolled");
 
-}else{
+    }else{
 
-header.classList.remove("scrolled");
+        header.classList.remove("scrolled");
 
-}
+    }
 
 }
 
@@ -60,10 +57,9 @@ header.classList.remove("scrolled");
 
 
 
-/*====================================
-        MOBILE MENU
-====================================*/
-
+/*=====================
+ MOBILE MENU
+=====================*/
 
 const menuBtn=document.querySelector(".menu-toggle");
 
@@ -75,17 +71,20 @@ if(menuBtn && nav){
 
 menuBtn.addEventListener("click",()=>{
 
-nav.classList.toggle("open");
+
+    nav.classList.toggle("open");
+
 
 });
 
 
-document.querySelectorAll("nav a").forEach(link=>{
+
+nav.querySelectorAll("a").forEach(link=>{
 
 
 link.addEventListener("click",()=>{
 
-nav.classList.remove("open");
+    nav.classList.remove("open");
 
 });
 
@@ -98,9 +97,9 @@ nav.classList.remove("open");
 
 
 
-/*====================================
-        REVEAL ANIMATION
-====================================*/
+/*=====================
+ REVEAL ANIMATION
+=====================*/
 
 
 const reveals=document.querySelectorAll(".reveal");
@@ -114,7 +113,7 @@ entries.forEach(entry=>{
 
 if(entry.isIntersecting){
 
-entry.target.classList.add("show");
+    entry.target.classList.add("show");
 
 }
 
@@ -127,9 +126,12 @@ threshold:.15
 });
 
 
+
 reveals.forEach(el=>{
 
+
 observer.observe(el);
+
 
 });
 
@@ -137,29 +139,29 @@ observer.observe(el);
 
 
 
-/*====================================
-        BACK TO TOP
-====================================*/
+/*=====================
+ BACK TO TOP
+=====================*/
 
 
-const backTop=document.querySelector(".back-to-top");
+const topBtn=document.querySelector(".back-to-top");
+
+
+if(topBtn){
 
 
 window.addEventListener("scroll",()=>{
 
 
-if(backTop){
-
-
 if(window.scrollY>500){
 
-backTop.classList.add("show");
+topBtn.classList.add("show");
+
 
 }else{
 
-backTop.classList.remove("show");
 
-}
+topBtn.classList.remove("show");
 
 
 }
@@ -168,10 +170,8 @@ backTop.classList.remove("show");
 });
 
 
-if(backTop){
 
-
-backTop.addEventListener("click",()=>{
+topBtn.addEventListener("click",()=>{
 
 
 window.scrollTo({
@@ -187,30 +187,69 @@ behavior:"smooth"
 
 
 }
-/*====================================
-        AUTH SYSTEM
-====================================*/
-
-
-const authModal =
-document.getElementById("authModal");
-
-
-const openAuthButtons =
-document.querySelectorAll(".open-auth");
-
-
-const closeAuthButton =
-document.querySelector(".close-auth");
 
 
 
-/*==============================
-        OPEN AUTH
-==============================*/
 
 
-openAuthButtons.forEach(btn=>{
+/*=====================
+ COUNTER
+=====================*/
+
+
+const counters=document.querySelectorAll(".counter");
+
+
+counters.forEach(counter=>{
+
+
+let target=Number(counter.dataset.target);
+
+let current=0;
+
+
+let timer=setInterval(()=>{
+
+
+current += Math.ceil(target/100);
+
+
+if(current>=target){
+
+current=target;
+
+clearInterval(timer);
+
+}
+
+
+counter.innerText=current.toLocaleString("fa-IR");
+
+
+},20);
+
+
+
+});
+
+
+
+
+
+/*=====================
+ AUTH OPEN
+=====================*/
+
+
+const authModal=document.getElementById("authModal");
+
+const authButtons=document.querySelectorAll(".open-auth");
+
+const closeAuth=document.querySelector(".close-auth");
+
+
+
+authButtons.forEach(btn=>{
 
 
 btn.addEventListener("click",(e)=>{
@@ -235,35 +274,18 @@ document.body.style.overflow="hidden";
 
 
 
-/*==============================
-        CLOSE AUTH
-==============================*/
+if(closeAuth){
 
 
-function closeAuth(){
+closeAuth.addEventListener("click",()=>{
 
-
-if(authModal){
 
 authModal.classList.remove("show");
-
-}
-
 
 document.body.style.overflow="";
 
 
-}
-
-
-
-if(closeAuthButton){
-
-
-closeAuthButton.addEventListener(
-"click",
-closeAuth
-);
+});
 
 
 }
@@ -278,7 +300,11 @@ authModal.addEventListener("click",(e)=>{
 
 if(e.target===authModal){
 
-closeAuth();
+
+authModal.classList.remove("show");
+
+document.body.style.overflow="";
+
 
 }
 
@@ -290,222 +316,13 @@ closeAuth();
 
 
 
-
-/*==============================
-        REGISTER
-==============================*/
-
-
-const registerBtn =
-document.getElementById("registerBtn");
-
-
-
-if(registerBtn){
-
-
-registerBtn.addEventListener("click",()=>{
-
-
-const user = {
-
-
-fullName:
-
-document.getElementById("fullName")?.value.trim() || "",
-
-
-mobile:
-
-document.getElementById("mobile")?.value.trim() || "",
-
-
-clinic:
-
-document.getElementById("clinic")?.value.trim() || "",
-
-
-city:
-
-document.getElementById("city")?.value.trim() || "",
-
-
-address:
-
-document.getElementById("address")?.value.trim() || "",
-
-
-username:
-
-document.getElementById("registerUsername")?.value.trim() || "",
-
-
-password:
-
-document.getElementById("registerPassword")?.value || ""
-
-
-};
-
-
-
-if(
-
-user.fullName===""
-
-||
-
-user.mobile===""
-
-||
-
-user.username===""
-
-||
-
-user.password===""
-
-){
-
-
-alert("لطفاً اطلاعات ضروری را کامل کنید");
-
-
-return;
-
-
-}
-
-
-
-
-localStorage.setItem(
-
-"gilsaUser",
-
-JSON.stringify(user)
-
-);
-
-
-
-alert(
-
-"ثبت نام با موفقیت انجام شد"
-
-);
-
-
-
-closeAuth();
-
-
-
-openDashboard(user);
-
-
-
 });
-
-
-}
-
-
-
-
-
-/*==============================
-        LOGIN
-==============================*/
-
-
-const loginBtn =
-document.getElementById("loginBtn");
-
-
-
-if(loginBtn){
-
-
-loginBtn.addEventListener("click",()=>{
-
-
-const user = JSON.parse(
-
-localStorage.getItem("gilsaUser")
-
-);
-
-
-
-if(!user){
-
-
-alert(
-
-"ابتدا ثبت نام کنید"
-
-);
-
-
-return;
-
-
-}
-
-
-
-closeAuth();
-
-
-openDashboard(user);
-
-
-
-});
-
-
-}
-
-
-
-
-
-/*==============================
-        AUTO LOGIN
-==============================*/
-
-
-const savedUser = JSON.parse(
-
-localStorage.getItem("gilsaUser")
-
-);
-
-
-
-if(savedUser){
-
-
-setTimeout(()=>{
-
-
-openDashboard(savedUser);
-
-
-},500);
-
-
-}
-
-
-/*====================================
+/*=====================================
         DASHBOARD SYSTEM
-====================================*/
+=====================================*/
 
 
-const dashboard = 
-document.getElementById("dashboard");
+const dashboard = document.getElementById("dashboard");
 
 
 
@@ -513,39 +330,70 @@ function openDashboard(user){
 
 
 
-const header =
-document.getElementById("header");
-
-
-const main =
-document.querySelector("main");
-
-
-const footer =
-document.querySelector("footer");
+    const header=document.getElementById("header");
+    const main=document.querySelector("main");
+    const footer=document.querySelector("footer");
 
 
 
-if(header)
-header.style.display="none";
+    if(header)
+        header.style.display="none";
 
 
-if(main)
-main.style.display="none";
+    if(main)
+        main.style.display="none";
 
 
-if(footer)
-footer.style.display="none";
+    if(footer)
+        footer.style.display="none";
 
 
 
-if(dashboard){
+    if(dashboard){
+
+        dashboard.classList.add("active");
+
+        dashboard.style.display="flex";
+
+    }
 
 
-dashboard.classList.add("show");
+
+    document.body.style.overflow="auto";
 
 
-dashboard.style.display="flex";
+
+    const dashName=document.getElementById("dashName");
+
+
+    if(dashName){
+
+        dashName.innerText =
+        user.fullName || "کاربر گیلسا";
+
+    }
+
+
+
+    const dashType=document.getElementById("dashType");
+
+
+    if(dashType){
+
+        dashType.innerText =
+        user.type==="dentist"
+        ?
+        "دندانپزشک"
+        :
+        "لابراتوار";
+
+    }
+
+
+
+    loadProfile(user);
+
+    loadOrders();
 
 
 }
@@ -553,63 +401,157 @@ dashboard.style.display="flex";
 
 
 
-document.body.style.overflow="auto";
 
-document.body.classList.add(
-"dashboard-active"
+function closeDashboard(){
+
+
+
+    const header=document.getElementById("header");
+    const main=document.querySelector("main");
+    const footer=document.querySelector("footer");
+
+
+
+    if(header)
+        header.style.display="";
+
+
+    if(main)
+        main.style.display="";
+
+
+    if(footer)
+        footer.style.display="";
+
+
+
+    if(dashboard){
+
+        dashboard.style.display="none";
+
+        dashboard.classList.remove("active");
+
+    }
+
+
+}
+
+
+
+
+
+window.openDashboard=openDashboard;
+
+window.closeDashboard=closeDashboard;
+
+
+
+
+
+
+/*=====================================
+        DASHBOARD MENU
+=====================================*/
+
+
+const dashboardMenu=document.querySelectorAll(
+".dashboard-sidebar li[data-page]"
 );
 
 
 
-/* USER NAME */
+const dashboardPages=document.querySelectorAll(
+".dashboard-page"
+);
 
 
-const dashName =
-document.getElementById("dashName");
+
+dashboardMenu.forEach(item=>{
 
 
-if(dashName){
+item.addEventListener("click",()=>{
 
-dashName.innerText =
-user.fullName || "کاربر گیلسا";
+
+let page=item.dataset.page;
+
+
+
+dashboardMenu.forEach(i=>{
+
+i.classList.remove("active");
+
+});
+
+
+
+item.classList.add("active");
+
+
+
+dashboardPages.forEach(p=>{
+
+
+p.classList.remove("active");
+
+
+
+if(p.id===page){
+
+p.classList.add("active");
 
 }
 
 
-
-/* USER TYPE */
-
-
-const dashType =
-document.getElementById("dashType");
-
-
-if(dashType){
-
-dashType.innerText =
-"همکار گیلسا";
-
-}
+});
 
 
 
-/* PROFILE */
+});
 
 
-const profile =
-document.getElementById("profileInfo");
+});
 
 
 
-if(profile){
 
 
-profile.innerHTML = `
 
+
+/*=====================================
+        PROFILE
+=====================================*/
+
+
+function loadProfile(user){
+
+
+const box=document.getElementById("profileInfo");
+
+
+if(!box)
+return;
+
+
+
+box.innerHTML=`
 
 <p>
 <strong>نام:</strong>
 ${user.fullName}
+</p>
+
+
+<p>
+<strong>نوع حساب:</strong>
+${user.type==="dentist"
+?"دندانپزشک"
+:"لابراتوار"}
+</p>
+
+
+<p>
+<strong>محل کار:</strong>
+${user.workPlace || "-"}
 </p>
 
 
@@ -620,180 +562,26 @@ ${user.mobile}
 
 
 <p>
-<strong>محل فعالیت:</strong>
-${user.clinic || "-"}
-</p>
-
-
-<p>
 <strong>شهر:</strong>
 ${user.city || "-"}
 </p>
 
 
-<p>
-<strong>آدرس:</strong>
-${user.address || "-"}
-</p>
-
-
 `;
 
-
-}
-
-
-
-loadOrders();
-
-
-
 }
 
 
 
 
-function closeDashboard(){
-
-
-
-const header =
-document.getElementById("header");
-
-
-const main =
-document.querySelector("main");
-
-
-const footer =
-document.querySelector("footer");
-
-
-
-if(header)
-header.style.display="";
-
-
-if(main)
-main.style.display="";
-
-
-if(footer)
-footer.style.display="";
-
-
-
-if(dashboard){
-
-
-dashboard.classList.remove("show");
-
-
-dashboard.style.display="none";
-
-
-}
-
-
-
-document.body.classList.remove(
-"dashboard-active"
-);
-
-
-
-}
-
-
-
-
-window.openDashboard =
-openDashboard;
-
-
-window.closeDashboard =
-closeDashboard;
-
-
-
-
-
-/*====================================
-        DASHBOARD MENU
-====================================*/
-
-
-const dashboardLinks =
-document.querySelectorAll(
-".dashboard-sidebar li[data-page]"
-);
-
-
-
-dashboardLinks.forEach(link=>{
-
-
-link.addEventListener("click",()=>{
-
-
-const page =
-link.dataset.page;
-
-
-
-document
-.querySelectorAll(".dashboard-page")
-.forEach(p=>{
-
-p.classList.remove("active");
-
-});
-
-
-
-const target =
-document.getElementById(page);
-
-
-
-if(target){
-
-target.classList.add("active");
-
-}
-
-
-
-
-dashboardLinks.forEach(item=>{
-
-item.classList.remove("active");
-
-});
-
-
-link.classList.add("active");
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-
-/*====================================
+/*=====================================
         LOGOUT
-====================================*/
+=====================================*/
 
 
-const logoutBtn =
-document.getElementById("logoutBtn");
+const logoutBtn=document.getElementById(
+"logoutBtn"
+);
 
 
 
@@ -829,71 +617,231 @@ alert(
 
 
 
-/*====================================
-        LOAD ORDERS
-====================================*/
+
+/*=====================================
+        AUTO LOGIN
+=====================================*/
 
 
-function loadOrders(){
-
-
-const table =
-document.getElementById(
-"ordersTable"
+const savedUser=
+JSON.parse(
+localStorage.getItem("gilsaUser")
 );
 
 
 
-if(!table)
-return;
+if(savedUser){
+
+
+/*
+فعلا خودکار وارد نمی‌کنیم
+تا کاربر خودش دکمه ورود بزند
+*/
+
+
+}
+/*=====================================
+        GILSA FINAL CONNECTOR
+=====================================*/
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+/*=====================================
+        OPEN DASHBOARD AFTER LOGIN
+=====================================*/
+
+
+window.showUserDashboard=function(){
+
+
+const user = JSON.parse(
+localStorage.getItem("gilsaUser")
+);
 
 
 
-const orders = JSON.parse(
-
-localStorage.getItem(
-"gilsaOrders"
-)
-
-) || [];
+if(user && typeof openDashboard==="function"){
 
 
-
-table.innerHTML="";
-
+openDashboard(user);
 
 
-orders.forEach(order=>{
+}
 
 
-table.innerHTML += `
-
-<tr>
-
-<td>
-${order.code || "-"}
-</td>
+};
 
 
-<td>
-${order.work || "-"}
-</td>
 
 
-<td>
-${order.status || "در انتظار"}
-</td>
 
 
-</tr>
+/*=====================================
+        CHECK USER BUTTON
+=====================================*/
 
-`;
+
+const loginBtnHeader=
+document.querySelector(".open-auth");
+
+
+
+if(loginBtnHeader){
+
+
+loginBtnHeader.addEventListener("click",()=>{
+
+
+const user =
+JSON.parse(
+localStorage.getItem("gilsaUser")
+);
+
+
+
+if(user){
+
+
+const result =
+confirm(
+"شما قبلاً حساب دارید.\nورود به پنل کاربری؟"
+);
+
+
+
+if(result && typeof openDashboard==="function"){
+
+
+openDashboard(user);
+
+
+}
+
+
+}
+
 
 
 });
 
 
 }
+
+
+
+
+
+
+
+/*=====================================
+        ESC CLOSE MODALS
+=====================================*/
+
+
+document.addEventListener("keydown",(e)=>{
+
+
+if(e.key==="Escape"){
+
+
+const auth=
+document.getElementById("authModal");
+
+
+
+if(auth){
+
+auth.classList.remove("show");
+
+}
+
+
+
+document.body.style.overflow="";
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+/*=====================================
+        SMOOTH LINKS
+=====================================*/
+
+
+document.querySelectorAll(
+'a[href^="#"]'
+)
+.forEach(link=>{
+
+
+link.addEventListener("click",(e)=>{
+
+
+const target =
+document.querySelector(
+link.getAttribute("href")
+);
+
+
+
+if(target){
+
+
+e.preventDefault();
+
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+/*=====================================
+        IMAGE ERROR FIX
+=====================================*/
+
+
+document.querySelectorAll("img")
+.forEach(img=>{
+
+
+img.addEventListener("error",()=>{
+
+
+img.style.display="none";
+
+
+});
+
+
+});
+
 
 
 
