@@ -202,3 +202,12 @@ window.addEventListener("load", function(){
     }
 
 });
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", function(){
+
+    localStorage.removeItem("gilsaUser");
+
+    location.reload();
+
+});
