@@ -675,7 +675,47 @@ document.addEventListener("keydown",(e)=>{
         document.body.style.overflow="";
 
     }
+/*==============================
+        DASHBOARD FIX
+==============================*/
 
+const dashboard = document.querySelector(".dashboard");
+
+
+if(dashboard){
+
+    dashboard.style.display="none";
+
+}
+
+
+window.openDashboard = function(){
+
+    document.body.classList.add("dashboard-active");
+
+    document.querySelector("header").style.display="none";
+    document.querySelector("main").style.display="none";
+    document.querySelector("footer").style.display="none";
+
+    dashboard.style.display="flex";
+
+    window.scrollTo(0,0);
+
+}
+
+
+
+window.closeDashboard = function(){
+
+    document.body.classList.remove("dashboard-active");
+
+    document.querySelector("header").style.display="";
+    document.querySelector("main").style.display="";
+    document.querySelector("footer").style.display="";
+
+    dashboard.style.display="none";
+
+}
 });
 
 
