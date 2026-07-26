@@ -25,7 +25,12 @@ const calcButton = document.querySelector(".calc-price");
 
 const sendButton = document.querySelector(".send-order");
 
+const confirmBox =
+document.getElementById("confirmBox");
 
+
+const confirmButton =
+document.querySelector(".confirm-send");
 
 let finalPrice = 0;
 
