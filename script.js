@@ -716,9 +716,9 @@ window.openDashboard = function(){
         footer.style.display="none";
 
 
-    if(dashboard)
-        dashboard.style.display="flex";
-
+  if(dashboard){
+    dashboard.classList.add("active");
+}
 
     window.scrollTo(0,0);
 
