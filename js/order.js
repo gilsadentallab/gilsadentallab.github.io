@@ -614,3 +614,44 @@ function generateOrderCode(){
     String(lastNumber).padStart(4,"0");
 
 }
+/*====================================
+        LOAD ORDERS
+====================================*/
+
+function loadOrders(){
+
+    const table=document.getElementById("ordersTable");
+
+    if(!table) return;
+
+    table.innerHTML="";
+
+    const orders=
+
+    JSON.parse(
+
+    localStorage.getItem("gilsaOrders")
+
+    ) || [];
+
+    orders.forEach(order=>{
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${order.code}</td>
+
+            <td>${order.work}</td>
+
+            <td>${order.status}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+loadOrders();
