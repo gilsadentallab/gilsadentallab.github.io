@@ -498,7 +498,7 @@ nav a:hover::after{
 }
 
 .card:hover{
-    transform:translateY(-12px);
+    transform:translateY(-8px) scale(1.02);
     border-color:var(--gold);
     box-shadow:0 25px 60px rgba(212,175,55,.18);
 }
