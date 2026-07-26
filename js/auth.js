@@ -2,456 +2,326 @@
         GILSA AUTH SYSTEM
 ====================================*/
 
-const authModal = document.getElementById("authModal");
 
-const loginTab = document.querySelector('[data-tab="login"]');
+document.addEventListener("DOMContentLoaded",()=>{
 
-const registerTab = document.querySelector('[data-tab="register"]');
 
-const loginContent = document.getElementById("login");
+const authModal=document.getElementById("authModal");
 
-const registerContent = document.getElementById("register");
+const openAuth=document.querySelectorAll(".open-auth");
 
-const closeAuth = document.querySelector(".close-auth");
+const closeAuth=document.querySelector(".close-auth");
 
-const authButtons = document.querySelectorAll(".open-auth");
-/*==============================
-        OPEN MODAL
-==============================*/
 
-authButtons.forEach(button=>{
+/* OPEN MODAL */
 
-    button.addEventListener("click",function(e){
+openAuth.forEach(btn=>{
 
-        e.preventDefault();
+btn.addEventListener("click",(e)=>{
 
-        authModal.classList.add("show");
+e.preventDefault();
 
-        document.body.style.overflow="hidden";
+authModal.classList.add("show");
 
-    });
+document.body.style.overflow="hidden";
+
 
 });
-/*==============================
-        CLOSE MODAL
-==============================*/
+
+});
+
+
+
+/* CLOSE */
 
 function closeAuthModal(){
 
-    authModal.classList.remove("show");
+if(authModal){
 
-    document.body.style.overflow="auto";
+authModal.classList.remove("show");
 
 }
+
+document.body.style.overflow="";
+
+}
+
+
+
+if(closeAuth){
 
 closeAuth.addEventListener("click",closeAuthModal);
 
-authModal.addEventListener("click",function(e){
-
-    if(e.target===authModal){
-
-        closeAuthModal();
-
-    }
-
-});
-
-document.addEventListener("keydown",function(e){
-
-    if(e.key==="Escape"){
-
-        closeAuthModal();
-
-    }
-
-});
-//==============================
-// Dashboard
-//==============================
-
-const dashboard = document.getElementById("dashboard");
-
-function openDashboard(user){
-
-    // مخفی شدن صفحه اصلی
-    document.querySelector("main").style.display = "none";
-
-    // مخفی شدن هدر
-    document.querySelector("header").style.display = "none";
-
-    // مخفی شدن فوتر
-    document.querySelector("footer").style.display = "none";
-
-    // نمایش داشبورد
-    dashboard.classList.add("show");
-
-    // اطلاعات کاربر
-    document.getElementById("dashName").innerHTML =
-        user.fullName;
-
-    document.getElementById("dashType").innerHTML =
-        user.type === "doctor"
-        ? "دندانپزشک"
-        : "لابراتوار";
 }
-/*==============================
-        REGISTER
-==============================*/
 
-const registerBtn = document.getElementById("registerBtn");
 
-registerBtn.addEventListener("click", function () {
 
-    const user = {
+if(authModal){
 
-        type: document.getElementById("registerType").value,
+authModal.addEventListener("click",(e)=>{
 
-        fullName: document.getElementById("fullName").value,
+if(e.target===authModal){
 
-        workPlace: document.getElementById("workPlace").value,
+closeAuthModal();
 
-        mobile: document.getElementById("mobile").value,
-
-        city: document.getElementById("city").value,
-
-        address: document.getElementById("address").value,
-
-        username: document.getElementById("registerUsername").value,
-
-        password: document.getElementById("registerPassword").value
-
-    };
-
-    localStorage.setItem("gilsaUser", JSON.stringify(user));
-
-    closeAuthModal();
-
-    openDashboard(user);
+}
 
 });
-/*==============================
-            LOGIN
-==============================*/
-
-const loginBtn = document.getElementById("loginBtn");
-
-loginBtn.addEventListener("click", function () {
-
-    const username = document.getElementById("loginUsername").value;
-
-    const password = document.getElementById("loginPassword").value;
-
-    const user = JSON.parse(localStorage.getItem("gilsaUser"));
-
-    if (!user) {
-
-        alert("ابتدا ثبت نام کنید");
-
-        return;
-
-    }
-
-    if (username !== user.username || password !== user.password) {
-
-        alert("نام کاربری یا رمز عبور اشتباه است");
-
-        return;
-
-    }
-
-    closeAuthModal();
-
-    openDashboard(user);
-
-});
-/*==============================
-        AUTH TABS
-==============================*/
-
-loginTab.addEventListener("click", function(){
-
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-
-    loginContent.classList.add("active");
-    registerContent.classList.remove("active");
-
-});
-
-registerTab.addEventListener("click", function(){
-
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
-
-    registerContent.classList.add("active");
-    loginContent.classList.remove("active");
-
-});
-/*==============================
-        AUTO LOGIN
-==============================*/
-
-window.addEventListener("load", function(){
-
-    const user = JSON.parse(localStorage.getItem("gilsaUser"));
-
-    if(user){
-
-        openDashboard(user);
-
-    }
-
-});
-const logoutBtn = document.getElementById("logoutBtn");
-
-logoutBtn.addEventListener("click", function(){
-
-    localStorage.removeItem("gilsaUser");
-
-    location.reload();
-
-});
-/*====================================
-        DASHBOARD MENU
-====================================*/
-
-const menuItems = document.querySelectorAll(".dashboard-sidebar li[data-page]");
-
-const pages = document.querySelectorAll(".dashboard-page");
-
-menuItems.forEach(item=>{
-
-    item.addEventListener("click",function(){
-
-        menuItems.forEach(i=>i.classList.remove("active"));
-
-        this.classList.add("active");
-
-        pages.forEach(page=>{
-
-            page.classList.remove("active");
-
-        });
-
-        document
-        .getElementById(this.dataset.page)
-        .classList.add("active");
-
-    });
-
-});
-
-
-/*====================================
-        PROFILE
-====================================*/
-
-function loadProfile(user){
-
-    const profile=document.getElementById("profileInfo");
-
-    if(!profile) return;
-
-    profile.innerHTML=`
-
-        <p><strong>نام:</strong> ${user.fullName}</p>
-
-        <p><strong>نوع کاربر:</strong> ${
-            user.type==="doctor"
-            ?"دندانپزشک"
-            :"لابراتوار"
-        }</p>
-
-        <p><strong>نام محل کار:</strong> ${user.workPlace}</p>
-
-        <p><strong>موبایل:</strong> ${user.mobile}</p>
-
-        <p><strong>تلفن محل کار:</strong> ${user.workPhone}</p>
-
-        <p><strong>شهر:</strong> ${user.city}</p>
-
-        <p><strong>آدرس:</strong> ${user.address}</p>
-
-        <p><strong>نام کاربری:</strong> ${user.username}</p>
-
-    `;
 
 }
 
 
-/*====================================
-        AUTO LOGIN
-====================================*/
-
-const savedUser=JSON.parse(localStorage.getItem("gilsaUser"));
-
-if(savedUser){
-
-    openDashboard(savedUser);
-
-    loadProfile(savedUser);
-
-}
 
 
-/*====================================
-        LOGOUT
-====================================*/
+/*========================
+REGISTER
+========================*/
 
-const logout=document.getElementById("logoutBtn");
 
-if(logout){
+const registerBtn=document.getElementById("registerBtn");
 
-logout.addEventListener("click",function(){
-
-    localStorage.removeItem("gilsaUser");
-
-    location.reload();
-
-});
-
-}
-/*====================================
-        REGISTER
-====================================*/
-
-const registerBtn = document.getElementById("registerBtn");
 
 if(registerBtn){
 
-registerBtn.addEventListener("click",function(){
 
-    const user={
+registerBtn.addEventListener("click",()=>{
 
-        type:document.getElementById("registerType").value,
 
-        fullName:document.getElementById("fullName").value.trim(),
+const user={
 
-        workPlace:document.getElementById("workPlace").value.trim(),
 
-        mobile:document.getElementById("mobile").value.trim(),
+type:document.getElementById("registerType")?.value,
 
-        workPhone:document.getElementById("workPhone").value.trim(),
 
-        city:document.getElementById("city").value.trim(),
+fullName:document.getElementById("fullName")?.value,
 
-        address:document.getElementById("address").value.trim(),
 
-        username:document.getElementById("registerUsername").value.trim(),
+workPlace:document.getElementById("workPlace")?.value,
 
-        password:document.getElementById("registerPassword").value,
 
-        password2:document.getElementById("registerPassword2").value
+mobile:document.getElementById("mobile")?.value,
 
-    };
 
-    if(
+city:document.getElementById("city")?.value,
 
-        user.fullName==="" ||
 
-        user.mobile==="" ||
+address:document.getElementById("address")?.value,
 
-        user.username==="" ||
 
-        user.password===""
+username:document.getElementById("registerUsername")?.value,
 
-    ){
 
-        alert("لطفاً تمام فیلدهای ضروری را تکمیل کنید.");
+password:document.getElementById("registerPassword")?.value
 
-        return;
 
-    }
 
-    if(user.password!==user.password2){
+};
 
-        alert("رمز عبور و تکرار آن یکسان نیست.");
 
-        return;
 
-    }
+localStorage.setItem(
+"gilsaUser",
+JSON.stringify(user)
+);
 
-    localStorage.setItem(
 
-        "gilsaUsers",
 
-        JSON.stringify([user])
+alert("ثبت نام با موفقیت انجام شد");
 
-    );
 
-    localStorage.setItem(
 
-        "gilsaUser",
+closeAuthModal();
 
-        JSON.stringify(user)
 
-    );
+openDashboard(user);
 
-    alert("ثبت نام با موفقیت انجام شد.");
 
-    closeAuthModal();
-
-    openDashboard(user);
-
-    loadProfile(user);
 
 });
+
 
 }
 
 
-/*====================================
-        LOGIN
-====================================*/
+
+
+/*========================
+LOGIN
+========================*/
+
 
 const loginBtn=document.getElementById("loginBtn");
 
+
 if(loginBtn){
 
-loginBtn.addEventListener("click",function(){
 
-    const username=document.getElementById("loginUsername").value.trim();
+loginBtn.addEventListener("click",()=>{
 
-    const password=document.getElementById("loginPassword").value;
 
-    const users=
+const user=JSON.parse(
+localStorage.getItem("gilsaUser")
+);
 
-    JSON.parse(
 
-        localStorage.getItem("gilsaUsers")
 
-    ) || [];
+if(!user){
 
-    const user=users.find(u=>
+alert("ابتدا ثبت نام کنید");
 
-        u.username===username &&
+return;
 
-        u.password===password
+}
 
-    );
 
-    if(!user){
 
-        alert("نام کاربری یا رمز عبور اشتباه است.");
+closeAuthModal();
 
-        return;
+openDashboard(user);
 
-    }
 
-    localStorage.setItem(
-
-        "gilsaUser",
-
-        JSON.stringify(user)
-
-    );
-
-    closeAuthModal();
-
-    openDashboard(user);
-
-    loadProfile(user);
 
 });
 
+
 }
+
+
+
+
+
+/*========================
+DASHBOARD
+========================*/
+
+
+const dashboard=document.getElementById("dashboard");
+
+
+
+window.openDashboard=function(user){
+
+
+const header=document.getElementById("header");
+
+const main=document.querySelector("main");
+
+const footer=document.querySelector("footer");
+
+
+
+if(header)
+header.style.display="none";
+
+
+if(main)
+main.style.display="none";
+
+
+if(footer)
+footer.style.display="none";
+
+
+
+if(dashboard){
+
+dashboard.style.display="flex";
+
+dashboard.classList.add("show");
+
+}
+
+
+
+document.body.style.overflow="auto";
+
+
+
+if(document.getElementById("dashName")){
+
+document.getElementById("dashName").innerText =
+user.fullName || "کاربر";
+
+
+}
+
+
+
+};
+
+
+
+
+
+window.closeDashboard=function(){
+
+
+
+const header=document.getElementById("header");
+
+const main=document.querySelector("main");
+
+const footer=document.querySelector("footer");
+
+
+
+if(header)
+header.style.display="";
+
+
+if(main)
+main.style.display="";
+
+
+if(footer)
+footer.style.display="";
+
+
+
+if(dashboard){
+
+dashboard.style.display="none";
+
+dashboard.classList.remove("show");
+
+}
+
+
+
+document.body.style.overflow="";
+
+
+};
+
+
+
+
+
+/* LOGOUT */
+
+
+const logout=document.getElementById("logoutBtn");
+
+
+if(logout){
+
+
+logout.addEventListener("click",()=>{
+
+
+localStorage.removeItem("gilsaUser");
+
+
+closeDashboard();
+
+
+
+});
+
+
+}
+
+
+
+
+});
