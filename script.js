@@ -747,10 +747,11 @@ window.closeDashboard=function(){
         footer.style.display="";
 
 
-  if(dashboard){
+ if(dashboard){
     dashboard.classList.remove("active");
 }
 
+};
 
 
 
@@ -764,14 +765,31 @@ const logoutBtn=document.getElementById("logoutBtn");
 
 if(logoutBtn){
 
+    logoutBtn.addEventListener("click",()=>{
 
-logoutBtn.addEventListener("click",()=>{
+        closeDashboard();
+
+    });
+
+}
 
 
-    closeDashboard();
+/*==============================
+        LOGIN BUTTON
+==============================*/
 
 
-});
+const loginBtn=document.getElementById("loginBtn");
 
+
+if(loginBtn){
+
+    loginBtn.addEventListener("click",()=>{
+
+
+        openDashboard();
+
+
+    });
 
 }
