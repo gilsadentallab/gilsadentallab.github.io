@@ -211,3 +211,103 @@ logoutBtn.addEventListener("click", function(){
     location.reload();
 
 });
+/*====================================
+        DASHBOARD MENU
+====================================*/
+
+const menuItems = document.querySelectorAll(".dashboard-sidebar li[data-page]");
+
+const pages = document.querySelectorAll(".dashboard-page");
+
+menuItems.forEach(item=>{
+
+    item.addEventListener("click",function(){
+
+        menuItems.forEach(i=>i.classList.remove("active"));
+
+        this.classList.add("active");
+
+        pages.forEach(page=>{
+
+            page.classList.remove("active");
+
+        });
+
+        document
+        .getElementById(this.dataset.page)
+        .classList.add("active");
+
+    });
+
+});
+
+
+/*====================================
+        PROFILE
+====================================*/
+
+function loadProfile(user){
+
+    const profile=document.getElementById("profileInfo");
+
+    if(!profile) return;
+
+    profile.innerHTML=`
+
+        <p><strong>نام:</strong> ${user.fullName}</p>
+
+        <p><strong>نوع کاربر:</strong> ${
+            user.type==="doctor"
+            ?"دندانپزشک"
+            :"لابراتوار"
+        }</p>
+
+        <p><strong>نام محل کار:</strong> ${user.workPlace}</p>
+
+        <p><strong>موبایل:</strong> ${user.mobile}</p>
+
+        <p><strong>تلفن محل کار:</strong> ${user.workPhone}</p>
+
+        <p><strong>شهر:</strong> ${user.city}</p>
+
+        <p><strong>آدرس:</strong> ${user.address}</p>
+
+        <p><strong>نام کاربری:</strong> ${user.username}</p>
+
+    `;
+
+}
+
+
+/*====================================
+        AUTO LOGIN
+====================================*/
+
+const savedUser=JSON.parse(localStorage.getItem("gilsaUser"));
+
+if(savedUser){
+
+    openDashboard(savedUser);
+
+    loadProfile(savedUser);
+
+}
+
+
+/*====================================
+        LOGOUT
+====================================*/
+
+const logout=document.getElementById("logoutBtn");
+
+if(logout){
+
+logout.addEventListener("click",function(){
+
+    localStorage.removeItem("gilsaUser");
+
+    location.reload();
+
+});
+
+}
