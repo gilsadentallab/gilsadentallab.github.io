@@ -100,7 +100,16 @@ sendButton.addEventListener("click", function(){
     const notes =
     document.getElementById("notes").value;
 
+const toothNumber =
+document.getElementById("toothNumber").value;
 
+
+const shade =
+document.getElementById("shade").value;
+
+
+const material =
+document.getElementById("material").value;
 
     if(name === "" || phone === ""){
 
