@@ -284,89 +284,142 @@ nav a:hover::after{
 ==================================================*/
 
 .hero{
+
     position:relative;
-     min-height:100vh;
-    padding-top:140px;
-   .hero .container{
 
-display:flex;
+    min-height:90vh;
 
-align-items:center;
+    padding:160px 8% 80px;
 
-justify-content:space-between;
+    display:flex;
 
-gap:70px;
+    align-items:center;
+
+}
+
+.hero .container{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:80px;
+
 }
 
 .hero-text{
+
     flex:1;
-    max-width:620px;
+
+    max-width:600px;
+
 }
 
 .hero-text h2{
-    font-size:58px;
+
+    font-size:60px;
+
     font-weight:800;
+
     color:var(--dark2);
-    line-height:1.25;
+
+    line-height:1.2;
+
     margin-bottom:25px;
+
 }
 
 .hero-text p{
 
-font-size:20px;
+    font-size:20px;
 
-line-height:2;
+    line-height:2;
 
-max-width:650px;
+    color:var(--gray);
+
+    margin-bottom:35px;
 
 }
 
 .hero::before{
+
     content:"";
+
     position:absolute;
-    right:8%;
-    width:500px;
-    height:500px;
+
+    top:50%;
+
+    right:5%;
+
+    transform:translateY(-50%);
+
+    width:450px;
+
+    height:450px;
+
     border-radius:50%;
-    background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%);
+
+    background:radial-gradient(circle,
+    rgba(212,175,55,.15),
+    transparent 70%);
+
     z-index:-1;
+
 }
 
 .hero-image{
+
     flex:1;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     position:relative;
+
 }
 
 .hero-image::before{
+
     content:"";
+
     position:absolute;
-    width:280px;
-    height:280px;
-    border-radius:50%;
+
+    width:220px;
+
+    height:220px;
+
     background:rgba(212,175,55,.18);
-    filter:blur(40px);
+
+    border-radius:50%;
+
+    filter:blur(35px);
+
     z-index:-1;
+
 }
 
 .hero-image img{
 
-width:430px;
+    width:460px;
 
-max-width:100%;
+    max-width:100%;
 
-animation:float 5s ease-in-out infinite;
+    animation:float 5s ease-in-out infinite;
 
-    transition:var(--transition);
+    transition:.4s;
+
 }
 
 .hero-image img:hover{
-    transform:scale(1.05);
-    filter:drop-shadow(0 0 50px rgba(212,175,55,.55));
-}
 
+    transform:scale(1.05);
+
+}
 /*==================================================
                     BUTTONS
 ==================================================*/
