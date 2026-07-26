@@ -187,3 +187,18 @@ registerTab.addEventListener("click", function(){
     loginContent.classList.remove("active");
 
 });
+/*==============================
+        AUTO LOGIN
+==============================*/
+
+window.addEventListener("load", function(){
+
+    const user = JSON.parse(localStorage.getItem("gilsaUser"));
+
+    if(user){
+
+        openDashboard(user);
+
+    }
+
+});
