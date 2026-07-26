@@ -136,7 +136,14 @@ ${workName}
 
 تعداد:
 ${count}
+شماره دندان:
+${toothNumber}
 
+Shade:
+${shade}
+
+متریال:
+${material}
 تاریخ تحویل:
 ${date}
 
