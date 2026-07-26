@@ -1,6 +1,6 @@
-/*====================================
-        GILSA AUTH SYSTEM
-====================================*/
+/*=====================================
+        GILSA AUTH SYSTEM FINAL
+=====================================*/
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -10,112 +10,8 @@ const authModal =
 document.getElementById("authModal");
 
 
-const openButtons =
-document.querySelectorAll(".open-auth");
-
-
-const closeButton =
-document.querySelector(".close-auth");
-
-
-
-
-
-/*====================
-OPEN MODAL
-====================*/
-
-
-openButtons.forEach(btn=>{
-
-
-btn.addEventListener("click",(e)=>{
-
-
-e.preventDefault();
-
-
-if(authModal){
-
-authModal.classList.add("show");
-
-document.body.style.overflow="hidden";
-
-}
-
-
-});
-
-
-});
-
-
-
-
-
-
-/*====================
-CLOSE MODAL
-====================*/
-
-
-function closeAuth(){
-
-
-if(authModal){
-
-authModal.classList.remove("show");
-
-}
-
-
-document.body.style.overflow="";
-
-
-}
-
-
-
-if(closeButton){
-
-closeButton.addEventListener(
-"click",
-closeAuth
-);
-
-}
-
-
-
-if(authModal){
-
-
-authModal.addEventListener(
-"click",
-(e)=>{
-
-
-if(e.target===authModal){
-
-closeAuth();
-
-}
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-/*====================
-REGISTER
-====================*/
+const loginBtn =
+document.getElementById("loginBtn");
 
 
 const registerBtn =
@@ -123,49 +19,74 @@ document.getElementById("registerBtn");
 
 
 
-if(registerBtn){
 
+
+/*=====================================
+        REGISTER
+=====================================*/
+
+
+if(registerBtn){
 
 
 registerBtn.addEventListener("click",()=>{
 
 
 
-const fullName =
-document.getElementById("fullName")?.value.trim();
+const user={
+
+
+type:
+document.getElementById("registerType")?.value || "",
 
 
 
-const mobile =
-document.getElementById("mobile")?.value.trim();
+fullName:
+document.getElementById("fullName")?.value.trim() || "",
 
 
 
-const username =
-document.getElementById("registerUsername")?.value.trim();
+workPlace:
+document.getElementById("workPlace")?.value.trim() || "",
 
 
 
-const password =
-document.getElementById("registerPassword")?.value;
+mobile:
+document.getElementById("mobile")?.value.trim() || "",
 
 
 
-const type =
-document.getElementById("registerType")?.value;
+city:
+document.getElementById("city")?.value.trim() || "",
 
 
 
-const workplace =
-document.getElementById("workPlace")?.value.trim();
+address:
+document.getElementById("address")?.value.trim() || "",
+
+
+
+username:
+document.getElementById("registerUsername")?.value.trim() || "",
+
+
+
+password:
+document.getElementById("registerPassword")?.value || ""
+
+
+
+};
+
+
 
 
 
 if(
-!fullName ||
-!mobile ||
-!username ||
-!password
+!user.fullName ||
+!user.mobile ||
+!user.username ||
+!user.password
 ){
 
 
@@ -183,42 +104,10 @@ return;
 
 
 
-const user={
-
-
-type:type || "dentist",
-
-
-fullName,
-
-mobile,
-
-username,
-
-password,
-
-workplace,
-
-
-created:
-
-new Date().toLocaleDateString("fa-IR")
-
-
-};
-
-
-
-
-
 localStorage.setItem(
-
 "gilsaUser",
-
 JSON.stringify(user)
-
 );
-
 
 
 
@@ -229,11 +118,19 @@ alert(
 
 
 
-closeAuth();
+
+if(authModal){
+
+authModal.classList.remove("show");
+
+}
 
 
 
-openDashboard(user);
+
+document.body.style.overflow="";
+
+
 
 
 
@@ -250,19 +147,13 @@ openDashboard(user);
 
 
 
-/*====================
-LOGIN
-====================*/
 
-
-
-const loginBtn =
-document.getElementById("loginBtn");
-
+/*=====================================
+        LOGIN
+=====================================*/
 
 
 if(loginBtn){
-
 
 
 loginBtn.addEventListener("click",()=>{
@@ -270,27 +161,26 @@ loginBtn.addEventListener("click",()=>{
 
 
 const username =
-document.querySelector(
-".auth-box input[type='text']"
-)?.value.trim();
+document.getElementById("loginUsername")?.value.trim();
 
 
 
 const password =
-document.querySelector(
-".auth-box input[type='password']"
-)?.value;
+document.getElementById("loginPassword")?.value;
 
 
 
-const saved =
+const savedUser =
 JSON.parse(
 localStorage.getItem("gilsaUser")
 );
 
 
 
-if(!saved){
+
+
+
+if(!savedUser){
 
 
 alert(
@@ -305,10 +195,12 @@ return;
 
 
 
-if(
-username !== saved.username ||
-password !== saved.password
 
+
+
+if(
+username !== savedUser.username ||
+password !== savedUser.password
 ){
 
 
@@ -324,10 +216,42 @@ return;
 
 
 
-closeAuth();
 
 
-openDashboard(saved);
+
+alert(
+"ورود موفقیت آمیز بود"
+);
+
+
+
+
+
+
+if(authModal){
+
+authModal.classList.remove("show");
+
+}
+
+
+
+document.body.style.overflow="";
+
+
+
+
+
+
+if(typeof openDashboard==="function"){
+
+
+openDashboard(savedUser);
+
+
+}
+
+
 
 
 
@@ -344,156 +268,31 @@ openDashboard(saved);
 
 
 
-/*====================
-DASHBOARD
-====================*/
+/*=====================================
+        ENTER LOGIN
+=====================================*/
+
+
+const passwordInput =
+document.getElementById("loginPassword");
 
 
 
-window.openDashboard=function(user){
+if(passwordInput){
 
 
-
-const dashboard =
-document.getElementById("dashboard");
-
-
-
-const header =
-document.getElementById("header");
+passwordInput.addEventListener(
+"keydown",
+(e)=>{
 
 
-
-const main =
-document.querySelector("main");
+if(e.key==="Enter"){
 
 
-
-const footer =
-document.querySelector("footer");
-
-
-
-
-if(header)
-header.style.display="none";
-
-
-if(main)
-main.style.display="none";
-
-
-if(footer)
-footer.style.display="none";
-
-
-
-
-if(dashboard){
-
-
-dashboard.classList.add("show");
+loginBtn?.click();
 
 
 }
-
-
-
-
-
-const name =
-document.getElementById("dashName");
-
-
-if(name){
-
-name.innerText =
-user.fullName;
-
-}
-
-
-
-
-const type =
-document.getElementById("dashType");
-
-
-if(type){
-
-type.innerText =
-user.type==="lab"
-?
-"لابراتوار"
-:
-"دندانپزشک";
-
-}
-
-
-
-document.body.style.overflow="";
-
-
-
-};
-
-
-
-
-
-
-
-
-
-/*====================
-LOGOUT
-====================*/
-
-
-const logout =
-document.getElementById("logoutBtn");
-
-
-
-if(logout){
-
-
-logout.addEventListener("click",()=>{
-
-
-localStorage.removeItem(
-"gilsaUser"
-);
-
-
-
-const dashboard =
-document.getElementById("dashboard");
-
-
-
-if(dashboard){
-
-dashboard.classList.remove("show");
-
-}
-
-
-
-document.getElementById("header")
-.style.display="";
-
-
-
-document.querySelector("main")
-.style.display="";
-
-
-
-document.querySelector("footer")
-.style.display="";
-
 
 
 });
