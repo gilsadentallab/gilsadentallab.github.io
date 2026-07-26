@@ -6,35 +6,50 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-const authModal=document.getElementById("authModal");
+const authModal = document.getElementById("authModal");
 
-const openAuth=document.querySelectorAll(".open-auth");
+const openAuthButtons = document.querySelectorAll(".open-auth");
 
-const closeAuth=document.querySelector(".close-auth");
+const closeAuthButton = document.querySelector(".close-auth");
 
 
-/* OPEN MODAL */
+/*==============================
+        OPEN AUTH
+==============================*/
 
-openAuth.forEach(btn=>{
+
+openAuthButtons.forEach(btn=>{
+
 
 btn.addEventListener("click",(e)=>{
 
+
 e.preventDefault();
+
+
+if(authModal){
 
 authModal.classList.add("show");
 
 document.body.style.overflow="hidden";
 
+}
+
 
 });
 
+
 });
 
 
 
-/* CLOSE */
+/*==============================
+        CLOSE AUTH
+==============================*/
 
-function closeAuthModal(){
+
+function closeAuth(){
+
 
 if(authModal){
 
@@ -42,15 +57,17 @@ authModal.classList.remove("show");
 
 }
 
+
 document.body.style.overflow="";
+
 
 }
 
 
 
-if(closeAuth){
+if(closeAuthButton){
 
-closeAuth.addEventListener("click",closeAuthModal);
+closeAuthButton.addEventListener("click",closeAuth);
 
 }
 
@@ -60,81 +77,12 @@ if(authModal){
 
 authModal.addEventListener("click",(e)=>{
 
+
 if(e.target===authModal){
 
-closeAuthModal();
+closeAuth();
 
 }
-
-});
-
-}
-
-
-
-
-/*========================
-REGISTER
-========================*/
-
-
-const registerBtn=document.getElementById("registerBtn");
-
-
-if(registerBtn){
-
-
-registerBtn.addEventListener("click",()=>{
-
-
-const user={
-
-
-type:document.getElementById("registerType")?.value,
-
-
-fullName:document.getElementById("fullName")?.value,
-
-
-workPlace:document.getElementById("workPlace")?.value,
-
-
-mobile:document.getElementById("mobile")?.value,
-
-
-city:document.getElementById("city")?.value,
-
-
-address:document.getElementById("address")?.value,
-
-
-username:document.getElementById("registerUsername")?.value,
-
-
-password:document.getElementById("registerPassword")?.value
-
-
-
-};
-
-
-
-localStorage.setItem(
-"gilsaUser",
-JSON.stringify(user)
-);
-
-
-
-alert("ثبت نام با موفقیت انجام شد");
-
-
-
-closeAuthModal();
-
-
-openDashboard(user);
-
 
 
 });
@@ -145,61 +93,17 @@ openDashboard(user);
 
 
 
-/*========================
-LOGIN
-========================*/
-
-
-const loginBtn=document.getElementById("loginBtn");
-
-
-if(loginBtn){
-
-
-loginBtn.addEventListener("click",()=>{
-
-
-const user=JSON.parse(
-localStorage.getItem("gilsaUser")
-);
-
-
-
-if(!user){
-
-alert("ابتدا ثبت نام کنید");
-
-return;
-
-}
-
-
-
-closeAuthModal();
-
-openDashboard(user);
-
-
-
-});
-
-
-}
-
-
-
-
-
-/*========================
-DASHBOARD
-========================*/
+/*==============================
+        DASHBOARD
+==============================*/
 
 
 const dashboard=document.getElementById("dashboard");
 
 
 
-window.openDashboard=function(user){
+function openDashboard(user){
+
 
 
 const header=document.getElementById("header");
@@ -233,27 +137,26 @@ dashboard.classList.add("show");
 
 
 
-document.body.style.overflow="auto";
+document.body.style.overflow="";
 
 
 
-if(document.getElementById("dashName")){
+const name=document.getElementById("dashName");
 
-document.getElementById("dashName").innerText =
-user.fullName || "کاربر";
+if(name){
+
+name.innerText=user.fullName;
+
+}
+
 
 
 }
 
 
 
-};
 
-
-
-
-
-window.closeDashboard=function(){
+function closeDashboard(){
 
 
 
@@ -291,22 +194,180 @@ dashboard.classList.remove("show");
 document.body.style.overflow="";
 
 
+
+}
+
+
+
+window.openDashboard=openDashboard;
+
+window.closeDashboard=closeDashboard;
+
+
+
+
+
+/*==============================
+        REGISTER
+==============================*/
+
+
+const registerBtn=document.getElementById("registerBtn");
+
+
+
+if(registerBtn){
+
+
+
+registerBtn.addEventListener("click",()=>{
+
+
+
+const user={
+
+
+type:document.getElementById("registerType")?.value || "",
+
+
+fullName:document.getElementById("fullName")?.value.trim() || "",
+
+
+workPlace:document.getElementById("workPlace")?.value.trim() || "",
+
+
+mobile:document.getElementById("mobile")?.value.trim() || "",
+
+
+city:document.getElementById("city")?.value.trim() || "",
+
+
+address:document.getElementById("address")?.value.trim() || "",
+
+
+username:document.getElementById("registerUsername")?.value.trim() || "",
+
+
+password:document.getElementById("registerPassword")?.value || ""
+
+
+
 };
 
 
 
+if(
+user.fullName==="" ||
+user.mobile==="" ||
+user.username==="" ||
+user.password===""
+){
 
 
-/* LOGOUT */
+alert("لطفاً اطلاعات ضروری را کامل کنید");
+
+return;
 
 
-const logout=document.getElementById("logoutBtn");
+}
 
 
-if(logout){
 
 
-logout.addEventListener("click",()=>{
+localStorage.setItem(
+
+"gilsaUser",
+
+JSON.stringify(user)
+
+);
+
+
+
+alert("ثبت نام با موفقیت انجام شد");
+
+
+
+closeAuth();
+
+
+openDashboard(user);
+
+
+
+});
+
+
+
+}
+
+
+
+
+/*==============================
+        LOGIN
+==============================*/
+
+
+const loginBtn=document.getElementById("loginBtn");
+
+
+
+if(loginBtn){
+
+
+loginBtn.addEventListener("click",()=>{
+
+
+
+const user=JSON.parse(
+
+localStorage.getItem("gilsaUser")
+
+);
+
+
+
+if(!user){
+
+
+alert("ابتدا ثبت نام کنید");
+
+return;
+
+
+}
+
+
+
+closeAuth();
+
+openDashboard(user);
+
+
+
+});
+
+
+
+}
+
+
+
+
+/*==============================
+        LOGOUT
+==============================*/
+
+
+const logoutBtn=document.getElementById("logoutBtn");
+
+
+
+if(logoutBtn){
+
+
+logoutBtn.addEventListener("click",()=>{
 
 
 localStorage.removeItem("gilsaUser");
@@ -315,12 +376,32 @@ localStorage.removeItem("gilsaUser");
 closeDashboard();
 
 
-
 });
 
 
 }
 
+
+
+
+/*==============================
+        AUTO LOGIN
+==============================*/
+
+
+const savedUser=
+
+JSON.parse(localStorage.getItem("gilsaUser"));
+
+
+
+if(savedUser){
+
+
+openDashboard(savedUser);
+
+
+}
 
 
 
