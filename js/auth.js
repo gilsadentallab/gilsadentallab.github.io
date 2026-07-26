@@ -65,3 +65,32 @@ document.addEventListener("keydown",function(e){
     }
 
 });
+//==============================
+// Dashboard
+//==============================
+
+const dashboard = document.getElementById("dashboard");
+
+function openDashboard(user){
+
+    // مخفی شدن صفحه اصلی
+    document.querySelector("main").style.display = "none";
+
+    // مخفی شدن هدر
+    document.querySelector("header").style.display = "none";
+
+    // مخفی شدن فوتر
+    document.querySelector("footer").style.display = "none";
+
+    // نمایش داشبورد
+    dashboard.classList.add("show");
+
+    // اطلاعات کاربر
+    document.getElementById("dashName").innerHTML =
+        user.fullName;
+
+    document.getElementById("dashType").innerHTML =
+        user.type === "doctor"
+        ? "دندانپزشک"
+        : "لابراتوار";
+}
