@@ -169,7 +169,28 @@ confirmBox.style.display="block";
 
 
 });
+confirmButton.addEventListener("click",function(){
 
+
+const text =
+document.getElementById("orderPreview").innerText;
+
+
+const whatsappNumber="989xxxxxxxxx";
+
+
+const url =
+"https://wa.me/"
++ whatsappNumber
++"?text="
++encodeURIComponent(text);
+
+
+
+window.open(url,"_blank");
+
+
+});
     const message =
 
 `سلام لابراتوار گیلسا
