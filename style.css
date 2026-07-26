@@ -2122,3 +2122,75 @@ input[type="file"]::file-selector-button{
     cursor:pointer;
 
 }
+/* ===== Order Confirmation ===== */
+
+
+.confirm-box{
+
+    display:none;
+
+    margin-top:35px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:#f8f8f8;
+
+    border:1px solid #eee;
+
+}
+
+
+
+.confirm-box h3{
+
+    color:#d4af37;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+#orderPreview{
+
+    line-height:2;
+
+    color:#333;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.confirm-send{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#25D366;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
