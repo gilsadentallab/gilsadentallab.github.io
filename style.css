@@ -3342,3 +3342,15 @@ padding:25px;
 }
 
 }
+/* Dashboard Mode */
+
+body.dashboard-active header,
+body.dashboard-active main,
+body.dashboard-active footer{
+    display:none;
+}
+
+
+body.dashboard-active .dashboard{
+    display:flex;
+}
