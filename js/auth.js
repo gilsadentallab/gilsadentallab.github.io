@@ -129,3 +129,38 @@ registerBtn.addEventListener("click", function () {
     openDashboard(user);
 
 });
+/*==============================
+            LOGIN
+==============================*/
+
+const loginBtn = document.getElementById("loginBtn");
+
+loginBtn.addEventListener("click", function () {
+
+    const username = document.getElementById("loginUsername").value;
+
+    const password = document.getElementById("loginPassword").value;
+
+    const user = JSON.parse(localStorage.getItem("gilsaUser"));
+
+    if (!user) {
+
+        alert("ابتدا ثبت نام کنید");
+
+        return;
+
+    }
+
+    if (username !== user.username || password !== user.password) {
+
+        alert("نام کاربری یا رمز عبور اشتباه است");
+
+        return;
+
+    }
+
+    closeAuthModal();
+
+    openDashboard(user);
+
+});
