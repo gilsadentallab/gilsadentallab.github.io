@@ -975,3 +975,6 @@ renderMyOrders();
 console.log(
 "GILSA ORDER SYSTEM READY"
 );
+console.log(
+"GILSA ORDER SYSTEM READY"
+);
