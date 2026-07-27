@@ -1036,7 +1036,7 @@ return false;
 
 
 return true;
-alert("auth loaded");
+
 
 
 }
