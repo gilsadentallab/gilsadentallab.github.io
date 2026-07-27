@@ -1831,7 +1831,275 @@
     <!--==========================
             SCRIPTS
     ===========================-->
+<!--==================================================
+                AUTH MODAL
+==================================================-->
 
+<div class="auth-modal" id="authModal">
+
+
+    <div class="auth-box">
+
+
+        <button class="close-auth">
+            ×
+        </button>
+
+
+
+        <!-- LOGIN -->
+
+        <div class="auth-content" id="loginBox">
+
+
+            <h2>
+                ورود به حساب کاربری
+            </h2>
+
+
+            <p>
+                وارد پنل گیلسا شوید
+            </p>
+
+
+
+            <form id="loginForm">
+
+
+                <input 
+                type="text"
+                id="loginUsername"
+                placeholder="نام کاربری"
+                required>
+
+
+
+                <input 
+                type="password"
+                id="loginPassword"
+                placeholder="رمز عبور"
+                required>
+
+
+
+                <button 
+                type="submit"
+                class="btn gold">
+
+                    ورود
+
+                </button>
+
+
+
+            </form>
+
+
+
+            <div class="auth-switch">
+
+                حساب ندارید؟
+
+                <span id="showRegister">
+                    ثبت نام
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <!-- REGISTER -->
+
+        <div 
+        class="auth-content"
+        id="registerBox"
+        style="display:none;">
+
+
+
+            <h2>
+                ایجاد حساب جدید
+            </h2>
+
+
+            <p>
+                نوع حساب خود را انتخاب کنید
+            </p>
+
+
+
+
+
+            <form id="registerForm">
+
+
+
+                <select id="userType">
+
+
+                    <option value="dentist">
+                        دندانپزشک
+                    </option>
+
+
+                    <option value="lab">
+                        لابراتوار
+                    </option>
+
+
+                </select>
+
+
+
+
+
+                <input
+                type="text"
+                id="registerName"
+                placeholder="نام و نام خانوادگی"
+                required>
+
+
+
+
+
+                <input
+                type="text"
+                id="registerUsername"
+                placeholder="نام کاربری"
+                required>
+
+
+
+
+
+                <input
+                type="password"
+                id="registerPassword"
+                placeholder="رمز عبور"
+                required>
+
+
+
+
+
+                <input
+                type="tel"
+                id="registerMobile"
+                placeholder="شماره موبایل"
+                required>
+
+
+
+
+
+                <!-- Dentist -->
+
+                <input
+                type="text"
+                id="clinicName"
+                placeholder="نام کلینیک">
+
+
+
+
+
+                <!-- Lab -->
+
+                <input
+                type="text"
+                id="labName"
+                placeholder="نام لابراتوار">
+
+
+
+
+
+                <input
+                type="text"
+                id="managerName"
+                placeholder="نام مسئول">
+
+
+
+
+
+                <input
+                type="tel"
+                id="landline"
+                placeholder="تلفن ثابت">
+
+
+
+
+
+
+                <input
+                type="text"
+                id="registerAddress"
+                placeholder="آدرس">
+
+
+
+
+
+
+                <input
+                type="text"
+                id="registerLocation"
+                placeholder="لوکیشن">
+
+
+
+
+
+
+                <button
+                type="submit"
+                class="btn gold">
+
+                    ثبت نام
+
+                </button>
+
+
+
+            </form>
+
+
+
+
+
+            <div class="auth-switch">
+
+
+                قبلا ثبت نام کرده‌اید؟
+
+
+                <span id="showLogin">
+                    ورود
+                </span>
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
     <script src="script.js"></script>
 
     <script src="js/auth.js"></script>
