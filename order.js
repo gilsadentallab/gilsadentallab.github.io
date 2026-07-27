@@ -5,7 +5,7 @@
 
 
 document.addEventListener("DOMContentLoaded",()=>{
-console.log("ORDER JS LOADED");
+
 
 /*========================
         ELEMENTS
