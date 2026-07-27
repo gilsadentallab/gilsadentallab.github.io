@@ -2,7 +2,7 @@
                 GILSA AUTH.JS
                 AUTH SYSTEM V2
 ==================================================*/
-
+console.log("AUTH JS LOADED");
 
 document.addEventListener(
 "DOMContentLoaded",
