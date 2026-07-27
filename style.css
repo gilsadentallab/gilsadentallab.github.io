@@ -2797,3 +2797,394 @@ height:48px;
 
 
 }
+/*==================================================
+        AUTH + ORDER MODALS
+==================================================*/
+
+
+.auth-modal,
+.order-modal{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.75);
+
+backdrop-filter:blur(10px);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:10000;
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.35s;
+
+}
+
+
+
+
+.auth-modal.active,
+.order-modal.active{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+
+
+
+
+/*==========================
+        MODAL BOX
+==========================*/
+
+
+.auth-box,
+.order-box{
+
+width:min(520px,92%);
+
+max-height:90vh;
+
+overflow-y:auto;
+
+background:#111;
+
+border:1px solid rgba(212,175,55,.20);
+
+border-radius:30px;
+
+padding:45px;
+
+position:relative;
+
+box-shadow:
+
+0 30px 80px rgba(0,0,0,.7);
+
+transform:translateY(40px) scale(.95);
+
+transition:.4s;
+
+}
+
+
+
+
+
+.auth-modal.active .auth-box,
+.order-modal.active .order-box{
+
+transform:none;
+
+}
+
+
+
+
+/*==========================
+        CLOSE BUTTON
+==========================*/
+
+
+.close-auth,
+.close-order{
+
+position:absolute;
+
+top:20px;
+
+left:20px;
+
+width:42px;
+
+height:42px;
+
+border-radius:50%;
+
+background:rgba(212,175,55,.12);
+
+color:var(--gold);
+
+font-size:28px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+transition:.3s;
+
+}
+
+
+
+.close-auth:hover,
+.close-order:hover{
+
+background:var(--gold);
+
+color:#111;
+
+transform:rotate(90deg);
+
+}
+
+
+
+
+
+/*==========================
+        TITLE
+==========================*/
+
+
+.auth-content h2,
+.order-title h2{
+
+font-size:32px;
+
+font-weight:800;
+
+margin-bottom:10px;
+
+text-align:center;
+
+}
+
+
+
+
+.auth-content p,
+.order-title p{
+
+text-align:center;
+
+color:#aaa;
+
+margin-bottom:30px;
+
+}
+
+
+
+
+
+/*==========================
+        FORM ELEMENTS
+==========================*/
+
+
+.auth-content form,
+#orderForm{
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+}
+
+
+
+
+.auth-content input,
+.auth-content select,
+#orderForm input,
+#orderForm select,
+#orderForm textarea{
+
+
+width:100%;
+
+padding:16px 18px;
+
+border-radius:16px;
+
+background:#080808;
+
+border:1px solid rgba(212,175,55,.15);
+
+color:#fff;
+
+font-family:inherit;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+
+
+
+
+#orderForm textarea{
+
+min-height:130px;
+
+resize:vertical;
+
+}
+
+
+
+
+
+.auth-content input:focus,
+.auth-content select:focus,
+#orderForm input:focus,
+#orderForm select:focus,
+#orderForm textarea:focus{
+
+border-color:var(--gold);
+
+box-shadow:
+
+0 0 0 4px rgba(212,175,55,.08);
+
+}
+
+
+
+
+
+/*==========================
+        SWITCH TEXT
+==========================*/
+
+
+.auth-switch{
+
+text-align:center;
+
+margin-top:25px;
+
+color:#aaa;
+
+}
+
+
+
+.auth-switch span{
+
+color:var(--gold);
+
+cursor:pointer;
+
+font-weight:700;
+
+}
+
+
+
+
+
+/*==========================
+        FILE UPLOAD
+==========================*/
+
+
+.file-upload{
+
+padding:20px;
+
+border-radius:18px;
+
+border:1px dashed rgba(212,175,55,.35);
+
+background:rgba(212,175,55,.04);
+
+text-align:center;
+
+}
+
+
+
+.file-upload label{
+
+display:inline-block;
+
+padding:12px 25px;
+
+border-radius:50px;
+
+background:rgba(212,175,55,.15);
+
+color:var(--gold);
+
+cursor:pointer;
+
+font-weight:700;
+
+}
+
+
+
+.file-upload input{
+
+display:none;
+
+}
+
+
+
+#fileName{
+
+margin-top:15px;
+
+font-size:14px;
+
+color:#bbb;
+
+}
+
+
+
+
+
+/*==========================
+        MOBILE MODAL
+==========================*/
+
+
+@media(max-width:600px){
+
+
+
+.auth-box,
+.order-box{
+
+padding:30px 20px;
+
+border-radius:22px;
+
+}
+
+
+
+.auth-content h2,
+.order-title h2{
+
+font-size:26px;
+
+}
+
+
+
+}
