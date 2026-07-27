@@ -1,106 +1,197 @@
-/*=====================================
-        GILSA ORDER SYSTEM FINAL
-=====================================*/
+/*==================================================
+                GILSA ORDER.JS
+                ORDER SYSTEM V2
+==================================================*/
 
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-
-
-
-/*=====================================
-        PRICE LIST
-=====================================*/
-
-
-const basePrices={
-
-
-zirconia:2500000,
-
-implant:3500000,
-
-pfm:1800000,
-
-emax:3000000
-
-
-};
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
 
-
-const materialExtra={
-
-
-"Zirconia HT":0,
-
-"Zirconia Multilayer":700000,
-
-"E.max Press":1000000,
-
-"E.max CAD":800000,
-
-"PFM":0
+/*==========================
+        ELEMENTS
+==========================*/
 
 
-};
+const orderForm =
+
+document.querySelector("#orderForm");
 
 
 
+const orderModal =
 
-let finalPrice=0;
+document.querySelector("#orderModal");
+
+
+
+const openOrderButtons =
+
+document.querySelectorAll(".order-btn");
+
+
+
+const closeOrder =
+
+document.querySelector(".close-order");
 
 
 
 
 
+/*==========================
+        OPEN ORDER FORM
+==========================*/
+
+
+openOrderButtons.forEach(btn=>{
+
+
+btn.addEventListener(
+"click",
+()=>{
+
+
+
+if(!requireLogin()){
+
+return;
+
+}
 
 
 
 
-/*=====================================
-        CALCULATE PRICE
-=====================================*/
-
-
-const calcBtn =
-document.querySelector(".calc-price");
-
-
-
-if(calcBtn){
-
-
-calcBtn.addEventListener("click",()=>{
-
-
-
-const work =
-document.getElementById("workType")?.value;
-
-
-
-const count =
-Number(
-document.getElementById("workCount")?.value
+orderModal?.classList.add(
+"active"
 );
 
 
 
-const material =
-document.getElementById("material")?.value;
+});
+
+
+
+});
 
 
 
 
 
-if(!work || !count){
+/*==========================
+        CLOSE ORDER FORM
+==========================*/
+
+
+closeOrder?.addEventListener(
+"click",
+()=>{
+
+
+orderModal?.classList.remove(
+"active"
+);
+
+
+
+});
+
+
+
+
+
+orderModal?.addEventListener(
+"click",
+(e)=>{
+
+
+if(e.target === orderModal){
+
+
+orderModal.classList.remove(
+"active"
+);
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+/*==========================
+        CHECK FORM
+==========================*/
+
+
+if(!orderForm)
+
+return;
+
+
+
+
+orderForm.addEventListener(
+"submit",
+(e)=>{
+
+
+e.preventDefault();
+
+
+
+
+if(!requireLogin()){
+
+
+return;
+
+
+}
+
+
+
+
+
+saveOrder();
+
+
+
+});
+
+
+
+
+});
+/*==========================
+        CREATE ORDER
+==========================*/
+
+
+function saveOrder(){
+
+
+
+const user =
+
+getCurrentUser();
+
+
+
+
+if(!user){
 
 
 alert(
-"نوع کار و تعداد را وارد کنید"
+"کاربر یافت نشد"
 );
 
 
@@ -113,411 +204,127 @@ return;
 
 
 
+/*==========================
+        ORDER DATA
+==========================*/
 
-finalPrice =
-(
-basePrices[work]
-+
-(materialExtra[material] || 0)
 
-)
-*
-count;
+const order = {
 
 
 
+id:
 
+Date.now(),
 
-if(count>=5){
 
-finalPrice*=0.9;
 
-}
 
+owner:
 
+user.username,
 
 
 
-const priceBox =
-document.getElementById("totalPrice");
+ownerName:
 
+user.name,
 
 
-if(priceBox){
 
 
-priceBox.innerHTML =
-finalPrice.toLocaleString("fa-IR")
-+
-" تومان";
+patientName:
 
+document.querySelector("#patientName")
+?.value.trim(),
 
-}
 
 
 
+service:
 
+document.querySelector("#orderService")
+?.value,
 
-
-
-const delivery =
-document.getElementById("deliveryTime");
-
-
-
-if(delivery){
-
-
-delivery.innerText =
-getDeliveryTime(
-count,
-work
-);
-
-
-}
-
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-/*=====================================
-        DELIVERY
-=====================================*/
-
-
-function getDeliveryTime(count,work){
-
-
-if(work==="implant"){
-
-return "۷ تا ۱۰ روز کاری";
-
-}
-
-
-if(count>=5){
-
-return "۵ تا ۷ روز کاری";
-
-}
-
-
-return "۳ تا ۵ روز کاری";
-
-
-}
-
-
-
-
-
-
-
-
-
-/*=====================================
-        SEND ORDER PREVIEW
-=====================================*/
-
-
-const sendBtn =
-document.querySelector(".send-order");
-
-
-
-const confirmBox =
-document.getElementById("confirmBox");
-
-
-
-if(sendBtn){
-
-
-sendBtn.addEventListener("click",()=>{
-
-
-
-if(finalPrice===0){
-
-
-alert(
-"ابتدا قیمت را محاسبه کنید"
-);
-
-
-return;
-
-
-}
-
-
-
-
-const data =
-getOrderData();
-
-
-
-
-
-const preview =
-document.getElementById("orderPreview");
-
-
-
-if(preview){
-
-
-preview.innerHTML=`
-
-<strong>نام:</strong>
-${data.name}
-
-<br>
-
-<strong>موبایل:</strong>
-${data.phone}
-
-<br>
-
-<strong>نوع کار:</strong>
-${data.workName}
-
-<br>
-
-<strong>تعداد:</strong>
-${data.count}
-
-<br>
-
-<strong>Shade:</strong>
-${data.shade}
-
-<br>
-
-<strong>متریال:</strong>
-${data.material}
-
-<br>
-
-<strong>قیمت:</strong>
-${finalPrice.toLocaleString("fa-IR")}
-تومان
-
-<br>
-
-<strong>توضیحات:</strong>
-${data.notes}
-
-
-`;
-
-}
-
-
-
-if(confirmBox){
-
-confirmBox.style.display="block";
-
-}
-
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-/*=====================================
-        CONFIRM WHATSAPP
-=====================================*/
-
-
-const confirmBtn =
-document.querySelector(".confirm-send");
-
-
-
-if(confirmBtn){
-
-
-confirmBtn.addEventListener("click",()=>{
-
-
-
-const data =
-getOrderData();
-
-
-
-
-
-saveOrder(data);
-
-
-
-
-
-
-const message =
-
-`
-سلام لابراتوار گیلسا
-
-نام:
-${data.name}
-
-نوع کار:
-${data.workName}
-
-تعداد:
-${data.count}
-
-Shade:
-${data.shade}
-
-متریال:
-${data.material}
-
-قیمت:
-${finalPrice.toLocaleString("fa-IR")}
-تومان
-
-توضیحات:
-${data.notes}
-
-`;
-
-
-
-
-
-
-const number=
-"989140503522";
-
-
-
-const url=
-
-"https://wa.me/"
-+
-number
-+
-"?text="
-+
-encodeURIComponent(message);
-
-
-
-
-window.open(url,"_blank");
-
-
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*=====================================
-        GET ORDER DATA
-=====================================*/
-
-
-function getOrderData(){
-
-
-const work =
-document.getElementById("workType");
-
-
-
-return {
-
-
-name:
-document.getElementById("customerName")?.value || "",
-
-
-
-phone:
-document.getElementById("customerPhone")?.value || "",
-
-
-
-work:
-work?.value || "",
-
-
-
-workName:
-work?.options[work.selectedIndex]?.text || "",
-
-
-
-count:
-document.getElementById("workCount")?.value || 0,
-
-
-
-shade:
-document.getElementById("shade")?.value || "",
 
 
 
 material:
-document.getElementById("material")?.value || "",
+
+document.querySelector("#materialType")
+?.value || "",
 
 
 
-notes:
-document.getElementById("notes")?.value || "",
+
+shade:
+
+document.querySelector("#shade")
+?.value || "",
 
 
 
-price:
-finalPrice
+
+description:
+
+document.querySelector("#orderDescription")
+?.value.trim(),
+
+
+
+
+file:
+
+document.querySelector("#orderFile")
+?.files[0]
+?.name || "بدون فایل",
+
+
+
+
+status:
+
+"در انتظار بررسی",
+
+
+
+
+created:
+
+new Date().toLocaleDateString("fa-IR")
 
 
 
 };
+
+
+
+
+
+
+/*==========================
+        VALIDATION
+==========================*/
+
+
+if(
+
+!order.patientName ||
+
+!order.service
+
+){
+
+
+alert(
+
+"لطفا اطلاعات ضروری سفارش را تکمیل کنید"
+
+);
+
+
+
+return;
 
 
 }
@@ -528,15 +335,9 @@ finalPrice
 
 
 
-
-
-/*=====================================
-        SAVE ORDER
-=====================================*/
-
-
-function saveOrder(data){
-
+/*==========================
+        SAVE
+==========================*/
 
 
 let orders =
@@ -555,32 +356,9 @@ localStorage.getItem(
 
 
 
-const order={
-
-
-code:
-generateCode(),
-
-
-...data,
-
-
-status:
-"در انتظار",
-
-
-date:
-new Date()
-.toLocaleDateString("fa-IR")
-
-
-};
-
-
-
-
-
 orders.push(order);
+
+
 
 
 
@@ -594,55 +372,39 @@ JSON.stringify(orders)
 
 
 
-}
 
 
 
+alert(
 
-
-
-
-
-
-/*=====================================
-        ORDER CODE
-=====================================*/
-
-
-function generateCode(){
-
-
-let number=
-
-Number(
-
-localStorage.getItem(
-"gilsaOrderNumber"
-)
-
-)
-
-||0;
-
-
-
-number++;
-
-
-
-localStorage.setItem(
-
-"gilsaOrderNumber",
-
-number
+"سفارش شما با موفقیت ثبت شد"
 
 );
 
 
 
-return "GL-"
-+
-String(number).padStart(5,"0");
+
+
+document
+.querySelector("#orderForm")
+?.reset();
+
+
+
+
+
+
+const orderModal =
+
+document.querySelector("#orderModal");
+
+
+
+orderModal?.classList.remove(
+"active"
+);
+
+
 
 
 
@@ -651,35 +413,16 @@ String(number).padStart(5,"0");
 
 
 
+/*==========================
+        GET ALL ORDERS
+==========================*/
+
+
+function getAllOrders(){
 
 
 
-
-
-/*=====================================
-        LOAD ORDERS
-=====================================*/
-
-
-window.loadOrders=function(){
-
-
-
-const table =
-document.getElementById("ordersTable");
-
-
-
-if(!table)
-return;
-
-
-
-
-
-const orders =
-
-JSON.parse(
+return JSON.parse(
 
 localStorage.getItem(
 "gilsaOrders"
@@ -691,9 +434,121 @@ localStorage.getItem(
 
 
 
+}
 
 
-table.innerHTML="";
+
+
+
+/*==========================
+        GET CURRENT USER ORDERS
+==========================*/
+
+
+function getMyOrders(){
+
+
+
+const user =
+
+getCurrentUser();
+
+
+
+
+if(!user)
+
+return [];
+
+
+
+
+
+const orders =
+
+getAllOrders();
+
+
+
+
+
+return orders.filter(order=>
+
+
+order.owner === user.username
+
+
+);
+
+
+
+}
+/*==========================
+        RENDER ORDERS
+==========================*/
+
+
+function renderMyOrders(){
+
+
+
+const orderList =
+
+document.querySelector("#orderList");
+
+
+
+
+if(!orderList)
+
+return;
+
+
+
+
+
+const orders =
+
+getMyOrders();
+
+
+
+
+
+if(orders.length === 0){
+
+
+
+orderList.innerHTML =
+
+`
+
+<div class="empty-orders">
+
+<p>
+
+هنوز سفارشی ثبت نکرده‌اید
+
+</p>
+
+</div>
+
+`;
+
+
+
+return;
+
+
+}
+
+
+
+
+
+orderList.innerHTML = "";
+
+
 
 
 
@@ -701,108 +556,345 @@ table.innerHTML="";
 orders.forEach(order=>{
 
 
-table.innerHTML+=`
 
-<tr>
 
-<td>${order.code}</td>
 
-<td>${order.workName}</td>
+orderList.innerHTML +=
 
-<td>${order.status}</td>
 
-</tr>
+
+`
+
+<div class="order-card">
+
+
+
+<div class="order-head">
+
+
+<h3>
+
+سفارش #${order.id}
+
+</h3>
+
+
+<span class="order-status">
+
+${order.status}
+
+</span>
+
+
+</div>
+
+
+
+
+
+<div class="order-body">
+
+
+<p>
+
+<b>بیمار:</b>
+
+${order.patientName}
+
+</p>
+
+
+
+
+<p>
+
+<b>خدمات:</b>
+
+${order.service}
+
+</p>
+
+
+
+
+<p>
+
+<b>متریال:</b>
+
+${order.material || "-"}
+
+</p>
+
+
+
+
+<p>
+
+<b>رنگ:</b>
+
+${order.shade || "-"}
+
+</p>
+
+
+
+
+<p>
+
+<b>تاریخ ثبت:</b>
+
+${order.created}
+
+</p>
+
+
+
+
+<p>
+
+<b>فایل:</b>
+
+${order.file}
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<button
+
+class="delete-order"
+
+data-id="${order.id}"
+
+>
+
+
+حذف سفارش
+
+</button>
+
+
+
+
+</div>
 
 `;
+
+
+
 
 
 });
 
 
 
-};
+
+
+/* DELETE BUTTONS */
+
+
+document
+
+.querySelectorAll(".delete-order")
+
+.forEach(btn=>{
+
+
+
+btn.addEventListener(
+"click",
+()=>{
+
+
+
+deleteOrder(
+
+Number(btn.dataset.id)
+
+);
+
+
+
+});
+
+
+});
+
+
+
+}
 
 
 
 
 
-loadOrders();
+
+
+/*==========================
+        DELETE ORDER
+==========================*/
+
+
+function deleteOrder(id){
+
+
+
+let orders =
+
+getAllOrders();
+
+
+
+
+
+orders = orders.filter(order=>
+
+
+order.id !== id
+
+
+);
+
+
+
+
+
+localStorage.setItem(
+
+"gilsaOrders",
+
+JSON.stringify(orders)
+
+);
 
 
 
 
 
 
+renderMyOrders();
 
 
 
-/*=====================================
-        FILE PREVIEW
-=====================================*/
+}
+
+
+
+
+
+/*==========================
+        AUTO LOAD
+==========================*/
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+renderMyOrders();
+
+
+
+});
+/*==========================
+        FILE HANDLER
+==========================*/
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
 const fileInput =
-document.getElementById("workFile");
+
+document.querySelector("#orderFile");
 
 
 
-const preview =
-document.getElementById("filePreview");
+const fileLabel =
+
+document.querySelector("#fileName");
 
 
 
-if(fileInput && preview){
+
+fileInput?.addEventListener(
+"change",
+()=>{
 
 
 
-fileInput.addEventListener("change",()=>{
-
-
-const file=fileInput.files[0];
+if(fileInput.files.length){
 
 
 
-if(!file){
+let file =
 
-preview.innerHTML=
-"فایلی انتخاب نشده";
+fileInput.files[0];
+
+
+
+
+/* CHECK FILE SIZE */
+
+
+if(file.size > 10 * 1024 * 1024){
+
+
+alert(
+"حجم فایل نباید بیشتر از 10 مگابایت باشد"
+);
+
+
+
+fileInput.value="";
 
 return;
+
 
 }
 
 
 
-preview.innerHTML=
-file.name;
+
+
+if(fileLabel){
 
 
 
+fileLabel.innerHTML =
 
-if(file.type.startsWith("image/")){
+`
 
-
-const reader=new FileReader();
-
-
-
-reader.onload=(e)=>{
-
-
-preview.innerHTML+=`
-
-<br>
-
-<img src="${e.target.result}">
+📎 ${file.name}
 
 `;
 
 
-};
+
+}
 
 
 
-reader.readAsDataURL(file);
+}
+
+else{
+
+
+if(fileLabel)
+
+fileLabel.innerHTML =
+
+"فایلی انتخاب نشده";
 
 
 
@@ -814,10 +906,253 @@ reader.readAsDataURL(file);
 
 
 
+});
+
+
+
+
+
+/*==========================
+        SEARCH ORDERS
+==========================*/
+
+
+function searchOrders(text){
+
+
+
+const orders =
+
+getMyOrders();
+
+
+
+
+
+return orders.filter(order=>
+
+
+order.patientName
+
+.includes(text)
+
+||
+
+order.service
+
+.includes(text)
+
+
+);
+
+
+
 }
 
 
 
 
 
-});
+
+/*==========================
+        CHANGE ORDER STATUS
+        (LAB PANEL READY)
+==========================*/
+
+
+function updateOrderStatus(id,status){
+
+
+
+let orders =
+
+getAllOrders();
+
+
+
+
+
+let order =
+
+orders.find(o=>
+
+o.id === id
+
+);
+
+
+
+
+
+if(!order)
+
+return;
+
+
+
+
+
+order.status = status;
+
+
+
+
+
+localStorage.setItem(
+
+"gilsaOrders",
+
+JSON.stringify(orders)
+
+);
+
+
+
+
+
+
+renderMyOrders();
+
+
+
+}
+
+
+
+
+
+
+/*==========================
+        ORDER COUNTER
+==========================*/
+
+
+function countMyOrders(){
+
+
+
+return getMyOrders().length;
+
+
+
+}
+
+
+
+
+
+
+/*==========================
+        LAST ORDER
+==========================*/
+
+
+function getLastOrder(){
+
+
+
+const orders =
+
+getMyOrders();
+
+
+
+
+
+if(!orders.length)
+
+return null;
+
+
+
+
+
+return orders[orders.length-1];
+
+
+
+}
+
+
+
+
+
+
+/*==========================
+        EXPORT USER ORDERS
+==========================*/
+
+
+function exportOrders(){
+
+
+
+const data =
+
+JSON.stringify(
+
+getMyOrders(),
+
+null,
+
+2
+
+);
+
+
+
+
+
+const blob =
+
+new Blob(
+
+[data],
+
+{
+
+type:"application/json"
+
+}
+
+);
+
+
+
+
+
+const url =
+
+URL.createObjectURL(blob);
+
+
+
+
+
+const a =
+
+document.createElement("a");
+
+
+
+a.href=url;
+
+
+
+a.download=
+
+"gilsa-orders.json";
+
+
+
+a.click();
+
+
+
+
+
+URL.revokeObjectURL(url);
+
+
+
+}
