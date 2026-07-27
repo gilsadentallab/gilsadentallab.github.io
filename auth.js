@@ -1,71 +1,73 @@
 /*==================================================
-                GILSA AUTH.JS
-                AUTH SYSTEM V2
+        GILSA AUTH.JS
+        CLEAN VERSION
 ==================================================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+document.addEventListener("DOMContentLoaded",()=>{
 
 
-
-/*==========================
-        ELEMENTS
-==========================*/
+/*========================
+ ELEMENTS
+========================*/
 
 
 const authModal =
-document.querySelector("#authModal");
+document.getElementById("authModal");
 
 
-
-const authButtons =
-document.querySelectorAll(".auth-btn");
-
+const openAuthButtons =
+document.querySelectorAll(".open-auth");
 
 
 const closeAuth =
 document.querySelector(".close-auth");
 
 
+const loginForm =
+document.getElementById("loginForm");
+
+
+const registerForm =
+document.getElementById("registerForm");
+
 
 const loginBox =
-document.querySelector("#loginBox");
-
+document.getElementById("loginBox");
 
 
 const registerBox =
-document.querySelector("#registerBox");
-
+document.getElementById("registerBox");
 
 
 const showRegister =
-document.querySelector("#showRegister");
-
+document.getElementById("showRegister");
 
 
 const showLogin =
-document.querySelector("#showLogin");
+document.getElementById("showLogin");
 
 
 
 
-/*==========================
-        OPEN MODAL
-==========================*/
+
+/*========================
+ OPEN AUTH
+========================*/
 
 
-authButtons.forEach(btn=>{
+openAuthButtons.forEach(btn=>{
 
 
-btn.addEventListener("click",()=>{
+btn.addEventListener("click",(e)=>{
+
+
+e.preventDefault();
 
 
 authModal?.classList.add("active");
 
 
-
 });
 
 
@@ -74,20 +76,16 @@ authModal?.classList.add("active");
 
 
 
-/*==========================
-        CLOSE MODAL
-==========================*/
+
+/*========================
+ CLOSE AUTH
+========================*/
 
 
-closeAuth?.addEventListener(
-"click",
-()=>{
+closeAuth?.addEventListener("click",()=>{
 
 
-authModal.classList.remove(
-"active"
-);
-
+authModal.classList.remove("active");
 
 
 });
@@ -95,22 +93,16 @@ authModal.classList.remove(
 
 
 
-authModal?.addEventListener(
-"click",
-(e)=>{
+authModal?.addEventListener("click",(e)=>{
 
 
 if(e.target === authModal){
 
 
-authModal.classList.remove(
-"active"
-);
-
+authModal.classList.remove("active");
 
 
 }
-
 
 
 });
@@ -119,14 +111,13 @@ authModal.classList.remove(
 
 
 
-/*==========================
-        SWITCH BOX
-==========================*/
+
+/*========================
+ SWITCH LOGIN REGISTER
+========================*/
 
 
-showRegister?.addEventListener(
-"click",
-()=>{
+showRegister?.addEventListener("click",()=>{
 
 
 loginBox.style.display="none";
@@ -135,16 +126,12 @@ loginBox.style.display="none";
 registerBox.style.display="block";
 
 
-
 });
 
 
 
 
-
-showLogin?.addEventListener(
-"click",
-()=>{
+showLogin?.addEventListener("click",()=>{
 
 
 registerBox.style.display="none";
@@ -153,77 +140,45 @@ registerBox.style.display="none";
 loginBox.style.display="block";
 
 
-
 });
 
-
-
-});
-/*==========================
+/*========================
         REGISTER SYSTEM
-==========================*/
+========================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-const registerForm =
-document.querySelector("#registerForm");
-
-
-
-if(!registerForm)
-return;
-
-
-
-registerForm.addEventListener(
-"submit",
-(e)=>{
+registerForm?.addEventListener("submit",(e)=>{
 
 
 e.preventDefault();
 
 
 
-
-/* USER TYPE */
-
-
 const type =
-document.querySelector("#userType")?.value;
+document.getElementById("userType")?.value;
 
-
-
-
-/* COMMON DATA */
 
 
 const name =
-document.querySelector("#registerName")?.value.trim();
+document.getElementById("registerName")?.value.trim();
 
 
 
 const username =
-document.querySelector("#registerUsername")?.value.trim();
+document.getElementById("registerUsername")?.value.trim();
 
 
 
 const password =
-document.querySelector("#registerPassword")?.value.trim();
+document.getElementById("registerPassword")?.value.trim();
 
 
 
 const mobile =
-document.querySelector("#registerMobile")?.value.trim();
+document.getElementById("registerMobile")?.value.trim();
 
 
 
-
-
-/* CHECK REQUIRED */
 
 
 if(
@@ -235,7 +190,7 @@ if(
 
 
 alert(
-"لطفا تمام فیلدهای ضروری را پر کنید"
+"لطفا اطلاعات ضروری را کامل کنید"
 );
 
 
@@ -249,10 +204,8 @@ return;
 
 
 
-/* EXTRA DATA */
+let extraData={};
 
-
-let extra={};
 
 
 
@@ -261,24 +214,24 @@ if(type==="dentist"){
 
 
 
-extra={
+extraData={
 
 
-clinic:
+clinicName:
 
-document.querySelector("#clinicName")?.value || "",
+document.getElementById("clinicName")?.value || "",
 
 
 
 address:
 
-document.querySelector("#registerAddress")?.value || "",
+document.getElementById("registerAddress")?.value || "",
 
 
 
 location:
 
-document.querySelector("#registerLocation")?.value || ""
+document.getElementById("registerLocation")?.value || ""
 
 
 
@@ -287,6 +240,8 @@ document.querySelector("#registerLocation")?.value || ""
 
 
 }
+
+
 
 
 
@@ -297,36 +252,36 @@ if(type==="lab"){
 
 
 
-extra={
+extraData={
 
 
 labName:
 
-document.querySelector("#labName")?.value || "",
+document.getElementById("labName")?.value || "",
 
 
 
-manager:
+managerName:
 
-document.querySelector("#managerName")?.value || "",
+document.getElementById("managerName")?.value || "",
 
 
 
-phone:
+landline:
 
-document.querySelector("#landline")?.value || "",
+document.getElementById("landline")?.value || "",
 
 
 
 address:
 
-document.querySelector("#registerAddress")?.value || "",
+document.getElementById("registerAddress")?.value || "",
 
 
 
 location:
 
-document.querySelector("#registerLocation")?.value || ""
+document.getElementById("registerLocation")?.value || ""
 
 
 
@@ -340,46 +295,33 @@ document.querySelector("#registerLocation")?.value || ""
 
 
 
-/* CREATE USER */
 
 
 const user={
 
 
-
-id:
-
-Date.now(),
-
+id:Date.now(),
 
 
 type:type,
 
 
-
 name:name,
-
 
 
 username:username,
 
 
-
 password:password,
-
 
 
 mobile:mobile,
 
 
-
-...extra,
-
+...extraData,
 
 
-created:
-
-new Date().toLocaleDateString("fa-IR")
+date:new Date().toLocaleDateString("fa-IR")
 
 
 
@@ -389,7 +331,6 @@ new Date().toLocaleDateString("fa-IR")
 
 
 
-/* SAVE USER */
 
 
 localStorage.setItem(
@@ -414,21 +355,11 @@ alert(
 
 
 
+
 registerForm.reset();
 
 
 
-
-/* SWITCH TO LOGIN */
-
-
-const loginBox =
-document.querySelector("#loginBox");
-
-
-
-const registerBox =
-document.querySelector("#registerBox");
 
 
 
@@ -439,35 +370,14 @@ loginBox.style.display="block";
 
 
 
-
 });
-
-
-});
-/*==========================
+  
+/*========================
         LOGIN SYSTEM
-==========================*/
+========================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-const loginForm =
-document.querySelector("#loginForm");
-
-
-
-if(!loginForm)
-return;
-
-
-
-
-loginForm.addEventListener(
-"submit",
-(e)=>{
+loginForm?.addEventListener("submit",(e)=>{
 
 
 e.preventDefault();
@@ -475,28 +385,34 @@ e.preventDefault();
 
 
 
+
 const username =
 
-document.querySelector("#loginUsername")
+document.getElementById("loginUsername")
 ?.value.trim();
+
 
 
 
 
 const password =
 
-document.querySelector("#loginPassword")
+document.getElementById("loginPassword")
 ?.value.trim();
 
 
 
 
 
-if(!username || !password){
+
+if(
+!username ||
+!password
+){
 
 
 alert(
-"لطفا نام کاربری و رمز عبور را وارد کنید"
+"نام کاربری و رمز عبور را وارد کنید"
 );
 
 
@@ -508,9 +424,6 @@ return;
 
 
 
-
-
-/* GET SAVED USER */
 
 
 const savedUser =
@@ -525,11 +438,14 @@ localStorage.getItem("gilsaUser")
 
 
 
+
 if(!savedUser){
 
 
 alert(
-"کاربری پیدا نشد، ابتدا ثبت نام کنید"
+
+"کاربری وجود ندارد، ابتدا ثبت نام کنید"
+
 );
 
 
@@ -542,7 +458,6 @@ return;
 
 
 
-/* CHECK LOGIN */
 
 
 if(
@@ -555,7 +470,6 @@ savedUser.password === password
 
 
 
-/* CREATE SESSION */
 
 
 localStorage.setItem(
@@ -565,6 +479,8 @@ localStorage.setItem(
 "true"
 
 );
+
+
 
 
 
@@ -581,6 +497,8 @@ JSON.stringify(savedUser)
 
 
 
+
+
 alert(
 
 "ورود موفقیت آمیز بود"
@@ -591,17 +509,12 @@ alert(
 
 
 
-/* CLOSE MODAL */
-
-
-const authModal =
-
-document.querySelector("#authModal");
-
 
 
 authModal?.classList.remove(
+
 "active"
+
 );
 
 
@@ -609,10 +522,54 @@ authModal?.classList.remove(
 
 
 
-/* UPDATE BUTTON */
+
+updateAuthButton();
 
 
-updateAuthState();
+
+
+
+
+const dashName =
+
+document.getElementById("dashName");
+
+
+
+const dashType =
+
+document.getElementById("dashType");
+
+
+
+
+
+
+if(dashName)
+
+dashName.innerHTML =
+savedUser.name;
+
+
+
+
+
+if(dashType)
+
+dashType.innerHTML =
+
+savedUser.type==="dentist"
+
+?
+
+"دندانپزشک"
+
+:
+
+"لابراتوار";
+
+
+
 
 
 
@@ -620,8 +577,8 @@ updateAuthState();
 
 }
 
-else{
 
+else{
 
 
 alert(
@@ -631,12 +588,10 @@ alert(
 );
 
 
-
 }
 
 
 
-});
 
 
 });
@@ -646,37 +601,99 @@ alert(
 
 
 
-/*==========================
-        LOGOUT
-==========================*/
+
+/*========================
+        UPDATE HEADER
+========================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+function updateAuthButton(){
 
 
-const logoutButtons =
 
-document.querySelectorAll(
-".logout-btn"
+const btn =
+
+document.querySelector(".open-auth");
+
+
+
+
+
+const login =
+
+localStorage.getItem("gilsaLogin");
+
+
+
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem("gilsaCurrentUser")
+
 );
 
 
 
 
-logoutButtons.forEach(btn=>{
 
 
-btn.addEventListener(
-"click",
-()=>{
+if(
+
+btn &&
+
+login==="true" &&
+
+user
+
+){
+
+
+
+btn.innerHTML =
+
+`
+
+👤 ${user.name}
+
+`;
+
+
+
+btn.classList.add("logged");
+
+
+}
+
+
+
+
+
+}
+
+/*========================
+        LOGOUT SYSTEM
+========================*/
+
+
+const logoutBtn =
+
+document.getElementById("logoutBtn");
+
+
+
+
+
+logoutBtn?.addEventListener("click",()=>{
 
 
 
 localStorage.removeItem(
 "gilsaLogin"
 );
+
 
 
 
@@ -687,9 +704,13 @@ localStorage.removeItem(
 
 
 
+
 alert(
+
 "از حساب کاربری خارج شدید"
+
 );
+
 
 
 
@@ -703,23 +724,17 @@ location.reload();
 
 
 
-});
 
 
 
-});
-/*==========================
-        UPDATE AUTH STATE
-==========================*/
 
 
-function updateAuthState(){
+/*========================
+        CHECK LOGIN
+========================*/
 
 
-
-const authBtn =
-
-document.querySelector(".auth-btn");
+function checkLogin(){
 
 
 
@@ -728,7 +743,6 @@ const login =
 localStorage.getItem(
 "gilsaLogin"
 );
-
 
 
 
@@ -747,96 +761,67 @@ localStorage.getItem(
 
 
 
+
 if(
 
-authBtn &&
-
-login === "true" &&
-
-user
+login==="true" && user
 
 ){
 
 
 
-authBtn.innerHTML =
-
-`
-
-👤 ${user.name}
-
-`;
+updateAuthButton();
 
 
 
-authBtn.classList.add(
-"logged"
+
+const dashName =
+
+document.getElementById(
+"dashName"
 );
 
 
 
-}
+
+const dashType =
+
+document.getElementById(
+"dashType"
+);
+
+
+
+
+
+if(dashName)
+
+dashName.innerHTML =
+user.name;
+
+
+
+
+
+if(dashType)
+
+
+dashType.innerHTML =
+
+user.type==="dentist"
+
+?
+
+"دندانپزشک"
+
+:
+
+"لابراتوار";
 
 
 
 }
 
-
-
-
-
-/*==========================
-        CURRENT USER
-==========================*/
-
-
-function getCurrentUser(){
-
-
-
-return JSON.parse(
-
-localStorage.getItem(
-"gilsaCurrentUser"
-)
-
-)
-
-|| null;
-
-
-
-}
-
-
-
-
-
-
-/*==========================
-        USER TYPE
-==========================*/
-
-
-function getUserType(){
-
-
-
-const user =
-
-getCurrentUser();
-
-
-
-
-if(!user)
-
-return null;
-
-
-
-
-return user.type;
 
 
 
@@ -847,35 +832,27 @@ return user.type;
 
 
 
-/*==========================
-        CHECK AUTH ON LOAD
-==========================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+/*========================
+        ACCOUNT BUTTON
+========================*/
 
 
-updateAuthState();
-
+document.querySelector(".open-auth")
+?.addEventListener("click",()=>{
 
 
 
-const user =
+if(
 
-getCurrentUser();
+localStorage.getItem("gilsaLogin")==="true"
 
-
-
-
-if(user){
+){
 
 
 
-document.body.dataset.user =
-
-user.type;
+window.location.href="#dashboard";
 
 
 
@@ -890,153 +867,17 @@ user.type;
 
 
 
-/*==========================
-        PROTECTED ELEMENTS
-==========================*/
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+/*========================
+        RUN
+========================*/
 
 
-const protectedItems =
+checkLogin();
 
-document.querySelectorAll(
-".need-login"
-);
-
-
-
-
-protectedItems.forEach(item=>{
-
-
-
-if(!isUserLoggedIn()){
-
-
-item.style.display="none";
-
-
-}
 
 
 
 });
-
-
-
-});
-
-
-
-
-
-
-/*==========================
-        OPEN USER PANEL
-==========================*/
-
-
-const accountBtn =
-
-document.querySelector(
-".auth-btn"
-);
-
-
-
-accountBtn?.addEventListener(
-"click",
-()=>{
-
-
-
-if(isUserLoggedIn()){
-
-
-
-window.location.href =
-"#dashboard";
-
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-/*==========================
-        AUTH HELPERS
-==========================*/
-
-
-function logoutUser(){
-
-
-
-localStorage.removeItem(
-"gilsaLogin"
-);
-
-
-
-localStorage.removeItem(
-"gilsaCurrentUser"
-);
-
-
-
-location.reload();
-
-
-
-}
-
-
-
-
-
-
-function requireLogin(){
-
-
-
-if(!isUserLoggedIn()){
-
-
-
-alert(
-
-"برای انجام این کار ابتدا وارد حساب کاربری شوید"
-
-);
-
-
-
-document
-.querySelector("#authModal")
-?.classList.add("active");
-
-
-
-return false;
-
-
-
-}
-
-
-
-return true;
-
-
-
-}
+                      
