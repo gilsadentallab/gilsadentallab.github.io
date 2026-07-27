@@ -1,40 +1,39 @@
 /*==================================================
-        GILSA ORDER.JS
-        CLEAN VERSION
+                GILSA ORDER.JS
+                ORDER SYSTEM V3
 ==================================================*/
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-/*========================
+/*==========================
         ELEMENTS
-========================*/
+==========================*/
+
+
+const orderForm =
+document.querySelector("#orderForm");
 
 
 const orderModal =
-document.getElementById("orderModal");
+document.querySelector("#orderModal");
 
 
 const openOrderButtons =
-document.querySelectorAll(".open-order");
+document.querySelectorAll(".order-btn");
 
 
 const closeOrder =
 document.querySelector(".close-order");
 
 
-const orderForm =
-document.getElementById("orderForm");
 
 
 
-
-
-
-/*========================
-        OPEN MODAL
-========================*/
+/*==========================
+        OPEN ORDER
+==========================*/
 
 
 openOrderButtons.forEach(btn=>{
@@ -46,32 +45,22 @@ btn.addEventListener("click",(e)=>{
 e.preventDefault();
 
 
-
-if(localStorage.getItem("gilsaLogin")!=="true"){
-
-
-alert(
-"برای ثبت سفارش ابتدا وارد حساب کاربری شوید"
-);
+if(typeof requireLogin === "function"){
 
 
-document
-.getElementById("authModal")
-?.classList.add("active");
-
+if(!requireLogin()){
 
 return;
+
+}
 
 
 }
 
 
-
-
 orderModal?.classList.add("active");
 
 
-
 });
 
 
@@ -81,11 +70,9 @@ orderModal?.classList.add("active");
 
 
 
-
-
-/*========================
-        CLOSE MODAL
-========================*/
+/*==========================
+        CLOSE ORDER
+==========================*/
 
 
 closeOrder?.addEventListener("click",()=>{
@@ -103,7 +90,7 @@ orderModal?.classList.remove("active");
 orderModal?.addEventListener("click",(e)=>{
 
 
-if(e.target===orderModal){
+if(e.target === orderModal){
 
 
 orderModal.classList.remove("active");
@@ -120,15 +107,38 @@ orderModal.classList.remove("active");
 
 
 
-/*========================
-        SUBMIT
-========================*/
+/*==========================
+        SUBMIT ORDER
+==========================*/
 
 
-orderForm?.addEventListener("submit",(e)=>{
+if(orderForm){
+
+
+
+orderForm.addEventListener("submit",(e)=>{
 
 
 e.preventDefault();
+
+
+
+console.log("ORDER SUBMIT CLICKED");
+
+
+
+if(typeof requireLogin === "function"){
+
+
+if(!requireLogin()){
+
+return;
+
+}
+
+
+}
+
 
 
 saveOrder();
@@ -139,44 +149,40 @@ saveOrder();
 
 
 
+}
+
+
+
 });
 
-/*========================
+
+
+
+
+
+
+/*==================================================
         SAVE ORDER
-========================*/
+==================================================*/
 
 
 function saveOrder(){
 
 
 
-const user =
-
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
-
+const user = getCurrentUser ? getCurrentUser() : null;
 
 
 
 if(!user){
 
 
-alert(
-
-"ابتدا وارد حساب کاربری شوید"
-
-);
-
+alert("ابتدا وارد حساب کاربری شوید");
 
 return;
 
 
 }
-
 
 
 
@@ -184,44 +190,35 @@ return;
 
 
 const patientName =
-
-document.getElementById("patientName")
+document.querySelector("#patientName")
 ?.value.trim();
 
 
 
 
-
 const service =
-
-document.getElementById("orderService")
+document.querySelector("#orderService")
 ?.value;
 
 
 
 
-
 const material =
-
-document.getElementById("materialType")
+document.querySelector("#materialType")
 ?.value || "";
-
 
 
 
 
 const shade =
-
-document.getElementById("shade")
+document.querySelector("#shade")
 ?.value || "";
 
 
 
 
-
 const description =
-
-document.getElementById("orderDescription")
+document.querySelector("#orderDescription")
 ?.value.trim();
 
 
@@ -229,10 +226,8 @@ document.getElementById("orderDescription")
 
 
 const file =
-
-document.getElementById("orderFile")
-?.files[0];
-
+document.querySelector("#orderFile")
+?.files[0]?.name || "بدون فایل";
 
 
 
@@ -240,16 +235,12 @@ document.getElementById("orderFile")
 
 
 
-if(
-!patientName ||
-!service
-){
+
+if(!patientName || !service){
 
 
 alert(
-
 "لطفا نام بیمار و نوع خدمات را وارد کنید"
-
 );
 
 
@@ -257,8 +248,6 @@ return;
 
 
 }
-
-
 
 
 
@@ -269,67 +258,40 @@ return;
 const order = {
 
 
-
 id:Date.now(),
-
-
 
 
 owner:user.username,
 
 
-
-
 ownerName:user.name,
 
 
+patientName,
 
 
-patientName:patientName,
+service,
 
 
+material,
 
 
-service:service,
+shade,
 
 
+description,
 
 
-material:material,
-
-
-
-
-shade:shade,
-
-
-
-
-description:description,
-
-
-
-
-file:file ? file.name : "بدون فایل",
-
-
+file,
 
 
 status:"در انتظار بررسی",
 
 
-
-
-created:
-
-new Date()
-
-.toLocaleDateString("fa-IR")
-
+created:new Date().toLocaleDateString("fa-IR")
 
 
 };
-
 
 
 
@@ -353,9 +315,7 @@ localStorage.getItem("gilsaOrders")
 
 
 
-
 orders.push(order);
-
 
 
 
@@ -377,11 +337,8 @@ JSON.stringify(orders)
 
 
 alert(
-
 "سفارش با موفقیت ثبت شد"
-
 );
-
 
 
 
@@ -395,27 +352,8 @@ orderForm.reset();
 
 
 
-const fileName =
-
-document.getElementById("fileName");
-
-
-
-if(fileName)
-
-fileName.innerHTML=
-
-"فایلی انتخاب نشده";
-
-
-
-
-
-
 document
-
-.getElementById("orderModal")
-
+.querySelector("#orderModal")
 ?.classList.remove("active");
 
 
@@ -427,127 +365,9 @@ renderMyOrders();
 
 
 }
-
-/*========================
-        FILE HANDLER
-========================*/
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const fileInput =
-
-document.getElementById("orderFile");
-
-
-
-const fileName =
-
-document.getElementById("fileName");
-
-
-
-
-
-fileInput?.addEventListener("change",()=>{
-
-
-
-if(fileInput.files.length){
-
-
-
-const file =
-
-fileInput.files[0];
-
-
-
-
-
-
-if(file.size > 10 * 1024 * 1024){
-
-
-
-alert(
-
-"حجم فایل نباید بیشتر از 10 مگابایت باشد"
-
-);
-
-
-
-fileInput.value="";
-
-
-
-return;
-
-
-
-}
-
-
-
-
-
-if(fileName){
-
-
-
-fileName.innerHTML =
-
-`
-
-📎 ${file.name}
-
-`;
-
-
-
-}
-
-
-
-
-}
-
-else{
-
-
-if(fileName){
-
-
-fileName.innerHTML =
-
-"فایلی انتخاب نشده";
-
-
-}
-
-
-}
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-
-
-
-/*========================
+/*==================================================
         GET ORDERS
-========================*/
+==================================================*/
 
 
 function getAllOrders(){
@@ -568,20 +388,12 @@ localStorage.getItem("gilsaOrders")
 
 
 
-
-
 function getMyOrders(){
-
 
 
 const user =
 
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
+getCurrentUser ? getCurrentUser() : null;
 
 
 
@@ -610,76 +422,186 @@ order.owner === user.username
 
 
 
-
-
-
-/*========================
-        SHOW ORDERS
-========================*/
+/*==================================================
+        RENDER ORDERS
+==================================================*/
 
 
 function renderMyOrders(){
 
 
 
+const orderList =
+
+document.querySelector("#orderList");
+
+
+
 const table =
 
-document.getElementById("ordersTable");
+document.querySelector("#ordersTable");
 
 
 
 
 
-if(!table)
-
-return;
-
-
-
-
-
-
-
-const orders =
-
-getMyOrders();
+const orders = getMyOrders();
 
 
 
 
 
 
-table.innerHTML="";
+/* CARD VIEW */
 
 
 
+if(orderList){
 
 
 
-
-if(orders.length===0){
-
+if(orders.length === 0){
 
 
-table.innerHTML=
 
-`
+orderList.innerHTML=`
 
-<tr>
+<div class="empty-orders">
 
-<td colspan="3">
+هنوز سفارشی ثبت نکرده‌اید
 
-هنوز سفارشی ثبت نشده است
-
-</td>
-
-</tr>
+</div>
 
 `;
 
 
 
-return;
+}
+
+else{
+
+
+
+orderList.innerHTML="";
+
+
+
+
+orders.forEach(order=>{
+
+
+orderList.innerHTML += `
+
+
+<div class="order-card">
+
+
+<div class="order-head">
+
+
+<h3>
+
+سفارش #${order.id}
+
+</h3>
+
+
+
+<span>
+
+${order.status}
+
+</span>
+
+
+
+</div>
+
+
+
+
+<p>
+
+<b>بیمار:</b>
+
+${order.patientName}
+
+</p>
+
+
+
+
+<p>
+
+<b>خدمات:</b>
+
+${order.service}
+
+</p>
+
+
+
+
+<p>
+
+<b>متریال:</b>
+
+${order.material || "-"}
+
+</p>
+
+
+
+
+<p>
+
+<b>رنگ:</b>
+
+${order.shade || "-"}
+
+</p>
+
+
+
+
+<p>
+
+<b>تاریخ:</b>
+
+${order.created}
+
+</p>
+
+
+
+
+<button
+
+class="delete-order"
+
+data-id="${order.id}"
+
+>
+
+حذف سفارش
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+}
+
 
 
 
@@ -691,13 +613,24 @@ return;
 
 
 
+/* TABLE VIEW DASHBOARD */
+
+
+
+if(table){
+
+
+
+table.innerHTML="";
+
+
+
+
 orders.forEach(order=>{
 
 
+table.innerHTML += `
 
-table.innerHTML +=
-
-`
 
 <tr>
 
@@ -709,13 +642,11 @@ ${order.id}
 </td>
 
 
-
 <td>
 
 ${order.service}
 
 </td>
-
 
 
 <td>
@@ -725,11 +656,46 @@ ${order.status}
 </td>
 
 
-
 </tr>
+
 
 `;
 
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+/* DELETE BUTTON */
+
+
+document
+
+.querySelectorAll(".delete-order")
+
+.forEach(btn=>{
+
+
+btn.addEventListener("click",()=>{
+
+
+deleteOrder(
+
+Number(btn.dataset.id)
+
+);
+
+
+
+});
 
 
 });
@@ -745,27 +711,16 @@ ${order.status}
 
 
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-renderMyOrders();
-
-
-});
-
-/*========================
+/*==================================================
         DELETE ORDER
-========================*/
+==================================================*/
 
 
 function deleteOrder(id){
 
 
 
-let orders =
-
-getAllOrders();
-
+let orders = getAllOrders();
 
 
 
@@ -781,7 +736,6 @@ order.id !== id
 
 
 
-
 localStorage.setItem(
 
 "gilsaOrders",
@@ -789,7 +743,6 @@ localStorage.setItem(
 JSON.stringify(orders)
 
 );
-
 
 
 
@@ -806,129 +759,140 @@ renderMyOrders();
 
 
 
-/*========================
-        CALCULATE PRICE
-========================*/
+/*==================================================
+        FILE NAME
+==================================================*/
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
+const fileInput =
 
-const calcBtn =
+document.querySelector("#orderFile");
 
-document.querySelector(".calc-price");
 
 
+const fileName =
 
-const priceBox =
+document.querySelector("#fileName");
 
-document.getElementById("totalPrice");
 
 
 
-const deliveryBox =
 
-document.getElementById("deliveryTime");
+fileInput?.addEventListener("change",()=>{
 
 
 
+if(fileInput.files.length){
 
 
-calcBtn?.addEventListener("click",()=>{
 
+const file = fileInput.files[0];
 
 
-const service =
 
-document.getElementById("orderService")
-?.value;
+if(file.size > 10 * 1024 * 1024){
 
-
-
-
-
-let price = 0;
-
-let time = "";
-
-
-
-
-
-
-switch(service){
-
-
-
-case "zirconia":
-
-
-price = 2500000;
-
-time = "۳ تا ۵ روز کاری";
-
-
-break;
-
-
-
-
-
-case "implant":
-
-
-price = 4000000;
-
-time = "۵ تا ۷ روز کاری";
-
-
-break;
-
-
-
-
-
-case "emax":
-
-
-price = 3500000;
-
-time = "۳ تا ۵ روز کاری";
-
-
-break;
-
-
-
-
-
-case "pfm":
-
-
-price = 2000000;
-
-time = "۳ تا ۴ روز کاری";
-
-
-break;
-
-
-
-
-
-default:
 
 
 alert(
-
-"ابتدا نوع خدمات را انتخاب کنید"
-
+"حجم فایل بیشتر از 10 مگابایت است"
 );
+
+
+
+fileInput.value="";
 
 
 return;
 
+
+}
+
+
+
+
+
+if(fileName){
+
+
+fileName.innerHTML =
+
+"📎 " + file.name;
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+
+
+/*==================================================
+        AUTO LOAD
+==================================================*/
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+renderMyOrders();
+
+
+});
+
+
+
+
+
+
+/*==================================================
+        EXTRA FUNCTIONS
+==================================================*/
+
+
+function countMyOrders(){
+
+
+return getMyOrders().length;
+
+
+}
+
+
+
+
+
+function getLastOrder(){
+
+
+
+const orders=getMyOrders();
+
+
+
+if(!orders.length)
+
+return null;
+
+
+
+return orders[orders.length-1];
 
 
 }
@@ -938,59 +902,7 @@ return;
 
 
 
-
-if(priceBox)
-
-
-priceBox.innerHTML =
-
-price.toLocaleString("fa-IR")
-
-+
-
-" تومان";
-
-
-
-
-
-
-
-if(deliveryBox)
-
-
-deliveryBox.innerHTML =
-
-"زمان تحویل: "
-
-+
-
-time;
-
-
-
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-
-
-/*========================
-        SEARCH
-========================*/
-
-
 function searchOrders(text){
-
 
 
 return getMyOrders().filter(order=>
@@ -1014,71 +926,52 @@ order.service.includes(text)
 
 
 
-
-/*========================
-        LAST ORDER
-========================*/
-
-
-function getLastOrder(){
+function updateOrderStatus(id,status){
 
 
 
-const orders =
+let orders=getAllOrders();
 
-getMyOrders();
+
+
+let order=
+
+orders.find(o=>o.id===id);
 
 
 
 
-if(!orders.length)
+if(!order)
 
-return null;
-
-
+return;
 
 
-return orders[orders.length-1];
 
-
-}
+order.status=status;
 
 
 
 
+localStorage.setItem(
 
+"gilsaOrders",
 
+JSON.stringify(orders)
 
-/*========================
-        ORDER COUNT
-========================*/
+);
 
-
-function countMyOrders(){
-
-
-
-return getMyOrders().length;
-
-
-}
-
-
-
-
-
-
-
-/*========================
-        START
-========================*/
-
-
-document.addEventListener("DOMContentLoaded",()=>{
 
 
 renderMyOrders();
 
 
 
-});
+}
+
+
+
+
+
+console.log(
+"GILSA ORDER SYSTEM READY"
+);
