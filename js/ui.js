@@ -1,10 +1,17 @@
 /*==================================================
-                UI MODULE V3
+                GILSA UI MODULE V4
 ==================================================*/
+
 
 const UI = {
 
+
+    name:"UI",
+
+
+
     init(){
+
 
         this.preloader();
 
@@ -14,102 +21,217 @@ const UI = {
 
         this.reveal();
 
+
     },
+
+
+
+
 
     preloader(){
 
-        const loader = document.querySelector("#preloader");
+
+        const loader =
+        document.querySelector("#preloader");
+
 
         if(!loader) return;
 
-        window.addEventListener("load",()=>{
 
-            setTimeout(()=>{
 
-                loader.classList.add("hide");
+        window.addEventListener(
+            "load",
+            ()=>{
 
-            },800);
 
-        });
+                setTimeout(()=>{
+
+
+                    loader.classList.add("hide");
+
+
+                },800);
+
+
+
+            }
+        );
+
 
     },
+
+
+
+
+
+
 
     header(){
 
-        const header = document.querySelector("#header");
+
+        const header =
+        document.querySelector("#header");
+
 
         if(!header) return;
 
-        window.addEventListener("scroll",()=>{
 
-            header.classList.toggle(
-                "scrolled",
-                window.scrollY > 50
-            );
 
-        });
+        window.addEventListener(
+            "scroll",
+            ()=>{
+
+
+                header.classList.toggle(
+
+                    "scrolled",
+
+                    window.scrollY > 50
+
+                );
+
+
+            }
+        );
+
 
     },
+
+
+
+
+
+
 
     backToTop(){
 
-        const btn=document.querySelector(".back-to-top");
+
+        const btn =
+        document.querySelector(".back-to-top");
+
 
         if(!btn) return;
 
-        window.addEventListener("scroll",()=>{
 
-            btn.classList.toggle(
-                "show",
-                window.scrollY>500
-            );
 
-        });
+        window.addEventListener(
+            "scroll",
+            ()=>{
 
-        btn.addEventListener("click",()=>{
 
-            window.scrollTo({
+                btn.classList.toggle(
 
-                top:0,
+                    "show",
 
-                behavior:"smooth"
+                    window.scrollY > 500
 
-            });
+                );
 
-        });
+
+            }
+        );
+
+
+
+
+        btn.addEventListener(
+            "click",
+            ()=>{
+
+
+                window.scrollTo({
+
+                    top:0,
+
+                    behavior:"smooth"
+
+                });
+
+
+            }
+        );
+
 
     },
 
+
+
+
+
+
+
     reveal(){
 
-        const items=document.querySelectorAll(
+
+        const items =
+        document.querySelectorAll(
 
             ".reveal,.fade-left,.fade-right"
 
         );
 
+
+
         if(!items.length) return;
 
-        const observer=new IntersectionObserver(entries=>{
 
-            entries.forEach(entry=>{
 
-                if(entry.isIntersecting){
 
-                    entry.target.classList.add("active");
+        const observer =
+        new IntersectionObserver(
 
-                }
+            entries=>{
 
-            });
 
-        },{
+                entries.forEach(
+                    entry=>{
 
-            threshold:.15
 
-        });
+                        if(
+                            entry.isIntersecting
+                        ){
 
-        items.forEach(item=>observer.observe(item));
+
+                            entry.target.classList.add(
+                                "active"
+                            );
+
+
+                        }
+
+
+                    }
+                );
+
+
+            },
+
+            {
+
+                threshold:.15
+
+            }
+
+        );
+
+
+
+
+
+        items.forEach(
+            item=>
+            observer.observe(item)
+        );
+
 
     }
 
+
+
 };
+
+
+
+
+
+export { UI };
