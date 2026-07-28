@@ -101,3 +101,28 @@ html+="</div>";
     container.appendChild(card);
 
 });
+document.querySelectorAll(".price-title").forEach(title=>{
+
+title.addEventListener("click",()=>{
+
+title.parentElement.classList.toggle("open");
+
+});
+
+});
+
+const search=document.getElementById("searchInput");
+
+search.addEventListener("keyup",()=>{
+
+const value=search.value.toLowerCase();
+
+document.querySelectorAll(".price-row").forEach(row=>{
+
+const text=row.innerText.toLowerCase();
+
+row.style.display=text.includes(value)?"flex":"none";
+
+});
+
+});
