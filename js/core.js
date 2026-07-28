@@ -2,42 +2,97 @@
                 GILSA CORE V4
 ==================================================*/
 
+
 const Core = {
 
-version:"4.0.0",
 
-started:false,
+    version:"4.0.0",
 
-modules:[],
 
-register(module){
+    started:false,
 
-this.modules.push(module);
 
-},
+    modules:[],
 
-init(){
 
-if(this.started) return;
 
-this.started=true;
+    register(module){
 
-this.modules.forEach(module=>{
 
-if(typeof module.init==="function"){
+        if(!module) return;
 
-module.init();
 
-}
+        this.modules.push(module);
 
-});
 
-console.log(
+    },
 
-`Gilsa V${this.version} Started`
 
-);
 
-}
+
+
+    init(){
+
+
+        if(this.started) return;
+
+
+        this.started=true;
+
+
+
+        this.modules.forEach(module=>{
+
+
+            if(
+                typeof module.init === "function"
+            ){
+
+                try{
+
+
+                    module.init();
+
+
+                    console.log(
+                        "Module Loaded:",
+                        module.name || "Unknown"
+                    );
+
+
+                }
+                catch(error){
+
+
+                    console.error(
+                        "Module Error:",
+                        error
+                    );
+
+
+                }
+
+
+            }
+
+
+        });
+
+
+
+        console.log(
+
+            `Gilsa V${this.version} Started`
+
+        );
+
+
+    }
+
+
 
 };
+
+
+
+export { Core };
