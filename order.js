@@ -1,980 +1,120 @@
 /*==================================================
-                GILSA ORDER.JS
-                ORDER SYSTEM V3
+                ORDER MODULE V3
 ==================================================*/
 
+const Order={
 
-document.addEventListener("DOMContentLoaded",()=>{
+orders:[],
 
+init(){
 
-/*==========================
-        ELEMENTS
-==========================*/
+this.load();
 
+this.bind();
 
-const orderForm =
-document.querySelector("#orderForm");
+this.render();
 
+},
 
-const orderModal =
-document.querySelector("#orderModal");
+load(){
 
+this.orders=
+Storage.get("gilsaOrders") || [];
 
-const openOrderButtons =
-document.querySelectorAll(".order-btn");
+},
 
+bind(){
 
-const closeOrder =
-document.querySelector(".close-order");
+const form=
+Utils.qs("#orderForm");
 
-
-
-
-
-/*==========================
-        OPEN ORDER
-==========================*/
-
-
-openOrderButtons.forEach(btn=>{
-
-
-btn.addEventListener("click",(e)=>{
-
-
-e.preventDefault();
-
-
-if(typeof requireLogin === "function"){
-
-
-if(!requireLogin()){
-
-return;
-
-}
-
-
-}
-
-
-orderModal?.classList.add("active");
-
-
-});
-
-
-});
-
-
-
-
-
-/*==========================
-        CLOSE ORDER
-==========================*/
-
-
-closeOrder?.addEventListener("click",()=>{
-
-
-orderModal?.classList.remove("active");
-
-
-});
-
-
-
-
-
-orderModal?.addEventListener("click",(e)=>{
-
-
-if(e.target === orderModal){
-
-
-orderModal.classList.remove("active");
-
-
-}
-
-
-});
-
-
-
-
-
-
-
-/*==========================
-        SUBMIT ORDER
-==========================*/
-
-
-if(orderForm){
-
-
-
-orderForm.addEventListener("submit",(e)=>{
-
-
-e.preventDefault();
-
-
-
-console.log("ORDER SUBMIT CLICKED");
-
-
-
-if(typeof requireLogin === "function"){
-
-
-if(!requireLogin()){
-
-return;
-
-}
-
-
-}
-
-
-
-saveOrder();
-
-
-
-});
-
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-/*==================================================
-        SAVE ORDER
-==================================================*/
-
-
-function saveOrder(){
-
-
-
-const user = getCurrentUser ? getCurrentUser() : null;
-
-
-
-if(!user){
-
-
-alert("ابتدا وارد حساب کاربری شوید");
-
-return;
-
-
-}
-
-
-
-
-
-
-const patientName =
-document.querySelector("#patientName")
-?.value.trim();
-
-
-
-
-const service =
-document.querySelector("#orderService")
-?.value;
-
-
-
-
-const material =
-document.querySelector("#materialType")
-?.value || "";
-
-
-
-
-const shade =
-document.querySelector("#shade")
-?.value || "";
-
-
-
-
-const description =
-document.querySelector("#orderDescription")
-?.value.trim();
-
-
-
-
-
-const file =
-document.querySelector("#orderFile")
-?.files[0]?.name || "بدون فایل";
-
-
-
-
-
-
-
-
-if(!patientName || !service){
-
-
-alert(
-"لطفا نام بیمار و نوع خدمات را وارد کنید"
+form?.addEventListener(
+"submit",
+e=>this.submit(e)
 );
 
+},
+  submit(e){
+
+e.preventDefault();
+
+if(!Auth.isLogin()){
+
+Utils.alert(
+"ابتدا وارد حساب کاربری شوید."
+);
+
+Utils.qs("#authModal")
+?.classList.add("active");
 
 return;
 
-
 }
 
+const user=
+Storage.get("gilsaCurrentUser");
 
+const order={
 
+id:Utils.generateId(),
 
+user:user.username,
 
+userName:user.name,
 
+patient:
+Utils.qs("#patientName")?.value,
 
-const order = {
+service:
+Utils.qs("#orderService")?.value,
 
+material:
+Utils.qs("#materialType")?.value,
 
-id:Date.now(),
+shade:
+Utils.qs("#shade")?.value,
 
+description:
+Utils.qs("#orderDescription")?.value,
 
-owner:user.username,
-
-
-ownerName:user.name,
-
-
-patientName,
-
-
-service,
-
-
-material,
-
-
-shade,
-
-
-description,
-
-
-file,
-
+file:
+Utils.qs("#orderFile")
+?.files[0]?.name || "بدون فایل",
 
 status:"در انتظار بررسی",
 
-
-created:new Date().toLocaleDateString("fa-IR")
-
+date:Utils.formatDate()
 
 };
 
+this.orders.push(order);
 
-
-
-
-
-
-
-let orders =
-
-JSON.parse(
-
-localStorage.getItem("gilsaOrders")
-
-)
-
-|| [];
-
-
-
-
-
-
-orders.push(order);
-
-
-
-
-
-
-localStorage.setItem(
-
+Storage.set(
 "gilsaOrders",
+this.orders
+);
 
-JSON.stringify(orders)
+Utils.alert(
+"سفارش با موفقیت ثبت شد."
+);
+
+e.target.reset();
+
+this.render();
+
+},
+  getUserOrders(){
+
+const user=
+Storage.get("gilsaCurrentUser");
+
+if(!user) return [];
+
+return this.orders.filter(order=>
+
+order.user===user.username
 
 );
 
-
-
-
-
-
-
-alert(
-"سفارش با موفقیت ثبت شد"
-);
-
-
-
-
-
-
-orderForm.reset();
-
-
-
-
-
-
-document
-.querySelector("#orderModal")
-?.classList.remove("active");
-
-
-
-
-
-renderMyOrders();
-
-
-
-}
-/*==================================================
-        GET ORDERS
-==================================================*/
-
-
-function getAllOrders(){
-
-
-return JSON.parse(
-
-localStorage.getItem("gilsaOrders")
-
-)
-
-|| [];
-
-
-}
-
-
-
-
-
-function getMyOrders(){
-
-
-const user =
-
-getCurrentUser ? getCurrentUser() : null;
-
-
-
-if(!user)
-
-return [];
-
-
-
-
-
-return getAllOrders().filter(order=>
-
-
-order.owner === user.username
-
-
-);
-
-
-
-}
-
-
-
-
-
-
-/*==================================================
-        RENDER ORDERS
-==================================================*/
-
-
-function renderMyOrders(){
-
-
-
-const orderList =
-
-document.querySelector("#orderList");
-
-
-
-const table =
-
-document.querySelector("#ordersTable");
-
-
-
-
-
-const orders = getMyOrders();
-
-
-
-
-
-
-/* CARD VIEW */
-
-
-
-if(orderList){
-
-
-
-if(orders.length === 0){
-
-
-
-orderList.innerHTML=`
-
-<div class="empty-orders">
-
-هنوز سفارشی ثبت نکرده‌اید
-
-</div>
-
-`;
-
-
-
-}
-
-else{
-
-
-
-orderList.innerHTML="";
-
-
-
-
-orders.forEach(order=>{
-
-
-orderList.innerHTML += `
-
-
-<div class="order-card">
-
-
-<div class="order-head">
-
-
-<h3>
-
-سفارش #${order.id}
-
-</h3>
-
-
-
-<span>
-
-${order.status}
-
-</span>
-
-
-
-</div>
-
-
-
-
-<p>
-
-<b>بیمار:</b>
-
-${order.patientName}
-
-</p>
-
-
-
-
-<p>
-
-<b>خدمات:</b>
-
-${order.service}
-
-</p>
-
-
-
-
-<p>
-
-<b>متریال:</b>
-
-${order.material || "-"}
-
-</p>
-
-
-
-
-<p>
-
-<b>رنگ:</b>
-
-${order.shade || "-"}
-
-</p>
-
-
-
-
-<p>
-
-<b>تاریخ:</b>
-
-${order.created}
-
-</p>
-
-
-
-
-<button
-
-class="delete-order"
-
-data-id="${order.id}"
-
->
-
-حذف سفارش
-
-</button>
-
-
-
-</div>
-
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-/* TABLE VIEW DASHBOARD */
-
-
-
-if(table){
-
-
-
-table.innerHTML="";
-
-
-
-
-orders.forEach(order=>{
-
-
-table.innerHTML += `
-
-
-<tr>
-
-
-<td>
-
-${order.id}
-
-</td>
-
-
-<td>
-
-${order.service}
-
-</td>
-
-
-<td>
-
-${order.status}
-
-</td>
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-/* DELETE BUTTON */
-
-
-document
-
-.querySelectorAll(".delete-order")
-
-.forEach(btn=>{
-
-
-btn.addEventListener("click",()=>{
-
-
-deleteOrder(
-
-Number(btn.dataset.id)
-
-);
-
-
-
-});
-
-
-});
-
-
-
-
-}
-
-
-
-
-
-
-
-/*==================================================
-        DELETE ORDER
-==================================================*/
-
-
-function deleteOrder(id){
-
-
-
-let orders = getAllOrders();
-
-
-
-
-orders = orders.filter(order=>
-
-
-order.id !== id
-
-
-);
-
-
-
-
-localStorage.setItem(
-
-"gilsaOrders",
-
-JSON.stringify(orders)
-
-);
-
-
-
-
-renderMyOrders();
-
-
-
-}
-
-
-
-
-
-
-
-/*==================================================
-        FILE NAME
-==================================================*/
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const fileInput =
-
-document.querySelector("#orderFile");
-
-
-
-const fileName =
-
-document.querySelector("#fileName");
-
-
-
-
-
-fileInput?.addEventListener("change",()=>{
-
-
-
-if(fileInput.files.length){
-
-
-
-const file = fileInput.files[0];
-
-
-
-if(file.size > 10 * 1024 * 1024){
-
-
-
-alert(
-"حجم فایل بیشتر از 10 مگابایت است"
-);
-
-
-
-fileInput.value="";
-
-
-return;
-
-
-}
-
-
-
-
-
-if(fileName){
-
-
-fileName.innerHTML =
-
-"📎 " + file.name;
-
-
-}
-
-
-
-}
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-
-
-/*==================================================
-        AUTO LOAD
-==================================================*/
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-renderMyOrders();
-
-
-});
-
-
-
-
-
-
-/*==================================================
-        EXTRA FUNCTIONS
-==================================================*/
-
-
-function countMyOrders(){
-
-
-return getMyOrders().length;
-
-
-}
-
-
-
-
-
-function getLastOrder(){
-
-
-
-const orders=getMyOrders();
-
-
-
-if(!orders.length)
-
-return null;
-
-
-
-return orders[orders.length-1];
-
-
-}
-
-
-
-
-
-
-function searchOrders(text){
-
-
-return getMyOrders().filter(order=>
-
-
-order.patientName.includes(text)
-
-||
-
-order.service.includes(text)
-
-
-);
-
-
-
-}
-
-
-
-
-
-
-function updateOrderStatus(id,status){
-
-
-
-let orders=getAllOrders();
-
-
-
-let order=
-
-orders.find(o=>o.id===id);
-
-
-
-
-if(!order)
-
-return;
-
-
-
-order.status=status;
-
-
-
-
-localStorage.setItem(
-
-"gilsaOrders",
-
-JSON.stringify(orders)
-
-);
-
-
-
-renderMyOrders();
-
-
-
-}
-
-
-
-
-
-console.log(
-"GILSA ORDER SYSTEM READY"
-);
-
-);
-alert("ORDER JS LOADED");
+},
+  
