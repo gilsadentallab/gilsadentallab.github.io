@@ -1,1077 +1,174 @@
 /*==================================================
-        GILSA AUTH SYSTEM V3
-        USER LOGIN / REGISTER SYSTEM
+                AUTH MODULE V3
 ==================================================*/
 
+const Auth={
 
-document.addEventListener("DOMContentLoaded",()=>{
+currentUser:null,
 
+init(){
 
+this.load();
 
-/*========================
-        ELEMENTS
-========================*/
+this.bind();
 
+this.refreshButton();
 
-const authModal =
-document.getElementById("authModal");
+},
 
+load(){
 
-const openButtons =
-document.querySelectorAll(".auth-btn,.open-auth");
+this.currentUser=Storage.get("gilsaCurrentUser");
 
+},
 
-const closeBtn =
-document.querySelector(".close-auth");
+bind(){
 
+const loginForm=Utils.qs("#loginForm");
 
-const loginForm =
-document.getElementById("loginForm");
+const registerForm=Utils.qs("#registerForm");
 
+const logoutBtn=Utils.qs("#logoutBtn");
 
-const registerForm =
-document.getElementById("registerForm");
+loginForm?.addEventListener(
+"submit",
+e=>this.login(e)
+);
 
+registerForm?.addEventListener(
+"submit",
+e=>this.register(e)
+);
 
-const loginBox =
-document.getElementById("loginBox");
+logoutBtn?.addEventListener(
+"click",
+()=>this.logout()
+);
 
+},
 
-const registerBox =
-document.getElementById("registerBox");
+isLogin(){
 
+return Storage.get("gilsaLogin")==="true";
 
-const showRegister =
-document.getElementById("showRegister");
-
-
-const showLogin =
-document.getElementById("showLogin");
-
-
-
-
-
-/*========================
-        OPEN MODAL
-========================*/
-
-
-openButtons.forEach(btn=>{
-
-
-btn.addEventListener("click",(e)=>{
-
+},
+        login(e){
 
 e.preventDefault();
 
+const username=
+Utils.qs("#loginUsername")?.value;
 
+const password=
+Utils.qs("#loginPassword")?.value;
 
-if(isLoggedIn()){
-
-
-openDashboard();
-
-
-return;
-
-
-}
-
-
-
-authModal?.classList.add("active");
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-/*========================
-        CLOSE MODAL
-========================*/
-
-
-closeBtn?.addEventListener("click",()=>{
-
-
-authModal?.classList.remove("active");
-
-
-});
-
-
-
-
-
-authModal?.addEventListener("click",(e)=>{
-
-
-if(e.target===authModal){
-
-
-authModal.classList.remove("active");
-
-
-}
-
-
-
-});
-
-
-
-
-
-/*========================
-        SWITCH BOX
-========================*/
-
-
-showRegister?.addEventListener("click",()=>{
-
-
-loginBox.style.display="none";
-
-
-registerBox.style.display="block";
-
-
-});
-
-
-
-
-
-showLogin?.addEventListener("click",()=>{
-
-
-registerBox.style.display="none";
-
-
-loginBox.style.display="block";
-
-
-});
-
-
-
-
-
-
-/*==================================================
-        REGISTER
-==================================================*/
-
-
-registerForm?.addEventListener("submit",(e)=>{
-
-
-e.preventDefault();
-
-
-
-
-const user={
-
-
-id:Date.now(),
-
-
-type:
-document.getElementById("userType").value,
-
-
-name:
-document.getElementById("registerName").value.trim(),
-
-
-username:
-document.getElementById("registerUsername").value.trim(),
-
-
-password:
-document.getElementById("registerPassword").value.trim(),
-
-
-mobile:
-document.getElementById("registerMobile").value.trim(),
-
-
-
-clinicName:
-document.getElementById("clinicName")?.value || "",
-
-
-labName:
-document.getElementById("labName")?.value || "",
-
-
-managerName:
-document.getElementById("managerName")?.value || "",
-
-
-landline:
-document.getElementById("landline")?.value || "",
-
-
-address:
-document.getElementById("registerAddress")?.value || "",
-
-
-location:
-document.getElementById("registerLocation")?.value || "",
-
-
-created:
-new Date().toLocaleDateString("fa-IR")
-
-
-
-};
-
-
-
-
-
+const user=
+Storage.get("gilsaUser");
 
 if(
-!user.name ||
-!user.username ||
-!user.password ||
-!user.mobile
-
+user &&
+user.username===username &&
+user.password===password
 ){
 
-
-alert(
-"لطفا اطلاعات ضروری را کامل کنید"
+Storage.set(
+"gilsaLogin",
+"true"
 );
 
+Storage.set(
+"gilsaCurrentUser",
+user
+);
 
-return;
+this.currentUser=user;
 
+this.refreshButton();
+
+Utils.alert("ورود موفقیت آمیز بود");
+
+Utils.qs("#authModal")
+?.classList.remove("active");
 
 }
+else{
 
-
-
-
-
-
-let users =
-
-JSON.parse(
-
-localStorage.getItem("gilsaUsers")
-
-)
-
-|| [];
-
-
-
-
-
-
-const exists =
-
-users.find(u=>
-
-u.username===user.username
-
-);
-
-
-
-
-
-
-if(exists){
-
-
-alert(
-"این نام کاربری قبلا ثبت شده است"
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-
-users.push(user);
-
-
-
-
-
-localStorage.setItem(
-
-"gilsaUsers",
-
-JSON.stringify(users)
-
-);
-
-
-
-
-
-
-alert(
-"ثبت نام با موفقیت انجام شد"
-);
-
-
-
-
-
-registerForm.reset();
-
-
-registerBox.style.display="none";
-
-
-loginBox.style.display="block";
-
-
-
-});
-        /*==================================================
-        LOGIN SYSTEM
-==================================================*/
-
-
-loginForm?.addEventListener("submit",(e)=>{
-
-
-e.preventDefault();
-
-
-
-
-const username =
-
-document.getElementById("loginUsername")
-.value.trim();
-
-
-
-
-const password =
-
-document.getElementById("loginPassword")
-.value.trim();
-
-
-
-
-
-
-let users =
-
-JSON.parse(
-
-localStorage.getItem("gilsaUsers")
-
-)
-
-|| [];
-
-
-
-
-
-
-
-const user =
-
-users.find(u=>
-
-u.username===username &&
-
-u.password===password
-
-);
-
-
-
-
-
-
-
-if(!user){
-
-
-alert(
+Utils.alert(
 "نام کاربری یا رمز عبور اشتباه است"
 );
 
-
-return;
-
-
 }
 
+},
+        register(e){
 
+e.preventDefault();
 
+const user={
 
+type:
+Utils.qs("#userType")?.value,
 
+name:
+Utils.qs("#registerName")?.value,
 
-localStorage.setItem(
+username:
+Utils.qs("#registerUsername")?.value,
 
-"gilsaLogin",
+password:
+Utils.qs("#registerPassword")?.value,
 
-"true"
+mobile:
+Utils.qs("#registerMobile")?.value,
 
+clinic:
+Utils.qs("#clinicName")?.value || "",
+
+address:
+Utils.qs("#registerAddress")?.value || "",
+
+location:
+Utils.qs("#registerLocation")?.value || ""
+
+};
+
+Storage.set(
+"gilsaUser",
+user
 );
 
-
-
-
-
-localStorage.setItem(
-
-"gilsaCurrentUser",
-
-JSON.stringify(user)
-
+Utils.alert(
+"ثبت نام با موفقیت انجام شد"
 );
 
+e.target.reset();
 
+},
+        logout(){
 
+Storage.remove("gilsaLogin");
 
-
-
-alert(
-
-"ورود موفقیت آمیز بود"
-
-);
-
-
-
-
-
-
-authModal?.classList.remove(
-"active"
-);
-
-
-
-
-
-
-updateUserUI();
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-        CHECK LOGIN
-==================================================*/
-
-
-function isLoggedIn(){
-
-
-return (
-
-localStorage.getItem("gilsaLogin")==="true"
-
-&&
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-        UPDATE USER UI
-==================================================*/
-
-
-function updateUserUI(){
-
-
-
-const user =
-
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
-
-
-
-if(!user)
-
-return;
-
-
-
-
-
-
-
-const authBtn =
-
-document.querySelector(".auth-btn");
-
-
-
-
-
-if(authBtn){
-
-
-
-authBtn.innerHTML =
-
-`
-
-👤 ${user.name}
-
-`;
-
-
-
-authBtn.classList.add(
-"logged"
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-const dashName =
-
-document.getElementById("dashName");
-
-
-
-const dashType =
-
-document.getElementById("dashType");
-
-
-
-
-
-
-if(dashName)
-
-dashName.innerHTML=user.name;
-
-
-
-
-
-
-if(dashType)
-
-
-dashType.innerHTML =
-
-user.type==="lab"
-
-?
-
-"لابراتوار"
-
-:
-
-"دندانپزشک";
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-        OPEN DASHBOARD
-==================================================*/
-
-
-function openDashboard(){
-
-
-
-const dashboard =
-
-document.getElementById("dashboard");
-
-
-
-
-if(!dashboard){
-
-
-alert(
-"داشبورد پیدا نشد"
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-window.scrollTo({
-
-top:dashboard.offsetTop,
-
-behavior:"smooth"
-
-});
-
-
-
-
-dashboard.classList.add(
-"active"
-);
-
-
-
-
-updateUserUI();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-        LOGOUT
-==================================================*/
-
-
-const logoutBtn =
-
-document.getElementById("logoutBtn");
-
-
-
-
-
-logoutBtn?.addEventListener("click",()=>{
-
-
-
-
-
-localStorage.removeItem(
-"gilsaLogin"
-);
-
-
-
-
-localStorage.removeItem(
-"gilsaCurrentUser"
-);
-
-
-
-
-
-
-alert(
-"از حساب خارج شدید"
-);
-
-
-
-
+Storage.remove("gilsaCurrentUser");
 
 location.reload();
 
+},
 
+refreshButton(){
 
+const btn=
+Utils.qs(".auth-btn");
 
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-        PAGE LOAD
-==================================================*/
-
-
-if(isLoggedIn()){
-
-
-updateUserUI();
-
-
-}
-
-
-
-
-
-
-});
-/*==================================================
-        DASHBOARD CONNECTOR V3
-==================================================*/
-
-
-function loadDashboard(){
-
-
-
-const user =
-
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
-
-
-
-
-if(!user)
-
+if(
+!btn ||
+!this.isLogin()
+)
 return;
 
+btn.innerHTML=
 
-
-
-
-
-
-const nameBox =
-
-document.getElementById("dashName");
-
-
-
-const typeBox =
-
-document.getElementById("dashType");
-
-
-
-
-
-
-
-if(nameBox)
-
-nameBox.innerHTML = user.name;
-
-
-
-
-
-
-if(typeBox){
-
-
-typeBox.innerHTML =
-
-user.type==="lab"
-
-?
-
-"لابراتوار"
-
-:
-
-"دندانپزشک";
-
-
+`👤 ${this.currentUser?.name}`;
 
 }
 
-
-
-
-
-
-
-/* USER INFO */
-
-const userInfo =
-
-document.querySelector(".dashboard-user");
-
-
-
-if(userInfo){
-
-
-
-userInfo.dataset.username =
-
-user.username;
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-/*==================================================
-        DASHBOARD MENU
-==================================================*/
-
-
-
-const dashboardMenu =
-
-document.querySelectorAll(
-".dashboard-sidebar li"
-);
-
-
-
-
-
-
-dashboardMenu.forEach(item=>{
-
-
-
-item.addEventListener(
-"click",
-()=>{
-
-
-
-
-
-dashboardMenu.forEach(i=>{
-
-i.classList.remove("active");
-
-});
-
-
-
-
-
-item.classList.add("active");
-
-
-
-
-
-
-const text =
-
-item.innerText;
-
-
-
-
-
-
-
-if(text.includes("سفارش جدید")){
-
-
-document.querySelector(".order-btn")
-?.click();
-
-
-
-}
-
-
-
-
-
-
-if(text.includes("سفارش‌های من")){
-
-
-if(typeof renderMyOrders==="function"){
-
-
-renderMyOrders();
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-});
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-        LAB ACCESS CONTROL
-==================================================*/
-
-
-function checkLabPanel(){
-
-
-
-const user =
-
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
-);
-
-
-
-
-
-if(!user)
-
-return;
-
-
-
-
-
-
-
-
-if(user.type==="lab"){
-
-
-
-document.body.classList.add(
-"lab-user"
-);
-
-
-
-}
-
-else{
-
-
-
-document.body.classList.add(
-"dentist-user"
-);
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-        RUN DASHBOARD
-==================================================*/
-
-
-loadDashboard();
-
-
-checkLabPanel();
-
-
+};
