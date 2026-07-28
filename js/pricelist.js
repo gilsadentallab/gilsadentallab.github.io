@@ -8,7 +8,7 @@ const PriceList = {
 
     init(){
 
-      import { data } from "./prices.js";
+      if(typeof data === "undefined") return;
 
         this.data = data;
 
