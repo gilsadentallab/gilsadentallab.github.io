@@ -18,67 +18,223 @@ const data = {
 
     whatsapp: "https://wa.me/989140503522",
 
+categories: [
 
-    categories: [
+    {
+        title:"روکش و بریج (Fixed Prosthesis)",
 
-        {
-            title: "روکش‌های زیرکونیا",
+        items:[
 
-            items: [
+            {
+                service:"PFM Crown",
+                price:"درج قیمت"
+            },
 
-                {
-                    service: "Full Zirconia",
-                    price: "درج قیمت"
-                },
+            {
+                service:"Zirconia Crown",
+                price:"درج قیمت"
+            },
 
-                {
-                    service: "Layered Zirconia",
-                    price: "درج قیمت"
-                }
+            {
+                service:"Monolithic Crown",
+                price:"درج قیمت"
+            },
 
-            ]
+            {
+                service:"Monolithic Zirconia (Implant)",
+                price:"درج قیمت"
+            },
 
-        },
+            {
+                service:"Multilayer Zirconia",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Multilayer Zirconia (Implant)",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Temporary Crown (PMMA)",
+                price:"درج قیمت"
+            }
+
+        ]
+
+    },
 
 
-        {
-            title: "ایمپلنت",
+    {
+        title:"ایمپلنت (Implant)",
 
-            items: [
+        items:[
 
-                {
-                    service: "Implant Crown",
-                    price: "درج قیمت"
-                },
+            {
+                service:"Screw Retained Crown",
+                price:"درج قیمت"
+            },
 
-                {
-                    service: "Custom Abutment",
-                    price: "درج قیمت"
-                }
+            {
+                service:"Implant Restoration",
+                price:"درج قیمت"
+            },
 
-            ]
+            {
+                service:"Post Implant",
+                price:"درج قیمت"
+            }
 
-        },
+        ]
+
+    },
 
 
-        {
-            title: "E.max",
+    {
+        title:"زیبایی (Esthetic Dentistry)",
 
-            items: [
+        items:[
 
-                {
-                    service: "E.max Crown",
-                    price: "درج قیمت"
-                }
+            {
+                service:"Laminate Veneer",
+                price:"درج قیمت"
+            },
 
-            ]
+            {
+                service:"Diagnostic Wax-Up",
+                price:"درج قیمت"
+            },
 
-        }
+            {
+                service:"Digital Mock-Up",
+                price:"درج قیمت"
+            }
 
-    ]
+        ]
 
-};
+    },
 
+
+    {
+        title:"پروتز متحرک (Removable Prosthesis)",
+
+        items:[
+
+            {
+                service:"Complete Denture",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Over Denture",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Special Tray",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Try-In Resin",
+                price:"درج قیمت"
+            }
+
+        ]
+
+    },
+
+
+    {
+        title:"خدمات جانبی (Other Services)",
+
+        items:[
+
+            {
+                service:"Bleaching Tray",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Night Guard",
+                price:"درج قیمت"
+            },
+
+            {
+                service:"Dental Cast / Model",
+                price:"درج قیمت"
+            }
+
+        ]
+
+    },
+
+
+    {
+        title:"سایر خدمات",
+
+        items:[
+
+            {
+                service:"طراحی اختصاصی",
+                price:"تماس بگیرید"
+            },
+
+            {
+                service:"کیس‌های خاص",
+                price:"تماس بگیرید"
+            },
+
+            {
+                service:"خدمات دیجیتال",
+                price:"تماس بگیرید"
+            },
+
+            {
+                service:"سایر خدمات لابراتواری",
+                price:"تماس بگیرید"
+            }
+
+        ]
+
+    },
+
+
+    {
+        title:"خدمات VIP (۴۰٪ افزایش)",
+
+        items:[
+
+            {
+                service:"روکش VIP زیرکونیا",
+                price:"۴۰٪ بیشتر"
+            },
+
+            {
+                service:"ایمپلنت VIP",
+                price:"۴۰٪ بیشتر"
+            },
+
+            {
+                service:"لمینت VIP",
+                price:"۴۰٪ بیشتر"
+            },
+
+            {
+                service:"خدمات دیجیتال VIP",
+                price:"۴۰٪ بیشتر"
+            },
+
+            {
+                service:"کیس فوری VIP",
+                price:"۴۰٪ بیشتر"
+            }
+
+        ]
+
+    }
+
+]
 
 
 /* =========================
