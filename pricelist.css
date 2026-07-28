@@ -1,27 +1,24 @@
-/* ===========================================
+/* ==========================================
    Gilsa Dental Laboratory
-   Price List V2
-=========================================== */
+   Price List CSS V3
+   Part 1/6
+========================================== */
 
-:root{
 
-    --gold:#d4af37;
-    --gold-light:#e8c867;
-    --dark:#171717;
-    --white:#ffffff;
-    --gray:#777;
-    --border:#ececec;
-    --shadow:0 15px 40px rgba(0,0,0,.08);
-    --shadow-hover:0 22px 60px rgba(0,0,0,.14);
-    --radius:28px;
-
-}
+/* =========================
+   Reset
+========================= */
 
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
+
 
 html{
 
@@ -29,44 +26,52 @@ html{
 
 }
 
+
 body{
 
     font-family:'Vazirmatn',sans-serif;
 
-    background:#f6f6f6;
+    background:#f7f7f7;
 
-    color:var(--dark);
-
-    overflow-x:hidden;
+    color:#222;
 
     min-height:100vh;
 
-    line-height:1.8;
+    overflow-x:hidden;
 
 }
 
-img{
 
-    max-width:100%;
+/* =========================
+   Variables
+========================= */
 
-    display:block;
+:root{
+
+    --gold:#d4af37;
+
+    --gold-light:#f1d77a;
+
+    --dark:#111;
+
+    --text:#333;
+
+    --gray:#777;
+
+    --white:#fff;
+
+    --shadow:0 15px 40px rgba(0,0,0,.08);
+
+    --shadow-hover:0 20px 50px rgba(0,0,0,.15);
+
+    --radius:25px;
 
 }
 
-a{
 
-    text-decoration:none;
-
-    color:inherit;
-
-}
-
-button,
-input{
-
-    font-family:inherit;
-
-}
+/* =========================
+   Background
+========================= */
 
 .background{
 
@@ -74,166 +79,183 @@ input{
 
     inset:0;
 
+    z-index:-1;
+
     background:
 
-    radial-gradient(circle at top right,
-    rgba(212,175,55,.14),
-    transparent 35%),
+    radial-gradient(
+        circle at top right,
+        rgba(212,175,55,.18),
+        transparent 35%
+    ),
 
-    radial-gradient(circle at bottom left,
-    rgba(212,175,55,.10),
-    transparent 35%),
+    radial-gradient(
+        circle at bottom left,
+        rgba(212,175,55,.12),
+        transparent 35%
+    ),
 
-    #f6f6f6;
-
-    z-index:-10;
+    #f7f7f7;
 
 }
-/* ===========================================
-   Loader
-=========================================== */
 
-.page-loader{
+
+/* =========================
+   Loader
+========================= */
+
+#loader{
 
     position:fixed;
+
     inset:0;
 
-    background:#ffffff;
+    background:#fff;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
 
     gap:20px;
 
     z-index:9999;
 
-    transition:.6s;
+    transition:.5s;
 
 }
 
-.page-loader.hide{
+
+#loader.hide{
 
     opacity:0;
+
     visibility:hidden;
 
 }
 
-.page-loader img{
+
+#loader img{
 
     width:110px;
 
-    animation:logoFloat 2.5s ease-in-out infinite;
+    animation:pulse 1.5s infinite;
 
 }
 
-.page-loader span{
+
+#loader p{
+
+    color:var(--gold);
+
+    font-weight:700;
+
+}
+
+
+@keyframes pulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+}
+
+
+/* =========================
+   Header
+========================= */
+
+header{
+
+    text-align:center;
+
+    padding:50px 20px 30px;
+
+}
+
+
+.logo{
+
+    width:130px;
+
+    height:130px;
+
+    object-fit:contain;
+
+    margin-bottom:15px;
+
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,.12));
+
+}
+
+
+header h1{
+
+    font-size:45px;
+
+    letter-spacing:5px;
+
+    font-weight:800;
+
+    background:linear-gradient(
+        180deg,
+        #f5db83,
+        #d4af37,
+        #a67c00
+    );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+header p{
+
+    margin-top:8px;
 
     color:var(--gray);
 
     font-size:18px;
 
-    letter-spacing:2px;
+    font-weight:500;
 
 }
 
-@keyframes logoFloat{
 
-    0%,100%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-10px);
-
-    }
-
-}
-
-/* ===========================================
-   Header
-=========================================== */
-
-header{
-
-    width:min(1100px,92%);
-
-    margin:45px auto 35px;
-
-    text-align:center;
-
-}
-
-.logo-box{
-
-    width:145px;
-    height:145px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    box-shadow:var(--shadow);
-
-    border:2px solid rgba(212,175,55,.25);
-
-}
-
-.logo{
-
-    width:95px;
-
-}
-
-header h1{
-
-    margin-top:25px;
-
-    font-size:46px;
-
-    font-weight:800;
-
-    color:var(--gold);
-
-    letter-spacing:5px;
-
-}
-
-header p{
-
-    margin-top:10px;
-
-    color:var(--gray);
-
-    font-size:19px;
-
-}
-
-/* ===========================================
+/* =========================
    Hero
-=========================================== */
+========================= */
 
 .hero{
 
     width:min(1100px,92%);
 
-    margin:auto;
+    margin:20px auto;
 
-    padding:55px 45px;
+    padding:55px 35px;
 
-    background:rgba(255,255,255,.78);
+    text-align:center;
 
-    backdrop-filter:blur(18px);
+    background:rgba(255,255,255,.85);
+
+    backdrop-filter:blur(15px);
 
     border-radius:var(--radius);
 
@@ -241,9 +263,8 @@ header p{
 
     box-shadow:var(--shadow);
 
-    text-align:center;
-
 }
+
 
 .hero-badge{
 
@@ -255,41 +276,44 @@ header p{
 
     padding:10px 22px;
 
+    border-radius:50px;
+
     background:rgba(212,175,55,.12);
 
-    color:var(--gold);
+    color:#9a7600;
 
-    border-radius:40px;
-
-    font-size:15px;
+    font-size:14px;
 
     font-weight:700;
 
-    margin-bottom:28px;
+    margin-bottom:25px;
 
 }
+
 
 .hero h2{
 
-    font-size:42px;
+    font-size:40px;
 
     margin-bottom:20px;
 
+    color:#111;
+
 }
+
 
 .hero p{
 
-    max-width:760px;
-
-    margin:auto;
-
-    color:var(--gray);
-
     font-size:18px;
 
-    line-height:2.1;
+    line-height:2;
+
+    color:#555;
 
 }
+/* ==========================================
+   Update Box
+========================================== */
 
 .update{
 
@@ -299,22 +323,35 @@ header p{
 
     gap:10px;
 
-    margin-top:35px;
+    margin-top:30px;
+
+    padding:14px 30px;
 
     background:var(--gold);
 
     color:#fff;
 
-    padding:14px 28px;
-
     border-radius:50px;
 
     font-weight:700;
 
+    box-shadow:0 10px 25px rgba(212,175,55,.25);
+
 }
-/* ===========================================
-   Search
-=========================================== */
+
+
+#updateDate{
+
+    font-weight:800;
+
+    direction:ltr;
+
+}
+
+
+/* ==========================================
+   Search Section
+========================================== */
 
 .tools{
 
@@ -324,17 +361,21 @@ header p{
 
 }
 
+
 .search-box{
 
     position:relative;
 
+    width:100%;
+
 }
+
 
 .search-box i{
 
     position:absolute;
 
-    right:22px;
+    right:25px;
 
     top:50%;
 
@@ -342,81 +383,95 @@ header p{
 
     color:var(--gold);
 
-    font-size:18px;
+    font-size:20px;
 
 }
+
 
 #searchInput{
 
     width:100%;
 
-    height:64px;
-
-    border:none;
-
-    outline:none;
-
-    padding:0 60px 0 20px;
+    padding:18px 60px 18px 25px;
 
     border-radius:60px;
 
+    border:2px solid rgba(212,175,55,.35);
+
     background:#fff;
 
-    box-shadow:var(--shadow);
+    font-family:inherit;
 
-    border:2px solid transparent;
+    font-size:16px;
 
-    transition:.35s;
+    outline:none;
 
-    font-size:17px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    transition:.3s;
 
 }
+
 
 #searchInput:focus{
 
     border-color:var(--gold);
 
-    box-shadow:0 15px 45px rgba(212,175,55,.18);
+    box-shadow:0 10px 35px rgba(212,175,55,.2);
 
 }
 
-/* ===========================================
-   Price Cards
-=========================================== */
+
+/* ==========================================
+   Price Container
+========================================== */
 
 #priceContainer{
 
     width:min(1100px,92%);
 
-    margin:30px auto 60px;
+    margin:40px auto;
 
 }
+
+
+/* ==========================================
+   Price Card
+========================================== */
 
 .price-card{
 
     background:#fff;
 
-    border-radius:26px;
+    border-radius:var(--radius);
 
-    margin-bottom:24px;
+    padding:30px;
 
-    overflow:hidden;
+    margin-bottom:25px;
 
-    border:1px solid rgba(212,175,55,.15);
+    border-right:6px solid var(--gold);
 
     box-shadow:var(--shadow);
+
+    overflow:hidden;
 
     transition:.35s;
 
 }
 
+
 .price-card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-7px);
 
     box-shadow:var(--shadow-hover);
 
 }
+
+
+/* ==========================================
+   Price Title
+========================================== */
 
 .price-title{
 
@@ -426,63 +481,42 @@ header p{
 
     align-items:center;
 
-    padding:24px 28px;
-
     cursor:pointer;
 
-    user-select:none;
+    font-size:25px;
 
-    font-size:24px;
+    font-weight:800;
 
-    font-weight:700;
+    color:#222;
 
-    color:var(--dark);
-
-    transition:.3s;
+    padding:5px 0;
 
 }
 
-.price-title:hover{
-
-    color:var(--gold);
-
-}
 
 .price-title::after{
 
     content:"+";
 
-    width:38px;
-
-    height:38px;
-
-    border-radius:50%;
-
-    background:rgba(212,175,55,.15);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
     color:var(--gold);
 
-    font-size:24px;
+    font-size:30px;
 
     transition:.35s;
 
 }
 
+
 .price-card.open .price-title::after{
 
     transform:rotate(45deg);
 
-    background:var(--gold);
-
-    color:#fff;
-
 }
+
+
+/* ==========================================
+   Price Content Accordion
+========================================== */
 
 .price-content{
 
@@ -494,11 +528,17 @@ header p{
 
 }
 
+
 .price-card.open .price-content{
 
-    max-height:1200px;
+    max-height:1000px;
 
 }
+
+
+/* ==========================================
+   Price Row
+========================================== */
 
 .price-row{
 
@@ -508,78 +548,88 @@ header p{
 
     align-items:center;
 
-    padding:18px 28px;
+    padding:16px 0;
 
-    border-top:1px solid #f1f1f1;
-
-    transition:.25s;
+    border-bottom:1px solid #eee;
 
 }
 
-.price-row:hover{
 
-    background:#fcfbf6;
+.price-row:last-child{
+
+    border-bottom:none;
 
 }
+
 
 .service{
 
+    font-size:16px;
+
     font-weight:600;
 
-    font-size:17px;
+    color:#333;
 
 }
+
 
 .price{
 
     color:var(--gold);
 
-    font-weight:800;
-
     font-size:18px;
 
+    font-weight:800;
+
 }
-/* ===========================================
+/* ==========================================
    Quick Links
-=========================================== */
+========================================== */
 
 .quick-links{
 
     width:min(1100px,92%);
 
-    margin:40px auto 60px;
-
-}
-
-.quick-links h3{
+    margin:60px auto;
 
     text-align:center;
 
-    font-size:28px;
+}
+
+
+.quick-links h3{
+
+    font-size:30px;
 
     margin-bottom:30px;
 
-    color:var(--dark);
+    color:#222;
 
 }
+
+
+/* ==========================================
+   Buttons
+========================================== */
 
 .buttons{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    justify-content:center;
 
     gap:20px;
 
+    flex-wrap:wrap;
+
 }
+
 
 .buttons a{
 
-    background:#fff;
+    position:relative;
 
-    border-radius:22px;
-
-    padding:22px;
+    overflow:hidden;
 
     display:flex;
 
@@ -587,55 +637,65 @@ header p{
 
     justify-content:center;
 
-    gap:14px;
+    gap:12px;
 
-    box-shadow:var(--shadow);
+    min-width:190px;
 
-    border:1px solid rgba(212,175,55,.15);
+    padding:16px 30px;
 
-    transition:.35s;
+    border-radius:60px;
+
+    background:#111;
+
+    color:#fff;
+
+    text-decoration:none;
 
     font-weight:700;
 
-    font-size:17px;
+    transition:.35s;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 
 }
+
 
 .buttons a:hover{
 
     background:var(--gold);
 
-    color:#fff;
+    transform:translateY(-5px);
 
-    transform:translateY(-6px);
-
-    box-shadow:var(--shadow-hover);
+    box-shadow:0 15px 35px rgba(212,175,55,.35);
 
 }
 
-.buttons a i{
 
-    font-size:24px;
+.buttons i{
+
+    font-size:20px;
 
 }
 
-/* ===========================================
-   About Lab
-=========================================== */
 
-.about-lab{
+/* ==========================================
+   About Section
+========================================== */
+
+.about{
 
     width:min(1100px,92%);
 
-    margin:70px auto;
+    margin:50px auto;
 
 }
 
+
 .about-card{
 
-    background:#fff;
+    background:rgba(255,255,255,.9);
 
-    border-radius:30px;
+    border-radius:var(--radius);
 
     padding:50px 35px;
 
@@ -643,19 +703,16 @@ header p{
 
     box-shadow:var(--shadow);
 
-    border:1px solid rgba(212,175,55,.15);
+    border:1px solid rgba(212,175,55,.2);
 
 }
 
-.about-icon{
 
-    width:90px;
+.about-card i{
 
-    height:90px;
+    width:75px;
 
-    margin:auto;
-
-    border-radius:50%;
+    height:75px;
 
     display:flex;
 
@@ -663,83 +720,143 @@ header p{
 
     align-items:center;
 
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
     background:rgba(212,175,55,.12);
 
     color:var(--gold);
 
-    font-size:38px;
-
-    margin-bottom:25px;
+    font-size:35px;
 
 }
 
+
 .about-card h3{
 
-    font-size:32px;
+    font-size:30px;
 
     margin-bottom:20px;
 
 }
 
+
 .about-card p{
 
-    color:var(--gray);
+    color:#666;
 
-    max-width:700px;
+    font-size:17px;
 
-    margin:auto;
-
-    line-height:2.2;
+    line-height:2;
 
 }
 
-.features{
 
-    display:grid;
+/* ==========================================
+   Contact Section
+========================================== */
 
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+.contact-section{
 
-    gap:18px;
+    width:min(1100px,92%);
 
-    margin-top:40px;
+    margin:50px auto;
 
 }
 
-.feature{
 
-    background:#fafafa;
+.contact-card{
 
-    border-radius:18px;
+    background:#111;
 
-    padding:22px;
+    color:#fff;
+
+    border-radius:30px;
+
+    padding:45px 30px;
+
+    text-align:center;
+
+}
+
+
+.contact-card h3{
+
+    color:var(--gold-light);
+
+    font-size:30px;
+
+    margin-bottom:20px;
+
+}
+
+
+.contact-card p{
+
+    color:#ddd;
+
+    line-height:2;
+
+    font-size:16px;
+
+}
+
+
+/* ==========================================
+   Contact Icons
+========================================== */
+
+.contact-icons{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+
+.contact-icons a{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(255,255,255,.1);
+
+    color:#fff;
+
+    font-size:23px;
 
     transition:.3s;
 
 }
 
-.feature:hover{
+
+.contact-icons a:hover{
 
     background:var(--gold);
-
-    color:#fff;
 
     transform:translateY(-5px);
 
 }
 
-.feature i{
 
-    font-size:28px;
-
-    margin-bottom:12px;
-
-    display:block;
-
-}
-
-/* ===========================================
-   WhatsApp
-=========================================== */
+/* ==========================================
+   WhatsApp Floating
+========================================== */
 
 #whatsappBtn{
 
@@ -749,98 +866,45 @@ header p{
 
     bottom:25px;
 
-    width:68px;
+    width:65px;
 
-    height:68px;
+    height:65px;
 
     border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     background:#25D366;
 
     color:#fff;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    text-decoration:none;
 
     font-size:34px;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
 
-    z-index:999;
+    z-index:900;
 
     transition:.35s;
 
 }
 
+
 #whatsappBtn:hover{
 
-    transform:scale(1.12) rotate(10deg);
+    transform:scale(1.1);
 
 }
 
-/* ===========================================
-   Footer
-=========================================== */
 
-.footer{
-
-    margin-top:80px;
-
-    padding:50px 20px;
-
-    text-align:center;
-
-    border-top:1px solid rgba(212,175,55,.2);
-
-}
-
-.footer-logo{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:20px;
-
-}
-
-.footer-logo img{
-
-    width:70px;
-
-}
-
-.footer h3{
-
-    font-size:24px;
-
-}
-
-.footer p{
-
-    color:var(--gray);
-
-    margin:12px 0;
-
-}
-
-.footer small{
-
-    color:#999;
-
-    line-height:2;
-
-}
-/* ===========================================
+/* ==========================================
    Back To Top
-=========================================== */
+========================================== */
 
 #backToTop{
 
@@ -862,17 +926,15 @@ header p{
 
     color:#fff;
 
-    font-size:20px;
-
-    cursor:pointer;
+    font-size:22px;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.20);
+    justify-content:center;
+
+    cursor:pointer;
 
     opacity:0;
 
@@ -882,9 +944,10 @@ header p{
 
     transition:.35s;
 
-    z-index:998;
+    z-index:900;
 
 }
+
 
 #backToTop.show{
 
@@ -896,28 +959,92 @@ header p{
 
 }
 
+
 #backToTop:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-5px);
 
-    background:var(--gold-light);
+}
+/* ==========================================
+   Premium Effects
+========================================== */
+
+
+/* Shine Effect */
+
+.hero,
+.price-card,
+.about-card,
+.contact-card,
+.buttons a{
+
+    position:relative;
+
+    overflow:hidden;
 
 }
 
-/* ===========================================
-   Scroll Animation
-=========================================== */
+
+.hero::before,
+.price-card::before,
+.about-card::before,
+.contact-card::before,
+.buttons a::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    transition:1s;
+
+}
+
+
+.hero:hover::before,
+.price-card:hover::before,
+.about-card:hover::before,
+.contact-card:hover::before,
+.buttons a:hover::before{
+
+    left:140%;
+
+}
+
+
+/* ==========================================
+   Fade Animation
+========================================== */
+
 
 .fade-up{
 
     opacity:0;
 
-    transform:translateY(40px);
+    transform:translateY(35px);
 
-    transition:opacity .7s ease,
-               transform .7s ease;
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
 
 }
+
 
 .fade-up.show{
 
@@ -927,17 +1054,20 @@ header p{
 
 }
 
-/* ===========================================
-   Smooth Card Animation
-=========================================== */
+
+/* ==========================================
+   Card Entrance
+========================================== */
+
 
 .price-card{
 
-    animation:cardFade .45s ease both;
+    animation:cardShow .5s ease both;
 
 }
 
-@keyframes cardFade{
+
+@keyframes cardShow{
 
     from{
 
@@ -946,6 +1076,7 @@ header p{
         transform:translateY(25px);
 
     }
+
 
     to{
 
@@ -957,53 +1088,74 @@ header p{
 
 }
 
-/* ===========================================
-   Hover Effects
-=========================================== */
 
-.logo-box{
 
-    transition:.35s;
+/* ==========================================
+   Floating Logo
+========================================== */
 
-}
 
-.logo-box:hover{
+.logo{
 
-    transform:translateY(-8px);
-
-    box-shadow:var(--shadow-hover);
+    animation:floating 5s ease-in-out infinite;
 
 }
 
-.about-card{
 
-    transition:.35s;
+@keyframes floating{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+
+    100%{
+
+        transform:translateY(0);
+
+    }
 
 }
 
-.about-card:hover{
 
-    transform:translateY(-8px);
 
-    box-shadow:var(--shadow-hover);
+/* ==========================================
+   Gold Glow
+========================================== */
 
-}
 
-.hero{
+.update:hover{
 
-    transition:.35s;
+    box-shadow:
 
-}
-
-.hero:hover{
-
-    box-shadow:var(--shadow-hover);
+    0 0 20px rgba(212,175,55,.45);
 
 }
 
-/* ===========================================
+
+.contact-card:hover{
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.18);
+
+}
+
+
+
+/* ==========================================
    Selection
-=========================================== */
+========================================== */
+
 
 ::selection{
 
@@ -1013,9 +1165,12 @@ header p{
 
 }
 
-/* ===========================================
+
+
+/* ==========================================
    Scrollbar
-=========================================== */
+========================================== */
+
 
 ::-webkit-scrollbar{
 
@@ -1023,11 +1178,13 @@ header p{
 
 }
 
+
 ::-webkit-scrollbar-track{
 
-    background:#efefef;
+    background:#eee;
 
 }
+
 
 ::-webkit-scrollbar-thumb{
 
@@ -1037,48 +1194,56 @@ header p{
 
 }
 
+
 ::-webkit-scrollbar-thumb:hover{
 
-    background:var(--gold-light);
+    background:#b89020;
 
 }
-/* ===========================================
-   Responsive - Tablet
-=========================================== */
+
+
+
+/* ==========================================
+   Smooth Images
+========================================== */
+
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+/* ==========================================
+   Responsive Design
+========================================== */
+
+
+/* Tablet */
 
 @media (max-width:992px){
 
     header{
 
-        margin-top:35px;
+        padding-top:35px;
 
     }
 
-    .logo-box{
-
-        width:125px;
-        height:125px;
-
-    }
-
-    .logo{
-
-        width:82px;
-
-    }
 
     header h1{
 
         font-size:38px;
-        letter-spacing:3px;
 
     }
+
 
     .hero{
 
-        padding:45px 30px;
+        padding:45px 25px;
 
     }
+
 
     .hero h2{
 
@@ -1086,26 +1251,35 @@ header p{
 
     }
 
+
+    .price-card{
+
+        padding:25px;
+
+    }
+
+
     .about-card{
 
         padding:40px 25px;
 
     }
 
-    .features{
 
-        grid-template-columns:repeat(2,1fr);
+    .buttons a{
+
+        min-width:170px;
 
     }
 
 }
 
 
-/* ===========================================
-   Responsive - Mobile
-=========================================== */
+
+/* Mobile */
 
 @media (max-width:768px){
+
 
     body{
 
@@ -1113,33 +1287,76 @@ header p{
 
     }
 
+
+    header{
+
+        padding:35px 15px 20px;
+
+    }
+
+
+    .logo{
+
+        width:100px;
+
+        height:100px;
+
+    }
+
+
+    header h1{
+
+        font-size:32px;
+
+        letter-spacing:3px;
+
+    }
+
+
+    header p{
+
+        font-size:15px;
+
+    }
+
+
+
     .hero{
 
-        padding:35px 22px;
+        width:94%;
+
+        padding:35px 20px;
 
         border-radius:22px;
 
     }
 
+
     .hero-badge{
 
-        font-size:13px;
+        font-size:12px;
 
-        padding:8px 18px;
+        padding:8px 15px;
 
     }
+
 
     .hero h2{
 
-        font-size:28px;
+        font-size:27px;
 
     }
+
 
     .hero p{
 
         font-size:15px;
 
+        line-height:2;
+
     }
+
+
 
     .update{
 
@@ -1147,15 +1364,58 @@ header p{
 
         justify-content:center;
 
+        padding:12px 15px;
+
     }
+
+
+
+    .tools{
+
+        width:94%;
+
+    }
+
+
+    #searchInput{
+
+        padding:16px 55px 16px 20px;
+
+        font-size:15px;
+
+    }
+
+
+
+    #priceContainer{
+
+        width:94%;
+
+    }
+
+
+    .price-card{
+
+        padding:20px;
+
+        border-right-width:4px;
+
+    }
+
 
     .price-title{
 
         font-size:20px;
 
-        padding:20px;
+    }
+
+
+    .price-title::after{
+
+        font-size:25px;
 
     }
+
 
     .price-row{
 
@@ -1165,47 +1425,113 @@ header p{
 
         gap:8px;
 
-        padding:16px 20px;
+        padding:14px 0;
 
     }
+
+
+    .service{
+
+        font-size:15px;
+
+    }
+
+
+    .price{
+
+        font-size:17px;
+
+    }
+
+
 
     .buttons{
 
-        grid-template-columns:1fr;
+        flex-direction:column;
+
+        width:100%;
 
     }
+
+
+    .buttons a{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+
+
+    .quick-links h3{
+
+        font-size:25px;
+
+    }
+
+
+
+    .about-card{
+
+        padding:30px 20px;
+
+    }
+
 
     .about-card h3{
 
-        font-size:26px;
+        font-size:24px;
 
     }
 
-    .features{
 
-        grid-template-columns:1fr;
+    .about-card p{
+
+        font-size:15px;
 
     }
+
+
+
+    .contact-card{
+
+        padding:35px 20px;
+
+        border-radius:22px;
+
+    }
+
+
+    .contact-card h3{
+
+        font-size:25px;
+
+    }
+
+
 
     #whatsappBtn{
 
-        width:60px;
+        width:58px;
 
-        height:60px;
-
-        font-size:30px;
+        height:58px;
 
         left:18px;
 
         bottom:18px;
 
+        font-size:30px;
+
     }
+
+
 
     #backToTop{
 
-        width:55px;
+        width:52px;
 
-        height:55px;
+        height:52px;
 
         right:18px;
 
@@ -1213,187 +1539,58 @@ header p{
 
     }
 
-}
-/* ===========================================
-   Premium Effects
-=========================================== */
-
-.hero,
-.about-card,
-.price-card,
-.buttons a{
-
-    position:relative;
-
-    overflow:hidden;
 
 }
 
-.hero::before,
-.about-card::before,
-.price-card::before,
-.buttons a::before{
 
-    content:"";
 
-    position:absolute;
+/* Small Phones */
 
-    top:0;
-    left:-130%;
+@media (max-width:420px){
 
-    width:70%;
-    height:100%;
 
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.45),
-        transparent
-    );
+    header h1{
 
-    transform:skewX(-25deg);
-
-    transition:1s;
-
-}
-
-.hero:hover::before,
-.about-card:hover::before,
-.price-card:hover::before,
-.buttons a:hover::before{
-
-    left:150%;
-
-}
-
-/* ===========================================
-   Gold Border Animation
-=========================================== */
-
-.price-card{
-
-    border:1px solid rgba(212,175,55,.18);
-
-}
-
-.price-card:hover{
-
-    border-color:rgba(212,175,55,.55);
-
-}
-
-/* ===========================================
-   Gradient Text
-=========================================== */
-
-header h1{
-
-    background:linear-gradient(
-        180deg,
-        #f7de84,
-        #d4af37,
-        #b68d1d
-    );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-}
-
-/* ===========================================
-   Button Glow
-=========================================== */
-
-.buttons a:hover{
-
-    box-shadow:
-        0 15px 45px rgba(212,175,55,.30),
-        0 0 25px rgba(212,175,55,.25);
-
-}
-
-/* ===========================================
-   Floating Animation
-=========================================== */
-
-.logo-box{
-
-    animation:floating 5s ease-in-out infinite;
-
-}
-
-@keyframes floating{
-
-    0%,100%{
-
-        transform:translateY(0);
+        font-size:28px;
 
     }
 
-    50%{
 
-        transform:translateY(-8px);
+    .hero h2{
+
+        font-size:23px;
 
     }
 
-}
 
-/* ===========================================
-   Hero Badge
-=========================================== */
+    .hero-badge{
 
-.hero-badge{
+        display:flex;
 
-    box-shadow:0 8px 20px rgba(212,175,55,.18);
+        justify-content:center;
 
-}
+    }
 
-/* ===========================================
-   Feature Cards
-=========================================== */
 
-.feature{
+    .price-title{
 
-    border:1px solid transparent;
+        font-size:18px;
 
-}
+    }
 
-.feature:hover{
 
-    border-color:rgba(255,255,255,.35);
+    .buttons a{
+
+        padding:14px 20px;
+
+    }
+
 
 }
+/* ==========================================
+   Final Optimization
+========================================== */
 
-/* ===========================================
-   Footer
-=========================================== */
-
-.footer{
-
-    background:linear-gradient(
-        180deg,
-        transparent,
-        rgba(212,175,55,.05)
-    );
-
-}
-
-/* ===========================================
-   Image Quality
-=========================================== */
-
-.logo{
-
-    user-select:none;
-
-    pointer-events:none;
-
-}
-/* ===========================================
-   Final Optimizations
-=========================================== */
 
 /* Focus Accessibility */
 
@@ -1407,44 +1604,30 @@ input:focus{
 
 }
 
-/* Smooth Transitions */
 
-*{
 
-    transition:
-        color .25s,
-        background-color .25s,
-        border-color .25s;
+/* Buttons Cursor */
 
-}
-
-/* Better Buttons */
-
-button{
+button,
+a{
 
     cursor:pointer;
 
 }
 
-/* Better Input Placeholder */
 
-#searchInput::placeholder{
 
-    color:#999;
+/* Remove Text Selection From Icons */
 
-}
-
-/* Prevent Image Drag */
-
-img{
-
-    -webkit-user-drag:none;
+i{
 
     user-select:none;
 
 }
 
-/* Hidden Utility */
+
+
+/* Hidden Class */
 
 .hidden{
 
@@ -1452,21 +1635,9 @@ img{
 
 }
 
-/* Fade Utility */
 
-.opacity-0{
 
-    opacity:0;
-
-}
-
-.opacity-1{
-
-    opacity:1;
-
-}
-
-/* Animation Delay Helpers */
+/* Utility Animation Delay */
 
 .delay-1{
 
@@ -1474,11 +1645,13 @@ img{
 
 }
 
+
 .delay-2{
 
     animation-delay:.30s;
 
 }
+
 
 .delay-3{
 
@@ -1486,9 +1659,12 @@ img{
 
 }
 
-/* Desktop Enhancement */
+
+
+/* Desktop Large Screens */
 
 @media (min-width:1200px){
+
 
     .hero{
 
@@ -1496,96 +1672,45 @@ img{
 
     }
 
-    .about-card{
 
-        padding:60px;
+    .price-card{
+
+        padding:35px;
 
     }
+
 
 }
 
-/* Small Mobile */
 
-@media (max-width:480px){
 
-    header h1{
-
-        font-size:30px;
-
-        letter-spacing:2px;
-
-    }
-
-    .hero h2{
-
-        font-size:24px;
-
-    }
-
-    .hero p{
-
-        font-size:14px;
-
-        line-height:2;
-
-    }
-
-    .price-title{
-
-        font-size:18px;
-
-    }
-
-    .service{
-
-        font-size:15px;
-
-    }
-
-    .price{
-
-        font-size:16px;
-
-    }
-
-    .quick-links h3{
-
-        font-size:22px;
-
-    }
-
-    .about-card{
-
-        padding:30px 20px;
-
-    }
-
-    .about-card h3{
-
-        font-size:22px;
-
-    }
-
-}
-
-/* Print */
+/* Print Mode */
 
 @media print{
+
 
     body{
 
         background:#fff;
 
+        color:#000;
+
     }
 
+
     .background,
+    #loader,
     #whatsappBtn,
     #backToTop,
-    .page-loader{
+    .tools,
+    .buttons,
+    .quick-links,
+    .contact-section{
 
         display:none !important;
 
     }
+
 
     .hero,
     .price-card,
@@ -1597,4 +1722,32 @@ img{
 
     }
 
+
 }
+
+
+
+/* Prevent Overflow */
+
+section,
+header,
+footer{
+
+    overflow:hidden;
+
+}
+
+
+
+/* Smooth Rendering */
+
+html{
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+
+/* End CSS */
