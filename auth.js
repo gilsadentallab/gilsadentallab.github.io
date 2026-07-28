@@ -1,174 +1,540 @@
-/*==================================================
-                AUTH MODULE V3
-==================================================*/
+// auth.js V4
+// Firebase Authentication + Firestore
 
-const Auth={
+import { auth, db } from "./firebase.js";
 
-currentUser:null,
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} 
+from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-init(){
 
-this.load();
-
-this.bind();
-
-this.refreshButton();
-
-},
-
-load(){
-
-this.currentUser=Storage.get("gilsaCurrentUser");
-
-},
-
-bind(){
-
-const loginForm=Utils.qs("#loginForm");
-
-const registerForm=Utils.qs("#registerForm");
-
-const logoutBtn=Utils.qs("#logoutBtn");
-
-loginForm?.addEventListener(
-"submit",
-e=>this.login(e)
-);
-
-registerForm?.addEventListener(
-"submit",
-e=>this.register(e)
-);
-
-logoutBtn?.addEventListener(
-"click",
-()=>this.logout()
-);
-
-},
-
-isLogin(){
-
-return Storage.get("gilsaLogin")==="true";
-
-},
-        login(e){
-
-e.preventDefault();
-
-const username=
-Utils.qs("#loginUsername")?.value;
-
-const password=
-Utils.qs("#loginPassword")?.value;
-
-const user=
-Storage.get("gilsaUser");
-
-if(
-user &&
-user.username===username &&
-user.password===password
-){
-
-Storage.set(
-"gilsaLogin",
-"true"
-);
-
-Storage.set(
-"gilsaCurrentUser",
-user
-);
-
-this.currentUser=user;
-
-this.refreshButton();
-
-Utils.alert("ورود موفقیت آمیز بود");
-
-Utils.qs("#authModal")
-?.classList.remove("active");
-
+import {
+    doc,
+    setDoc,
+    getDoc
 }
-else{
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-Utils.alert(
-"نام کاربری یا رمز عبور اشتباه است"
-);
+
+// تبدیل username به ایمیل داخلی Firebase
+
+function createFirebaseEmail(username){
+
+    return username.trim().toLowerCase()
+    + "@gilsa.local";
 
 }
 
-},
-        register(e){
 
-e.preventDefault();
+// گرفتن اطلاعات فرم ثبت نام
 
-const user={
+function getRegisterData(){
 
-type:
-Utils.qs("#userType")?.value,
+    return {
 
-name:
-Utils.qs("#registerName")?.value,
+        role:
+        document.querySelector("#registerRole")?.value,
 
-username:
-Utils.qs("#registerUsername")?.value,
 
-password:
-Utils.qs("#registerPassword")?.value,
+        name:
+        document.querySelector("#registerName")?.value,
 
-mobile:
-Utils.qs("#registerMobile")?.value,
 
-clinic:
-Utils.qs("#clinicName")?.value || "",
+        username:
+        document.querySelector("#registerUsername")?.value,
 
-address:
-Utils.qs("#registerAddress")?.value || "",
 
-location:
-Utils.qs("#registerLocation")?.value || ""
+        password:
+        document.querySelector("#registerPassword")?.value,
 
-};
 
-Storage.set(
-"gilsaUser",
-user
-);
+        mobile:
+        document.querySelector("#registerMobile")?.value,
 
-Utils.alert(
-"ثبت نام با موفقیت انجام شد"
-);
 
-e.target.reset();
+        clinicName:
+        document.querySelector("#clinicName")?.value || "",
 
-},
-        logout(){
 
-Storage.remove("gilsaLogin");
+        clinicAddress:
+        document.querySelector("#clinicAddress")?.value || "",
 
-Storage.remove("gilsaCurrentUser");
 
-location.reload();
+        location:
+        document.querySelector("#registerLocation")?.value || ""
 
-},
+    };
 
-refreshButton(){
+}
+// ===============================
+// Register User
+// ===============================
 
-const btn=
-Utils.qs(".auth-btn");
+export async function registerUser(){
 
-if(
-!btn ||
-!this.isLogin()
-)
-return;
 
-btn.innerHTML=
+    const data = getRegisterData();
 
-`👤 ${this.currentUser?.name}`;
+
+    if(
+        !data.username ||
+        !data.password ||
+        !data.role
+    ){
+
+        alert("لطفاً اطلاعات ضروری را کامل کنید");
+        return;
+
+    }
+
+
+
+    try{
+
+
+        const email = createFirebaseEmail(
+            data.username
+        );
+
+
+
+        // ساخت حساب Firebase
+
+        const userCredential =
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            data.password
+        );
+
+
+
+        const user =
+        userCredential.user;
+
+
+
+        // ذخیره اطلاعات در Firestore
+
+        await setDoc(
+            doc(
+                db,
+                "users",
+                user.uid
+            ),
+            {
+
+                uid:user.uid,
+
+                role:data.role,
+
+                name:data.name,
+
+                username:data.username,
+
+                mobile:data.mobile,
+
+
+                clinicName:data.clinicName,
+
+                clinicAddress:data.clinicAddress,
+
+                location:data.location,
+
+
+                createdAt:
+                new Date()
+
+            }
+        );
+
+
+
+        alert(
+            "ثبت نام با موفقیت انجام شد"
+        );
+
+
+        console.log(
+            "New User:",
+            user.uid
+        );
+
+
+
+    }
+    catch(error){
+
+
+        console.error(error);
+
+
+
+        if(
+            error.code === 
+            "auth/email-already-in-use"
+        ){
+
+            alert(
+            "این نام کاربری قبلاً ثبت شده است"
+            );
+
+        }
+
+
+        else if(
+            error.code ===
+            "auth/weak-password"
+        ){
+
+            alert(
+            "رمز عبور باید حداقل ۶ کاراکتر باشد"
+            );
+
+        }
+
+
+        else{
+
+            alert(
+            "خطا در ثبت نام"
+            );
+
+        }
+
+    }
+
+
+}
+// ===============================
+// Login User
+// ===============================
+
+export async function loginUser(){
+
+
+    const username =
+    document.querySelector("#loginUsername")?.value;
+
+
+    const password =
+    document.querySelector("#loginPassword")?.value;
+
+
+
+    if(
+        !username ||
+        !password
+    ){
+
+        alert(
+            "نام کاربری و رمز عبور را وارد کنید"
+        );
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        const email =
+        createFirebaseEmail(username);
+
+
+
+        // ورود به Firebase
+
+        const userCredential =
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+
+        const user =
+        userCredential.user;
+
+
+
+        // گرفتن اطلاعات پروفایل
+
+        const userDoc =
+        await getDoc(
+            doc(
+                db,
+                "users",
+                user.uid
+            )
+        );
+
+
+
+        if(
+            userDoc.exists()
+        ){
+
+
+            const userData =
+            userDoc.data();
+
+
+
+            // ذخیره موقت اطلاعات کاربر
+
+            sessionStorage.setItem(
+                "gilsaUser",
+                JSON.stringify(userData)
+            );
+
+
+
+            alert(
+                "ورود موفق بود"
+            );
+
+
+
+            console.log(
+                "Logged User:",
+                userData
+            );
+
+
+
+            // انتقال بر اساس نقش
+
+            if(
+                userData.role === "dentist"
+            ){
+
+                window.location.href =
+                "dentist-dashboard.html";
+
+            }
+
+
+            else if(
+                userData.role === "laboratory"
+            ){
+
+                window.location.href =
+                "lab-dashboard.html";
+
+            }
+
+
+            else{
+
+                window.location.href =
+                "dashboard.html";
+
+            }
+
+
+
+        }
+
+        else{
+
+
+            alert(
+                "اطلاعات پروفایل پیدا نشد"
+            );
+
+
+        }
+
+
+
+    }
+    catch(error){
+
+
+        console.error(error);
+
+
+
+        if(
+            error.code ===
+            "auth/invalid-credential"
+        ){
+
+            alert(
+            "نام کاربری یا رمز عبور اشتباه است"
+            );
+
+        }
+
+
+        else{
+
+            alert(
+            "خطا در ورود"
+            );
+
+        }
+
+    }
+
+
+}
+// ===============================
+// Logout User
+// ===============================
+
+export async function logoutUser(){
+
+
+    try{
+
+
+        await signOut(auth);
+
+
+
+        sessionStorage.removeItem(
+            "gilsaUser"
+        );
+
+
+
+        alert(
+            "از حساب خارج شدید"
+        );
+
+
+
+        window.location.href =
+        "index.html";
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "خطا در خروج از حساب"
+        );
+
+    }
 
 }
 
-};
+
+
+
+
+// ===============================
+// Current User Listener
+// ===============================
+
+export function checkAuthState(){
+
+
+    onAuthStateChanged(
+        auth,
+        async (user)=>{
+
+
+            if(user){
+
+
+                console.log(
+                    "Firebase User:",
+                    user.uid
+                );
+
+
+
+                const userDoc =
+                await getDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    )
+                );
+
+
+
+                if(
+                    userDoc.exists()
+                ){
+
+
+                    const userData =
+                    userDoc.data();
+
+
+
+                    sessionStorage.setItem(
+                        "gilsaUser",
+                        JSON.stringify(userData)
+                    );
+
+
+
+                }
+
+
+            }
+
+            else{
+
+
+                console.log(
+                    "No User Logged In"
+                );
+
+
+            }
+
+
+        }
+
+    );
+
+}
+
+
+
+
+// ===============================
+// Get Current User Data
+// ===============================
+
+export function getCurrentUser(){
+
+
+    const user =
+    sessionStorage.getItem(
+        "gilsaUser"
+    );
+
+
+
+    if(user){
+
+
+        return JSON.parse(user);
+
+
+    }
+
+
+    return null;
+
+
+}
