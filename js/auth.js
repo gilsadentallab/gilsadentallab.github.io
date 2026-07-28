@@ -537,3 +537,91 @@ export function getCurrentUser(){
 
 
 }
+// ===============================
+// Core Module Export
+// ===============================
+
+export const Auth = {
+
+
+    init(){
+
+        console.log(
+            "Auth V4 Initialized"
+        );
+
+
+        const loginForm =
+        document.querySelector("#loginForm");
+
+
+        if(loginForm){
+
+            loginForm.addEventListener(
+                "submit",
+                (e)=>{
+
+                    e.preventDefault();
+
+                    loginUser();
+
+                }
+
+            );
+
+        }
+
+
+
+        const registerForm =
+        document.querySelector("#registerForm");
+
+
+        if(registerForm){
+
+            registerForm.addEventListener(
+                "submit",
+                (e)=>{
+
+                    e.preventDefault();
+
+                    registerUser();
+
+                }
+
+            );
+
+        }
+
+
+
+        const logout =
+        document.querySelector("#logoutBtn");
+
+
+        if(logout){
+
+            logout.addEventListener(
+                "click",
+                logoutUser
+            );
+
+        }
+
+
+
+    },
+
+
+    loginUser,
+
+    registerUser,
+
+    logoutUser,
+
+    checkAuthState,
+
+    getCurrentUser
+
+
+};
