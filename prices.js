@@ -126,3 +126,55 @@ row.style.display=text.includes(value)?"flex":"none";
 });
 
 });
+document.getElementById("downloadBtn").addEventListener("click", function (e) {
+
+    e.preventDefault();
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF();
+
+    pdf.setFontSize(22);
+    pdf.text("Gilsa Dental Laboratory", 20, 20);
+
+    pdf.setFontSize(12);
+    pdf.text("Price List", 20, 35);
+
+    let y = 50;
+
+    data.categories.forEach(category => {
+
+        pdf.setFontSize(16);
+        pdf.text(category.title, 20, y);
+
+        y += 8;
+
+        category.items.forEach(item => {
+
+            pdf.setFontSize(11);
+
+            pdf.text(
+                `${item.service} : ${item.price}`,
+                25,
+                y
+            );
+
+            y += 7;
+
+            if (y > 270) {
+
+                pdf.addPage();
+
+                y = 20;
+
+            }
+
+        });
+
+        y += 8;
+
+    });
+
+    pdf.save("Gilsa-Price-List.pdf");
+
+});
