@@ -2077,31 +2077,35 @@ class="btn gold send-order">
 
 
 </div>
-<!-- DASHBOARD -->
+<!-- ==========================
+        DASHBOARD V3
+=========================== -->
+
 
 <section id="dashboard" class="dashboard">
 
 
-<div class="dashboard-sidebar">
+<div class="dashboard-wrapper">
 
 
-<div class="dashboard-user">
+<!-- SIDEBAR -->
+
+<aside class="dashboard-sidebar">
 
 
-<img src="images/gilsa-logo.png" alt="Gilsa">
+<div class="dashboard-profile">
+
+
+<img src="images/gilsa-logo.png">
 
 
 <h3 id="dashName">
-
-کاربر
-
+کاربر گیلسا
 </h3>
 
 
 <span id="dashType">
-
 دندانپزشک
-
 </span>
 
 
@@ -2110,74 +2114,68 @@ class="btn gold send-order">
 
 
 
-
-<ul>
+<ul class="dashboard-menu">
 
 
 <li class="active">
-
 🏠 داشبورد
-
 </li>
 
 
 <li>
-
 📦 سفارش جدید
-
 </li>
 
 
 <li>
-
 📋 سفارش‌های من
-
 </li>
 
 
 <li>
+💬 پیام‌ها
+</li>
 
-👤 اطلاعات حساب
 
+<li>
+⚙️ تنظیمات حساب
 </li>
 
 
 <li id="logoutBtn">
-
 🚪 خروج
-
 </li>
 
 
 </ul>
 
 
-</div>
+</aside>
 
 
 
 
 
+<!-- CONTENT -->
 
 
-<div class="dashboard-content">
+<div class="dashboard-main">
 
 
 
-<div class="dashboard-page active">
+<div class="dashboard-header">
 
 
-<h2>
+<div>
 
+
+<h1>
 پنل کاربری گیلسا
-
-</h2>
+</h1>
 
 
 <p>
-
-به سیستم مدیریت سفارشات خوش آمدید.
-
+مدیریت سفارش‌های دندانی
 </p>
 
 
@@ -2185,68 +2183,137 @@ class="btn gold send-order">
 
 
 
+<button class="btn gold order-btn">
+
++ سفارش جدید
+
+</button>
+
+
+</div>
 
 
 
 
-<div class="dashboard-page">
 
 
-<h2>
 
-سفارش‌های من
+<!-- STAT CARDS -->
 
+
+<div class="dashboard-stats">
+
+
+
+<div class="dash-card">
+
+
+<span>
+📦
+</span>
+
+
+<div>
+
+<h2 id="totalOrders">
+0
 </h2>
 
+<p>
+کل سفارش‌ها
+</p>
+
+</div>
+
+
+</div>
 
 
 
 
-<table class="orders-table">
 
 
-<thead>
+<div class="dash-card">
 
 
-<tr>
+<span>
+⏳
+</span>
 
 
-<th>
+<div>
 
-کد
+<h2 id="pendingOrders">
+0
+</h2>
 
-</th>
+<p>
+در انتظار بررسی
+</p>
 
-
-<th>
-
-نوع کار
-
-</th>
-
-
-<th>
-
-وضعیت
-
-</th>
+</div>
 
 
-</tr>
-
-
-</thead>
+</div>
 
 
 
-<tbody id="ordersTable">
-
-
-</tbody>
 
 
 
-</table>
+
+<div class="dash-card">
+
+
+<span>
+🦷
+</span>
+
+
+<div>
+
+<h2 id="activeOrders">
+0
+</h2>
+
+<p>
+در حال ساخت
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="dash-card">
+
+
+<span>
+✅
+</span>
+
+
+<div>
+
+<h2 id="doneOrders">
+0
+</h2>
+
+<p>
+تحویل شده
+</p>
+
+</div>
+
+
+</div>
+
 
 
 
@@ -2254,19 +2321,58 @@ class="btn gold send-order">
 
 
 
+
+
+
+
+
+<!-- ORDERS -->
+
+
+<div class="dashboard-box">
+
+
+<div class="box-title">
+
+<h2>
+آخرین سفارش‌ها
+</h2>
+
+
+</div>
+
+
+
+
+
+<div class="orders-container" id="dashboardOrders">
+
+
+<div class="empty-orders">
+
+هنوز سفارشی وجود ندارد
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
 
 
 </div>
 
 
 </section>
-
-
-
-
-
-
-
 <!-- JAVASCRIPT FILES -->
 
 
