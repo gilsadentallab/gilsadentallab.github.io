@@ -75,7 +75,15 @@ data.categories.forEach(category=>{
 
     card.className="price-card";
 
-    let html=`<div class="price-title">${category.title}</div>`;
+   let html=`
+<div class="price-title">
+
+${category.title}
+
+</div>
+
+<div class="price-content">
+`;
 
     category.items.forEach(item=>{
 
