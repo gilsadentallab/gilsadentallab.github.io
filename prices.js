@@ -60,7 +60,7 @@ whatsapp:"https://wa.me/989140503522",
     ]
 
 };
-
+document.getElementById("whatsappBtn").href=data.whatsapp;
 document.getElementById("updateDate").textContent = data.update;
 
 document.getElementById("instagramBtn").href = data.instagram;
