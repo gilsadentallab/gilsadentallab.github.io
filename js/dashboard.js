@@ -146,3 +146,8 @@ Auth.logout();
 
 };
 
+export {
+
+    Dashboard
+
+};
