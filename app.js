@@ -7,7 +7,7 @@ document.addEventListener(
 Core.register(UI);
 Core.register(Services);
 Core.register(Auth);
-
+Core.register(API);
 Core.register(Order);
 
 Core.register(Dashboard);
