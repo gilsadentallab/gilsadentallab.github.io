@@ -1,166 +1,339 @@
 /*==================================================
-                PRICELIST MODULE V3
+                PRICELIST MODULE V4
 ==================================================*/
+
 
 const PriceList = {
 
+
     data:null,
+
 
     init(){
 
-      if(typeof data === "undefined") return;
+
+        if(typeof data === "undefined"){
+
+            console.log(
+                "Price data not found"
+            );
+
+            return;
+
+        }
+
 
         this.data = data;
 
+
         this.render();
+
 
         this.search();
 
+
         this.setupLinks();
 
+
+
+        console.log(
+            "PriceList V4 Started"
+        );
+
+
     },
-  render(){
 
-const container =
-Utils.qs("#priceContainer");
 
-if(!container) return;
 
-container.innerHTML="";
 
-this.data.categories.forEach(category=>{
 
-let html=`
+    render(){
 
-<div class="price-card">
 
-<div class="price-title">
+        const container =
+        Utils.qs("#priceContainer");
 
-${category.title}
 
-</div>
 
-<div class="price-content">
+        if(!container) return;
 
-`;
 
-category.items.forEach(item=>{
 
-html+=`
+        container.innerHTML = "";
 
-<div class="price-row">
 
-<div class="service">
 
-${item.service}
+        this.data.categories.forEach(category=>{
 
-</div>
 
-<div class="price">
+            let html = `
 
-${item.price}
 
-</div>
+            <div class="price-card">
 
-</div>
 
-`;
+                <div class="price-title">
 
-});
+                    ${category.title}
 
-html+=`
+                </div>
 
-</div>
 
-</div>
 
-`;
+                <div class="price-content">
 
-container.innerHTML+=html;
+            `;
 
-});
 
-}
-  search(){
 
-const input=
-Utils.qs("#searchInput");
+            category.items.forEach(item=>{
 
-if(!input) return;
 
-input.addEventListener("input",()=>{
+                html += `
 
-const value=
-input.value.toLowerCase();
 
-document
-.querySelectorAll(".price-card")
-.forEach(card=>{
+                <div class="price-row">
 
-let found=false;
 
-card
-.querySelectorAll(".price-row")
-.forEach(row=>{
+                    <div class="service">
 
-if(
+                        ${item.service}
 
-row.innerText
-.toLowerCase()
-.includes(value)
+                    </div>
 
-){
 
-row.style.display="flex";
 
-found=true;
+                    <div class="price">
 
-}
+                        ${item.price}
 
-else{
+                    </div>
 
-row.style.display="none";
 
-}
+                </div>
 
-});
 
-card.style.display=
+                `;
 
-(found || value==="")
 
-?
+            });
 
-"block"
 
-:
 
-"none";
+            html += `
 
-});
 
-});
+                </div>
 
-},
-  setupLinks(){
 
-Utils.qs("#updateDate").innerHTML=
+            </div>
 
-this.data.update;
 
-Utils.qs("#instagramBtn").href=
+            `;
 
-this.data.instagram;
 
-Utils.qs("#websiteBtn").href=
 
-this.data.website;
+            container.innerHTML += html;
 
-Utils.qs("#whatsappBtn").href=
 
-this.data.whatsapp;
 
-}
+        });
+
+
+
+    },
+
+
+
+
+
+
+
+    search(){
+
+
+
+        const input =
+        Utils.qs("#searchInput");
+
+
+
+        if(!input) return;
+
+
+
+        input.addEventListener(
+            "input",
+            ()=>{
+
+
+                const value =
+                input.value
+                .toLowerCase()
+                .trim();
+
+
+
+                document
+                .querySelectorAll(".price-card")
+                .forEach(card=>{
+
+
+                    let found=false;
+
+
+
+                    card
+                    .querySelectorAll(".price-row")
+                    .forEach(row=>{
+
+
+
+                        const text =
+                        row.innerText
+                        .toLowerCase();
+
+
+
+
+                        if(
+                            text.includes(value)
+                        ){
+
+
+                            row.style.display =
+                            "flex";
+
+
+                            found=true;
+
+
+                        }
+
+                        else{
+
+
+                            row.style.display =
+                            "none";
+
+
+                        }
+
+
+                    });
+
+
+
+
+                    card.style.display =
+
+                    (
+                        found ||
+                        value === ""
+                    )
+
+                    ?
+
+                    "block"
+
+                    :
+
+                    "none";
+
+
+
+                });
+
+
+
+            }
+        );
+
+
+
+    },
+
+
+
+
+
+
+
+
+    setupLinks(){
+
+
+
+        const update =
+        Utils.qs("#updateDate");
+
+
+
+        if(update){
+
+            update.innerHTML =
+            this.data.update;
+
+        }
+
+
+
+
+
+        const instagram =
+        Utils.qs("#instagramBtn");
+
+        if(instagram){
+
+            instagram.href =
+            this.data.instagram;
+
+        }
+
+
+
+
+
+
+        const website =
+        Utils.qs("#websiteBtn");
+
+        if(website){
+
+            website.href =
+            this.data.website;
+
+        }
+
+
+
+
+
+
+        const whatsapp =
+        Utils.qs("#whatsappBtn");
+
+        if(whatsapp){
+
+            whatsapp.href =
+            this.data.whatsapp;
+
+        }
+
+
+
+    }
+
+
 
 };
-export { PriceList };
+
+
+
+
+
+export {
+
+    PriceList
+
+};
