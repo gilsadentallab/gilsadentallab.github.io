@@ -1,12 +1,8 @@
 /* ==========================================
    Gilsa Dental Laboratory
-   Price List JS V3
+   Price List JS V4
 ========================================== */
 
-
-/* =========================
-   Data
-========================= */
 
 const data = {
 
@@ -18,228 +14,232 @@ const data = {
 
     whatsapp: "https://wa.me/989140503522",
 
-categories: [
 
-    {
-        title:"روکش و بریج (Fixed Prosthesis)",
+    categories: [
 
-        items:[
+        {
+            title:"روکش و بریج (Fixed Prosthesis)",
 
-            {
-                service:"PFM Crown",
-                price:"درج قیمت"
-            },
+            items:[
 
-            {
-                service:"Zirconia Crown",
-                price:"درج قیمت"
-            },
+                {
+                    service:"PFM Crown",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Monolithic Crown",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Zirconia Crown",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Monolithic Zirconia (Implant)",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Monolithic Crown",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Multilayer Zirconia",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Monolithic Zirconia (Implant)",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Multilayer Zirconia (Implant)",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Multilayer Zirconia",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Temporary Crown (PMMA)",
-                price:"درج قیمت"
-            }
+                {
+                    service:"Multilayer Zirconia (Implant)",
+                    price:"درج قیمت"
+                },
 
-        ]
+                {
+                    service:"Temporary Crown (PMMA)",
+                    price:"درج قیمت"
+                }
 
-    },
+            ]
 
+        },
 
-    {
-        title:"ایمپلنت (Implant)",
 
-        items:[
+        {
+            title:"ایمپلنت (Implant)",
 
-            {
-                service:"Screw Retained Crown",
-                price:"درج قیمت"
-            },
+            items:[
 
-            {
-                service:"Implant Restoration",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Screw Retained Crown",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Post Implant",
-                price:"درج قیمت"
-            }
+                {
+                    service:"Implant Restoration",
+                    price:"درج قیمت"
+                },
 
-        ]
+                {
+                    service:"Post Implant",
+                    price:"درج قیمت"
+                }
 
-    },
+            ]
 
+        },
 
-    {
-        title:"زیبایی (Esthetic Dentistry)",
 
-        items:[
+        {
+            title:"زیبایی (Esthetic Dentistry)",
 
-            {
-                service:"Laminate Veneer",
-                price:"درج قیمت"
-            },
+            items:[
 
-            {
-                service:"Diagnostic Wax-Up",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Laminate Veneer",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Digital Mock-Up",
-                price:"درج قیمت"
-            }
+                {
+                    service:"Diagnostic Wax-Up",
+                    price:"درج قیمت"
+                },
 
-        ]
+                {
+                    service:"Digital Mock-Up",
+                    price:"درج قیمت"
+                }
 
-    },
+            ]
 
+        },
+       
+        {
+            title:"پروتز متحرک (Removable Prosthesis)",
 
-    {
-        title:"پروتز متحرک (Removable Prosthesis)",
+            items:[
 
-        items:[
+                {
+                    service:"Complete Denture",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Complete Denture",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Over Denture",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Over Denture",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Special Tray",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Special Tray",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Try-In Resin",
+                    price:"درج قیمت"
+                }
 
-            {
-                service:"Try-In Resin",
-                price:"درج قیمت"
-            }
+            ]
 
-        ]
+        },
 
-    },
 
+        {
+            title:"خدمات جانبی (Other Services)",
 
-    {
-        title:"خدمات جانبی (Other Services)",
+            items:[
 
-        items:[
+                {
+                    service:"Bleaching Tray",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Bleaching Tray",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Night Guard",
+                    price:"درج قیمت"
+                },
 
-            {
-                service:"Night Guard",
-                price:"درج قیمت"
-            },
+                {
+                    service:"Dental Cast / Model",
+                    price:"درج قیمت"
+                }
 
-            {
-                service:"Dental Cast / Model",
-                price:"درج قیمت"
-            }
+            ]
 
-        ]
+        },
 
-    },
 
+        {
+            title:"سایر خدمات",
 
-    {
-        title:"سایر خدمات",
+            items:[
 
-        items:[
+                {
+                    service:"طراحی اختصاصی",
+                    price:"تماس بگیرید"
+                },
 
-            {
-                service:"طراحی اختصاصی",
-                price:"تماس بگیرید"
-            },
+                {
+                    service:"کیس‌های خاص",
+                    price:"تماس بگیرید"
+                },
 
-            {
-                service:"کیس‌های خاص",
-                price:"تماس بگیرید"
-            },
+                {
+                    service:"خدمات دیجیتال",
+                    price:"تماس بگیرید"
+                },
 
-            {
-                service:"خدمات دیجیتال",
-                price:"تماس بگیرید"
-            },
+                {
+                    service:"سایر خدمات لابراتواری",
+                    price:"تماس بگیرید"
+                }
 
-            {
-                service:"سایر خدمات لابراتواری",
-                price:"تماس بگیرید"
-            }
+            ]
 
-        ]
+        },
 
-    },
 
+        {
+            title:"خدمات VIP (۴۰٪ افزایش)",
 
-    {
-        title:"خدمات VIP (۴۰٪ افزایش)",
+            items:[
 
-        items:[
+                {
+                    service:"روکش VIP زیرکونیا",
+                    price:"۴۰٪ بیشتر"
+                },
 
-            {
-                service:"روکش VIP زیرکونیا",
-                price:"۴۰٪ بیشتر"
-            },
+                {
+                    service:"ایمپلنت VIP",
+                    price:"۴۰٪ بیشتر"
+                },
 
-            {
-                service:"ایمپلنت VIP",
-                price:"۴۰٪ بیشتر"
-            },
+                {
+                    service:"لمینت VIP",
+                    price:"۴۰٪ بیشتر"
+                },
 
-            {
-                service:"لمینت VIP",
-                price:"۴۰٪ بیشتر"
-            },
+                {
+                    service:"خدمات دیجیتال VIP",
+                    price:"۴۰٪ بیشتر"
+                },
 
-            {
-                service:"خدمات دیجیتال VIP",
-                price:"۴۰٪ بیشتر"
-            },
+                {
+                    service:"کیس فوری VIP",
+                    price:"۴۰٪ بیشتر"
+                }
 
-            {
-                service:"کیس فوری VIP",
-                price:"۴۰٪ بیشتر"
-            }
+            ]
 
-        ]
+        }
 
-    }
 
-]
+    ]
+
+};
 
 
 /* =========================
    Elements
 ========================= */
+
 
 const updateDate =
 document.getElementById("updateDate");
@@ -269,94 +269,62 @@ const whatsappBtn =
 document.getElementById("whatsappBtn");
 
 
-const backToTop =
-document.getElementById("backToTop");
 
 
-const loader =
-document.getElementById("loader");
 /* =========================
-   Initial Setup
+   Setup Page
 ========================= */
+
 
 function setupPage(){
 
-    // Update Date
 
     if(updateDate){
 
-        updateDate.textContent = data.update;
+        updateDate.textContent =
+        data.update;
 
     }
 
 
-    // Social Links
 
     if(instagramBtn){
 
-        instagramBtn.href = data.instagram;
+        instagramBtn.href =
+        data.instagram;
 
     }
+
 
 
     if(websiteBtn){
 
-        websiteBtn.href = data.website;
+        websiteBtn.href =
+        data.website;
 
     }
+
 
 
     if(whatsappBtn){
 
-        whatsappBtn.href = data.whatsapp;
+        whatsappBtn.href =
+        data.whatsapp;
 
     }
 
-
-    // Contact links
-
-    const contactInstagram =
-    document.getElementById("contactInstagram");
-
-
-    const contactWebsite =
-    document.getElementById("contactWebsite");
-
-
-    const contactWhatsapp =
-    document.getElementById("contactWhatsapp");
-
-
-
-    if(contactInstagram){
-
-        contactInstagram.href = data.instagram;
-
-    }
-
-
-    if(contactWebsite){
-
-        contactWebsite.href = data.website;
-
-    }
-
-
-    if(contactWhatsapp){
-
-        contactWhatsapp.href = data.whatsapp;
-
-    }
 
 
     renderPrices();
+
 
 }
 
 
 
+
 /* =========================
-   Render Price Cards
+   Create Price List
 ========================= */
 
 
@@ -366,23 +334,25 @@ function renderPrices(){
     if(!container) return;
 
 
+
     container.innerHTML = "";
 
 
-    data.categories.forEach(category => {
 
+    data.categories.forEach(category=>{
 
 
         const card =
         document.createElement("div");
 
 
+
         card.className =
-        "price-card fade-up";
+        "price-card";
 
 
 
-        let content = `
+        let html = `
 
 
         <div class="price-title">
@@ -392,6 +362,7 @@ function renderPrices(){
         </div>
 
 
+
         <div class="price-content">
 
 
@@ -399,11 +370,10 @@ function renderPrices(){
 
 
 
-        category.items.forEach(item => {
+        category.items.forEach(item=>{
 
 
-
-            content += `
+            html += `
 
 
             <div class="price-row">
@@ -427,7 +397,6 @@ function renderPrices(){
             </div>
 
 
-
             `;
 
 
@@ -435,7 +404,7 @@ function renderPrices(){
 
 
 
-        content += `
+        html += `
 
         </div>
 
@@ -443,7 +412,8 @@ function renderPrices(){
 
 
 
-        card.innerHTML = content;
+        card.innerHTML = html;
+
 
 
         container.appendChild(card);
@@ -475,32 +445,25 @@ function activateAccordion(){
 
 
 
-    titles.forEach(title => {
-
+    titles.forEach(title=>{
 
 
         title.addEventListener("click",()=>{
 
 
-
-            const card =
-            title.parentElement;
-
-
-
-            card.classList.toggle("open");
-
+            title.parentElement
+            .classList
+            .toggle("open");
 
 
         });
 
 
-
     });
 
 
-
 }
+
 /* =========================
    Search System
 ========================= */
@@ -518,8 +481,8 @@ function activateSearch(){
 
         const value =
         searchInput.value
-        .trim()
-        .toLowerCase();
+        .toLowerCase()
+        .trim();
 
 
 
@@ -552,10 +515,11 @@ function activateSearch(){
                 if(text.includes(value)){
 
 
-                    row.style.display="flex";
+                    row.style.display =
+                    "flex";
 
 
-                    found=true;
+                    found = true;
 
 
                 }
@@ -563,7 +527,8 @@ function activateSearch(){
                 else{
 
 
-                    row.style.display="none";
+                    row.style.display =
+                    "none";
 
 
                 }
@@ -574,10 +539,11 @@ function activateSearch(){
 
 
 
-            if(found || value===""){
+            if(found || value === ""){
 
 
-                card.style.display="block";
+                card.style.display =
+                "block";
 
 
             }
@@ -585,7 +551,8 @@ function activateSearch(){
             else{
 
 
-                card.style.display="none";
+                card.style.display =
+                "none";
 
 
             }
@@ -604,151 +571,6 @@ function activateSearch(){
 
 
 
-/* =========================
-   Scroll Animation
-========================= */
-
-
-function activateAnimation(){
-
-
-
-    const elements =
-    document.querySelectorAll(".fade-up");
-
-
-
-    const observer =
-    new IntersectionObserver((entries)=>{
-
-
-
-        entries.forEach(entry=>{
-
-
-            if(entry.isIntersecting){
-
-
-                entry.target.classList.add("show");
-
-
-            }
-
-
-
-        });
-
-
-
-    },{
-        threshold:.15
-    });
-
-
-
-    elements.forEach(el=>{
-
-
-        observer.observe(el);
-
-
-    });
-
-
-
-}
-
-
-
-/* =========================
-   Loader
-========================= */
-
-
-window.addEventListener("load",()=>{
-
-
-
-    if(loader){
-
-
-
-        setTimeout(()=>{
-
-
-            loader.classList.add("hide");
-
-
-        },500);
-
-
-
-    }
-
-
-
-});
-
-
-
-/* =========================
-   Back To Top
-========================= */
-
-
-function activateBackToTop(){
-
-
-
-    if(!backToTop) return;
-
-
-
-    window.addEventListener("scroll",()=>{
-
-
-
-        if(window.scrollY > 350){
-
-
-            backToTop.classList.add("show");
-
-
-        }
-
-        else{
-
-
-            backToTop.classList.remove("show");
-
-
-        }
-
-
-
-    });
-
-
-
-    backToTop.addEventListener("click",()=>{
-
-
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
-
-        });
-
-
-
-    });
-
-
-
-}
 /* =========================
    PDF Download
 ========================= */
@@ -757,10 +579,11 @@ function activateBackToTop(){
 function downloadPDF(){
 
 
+
     if(!window.jspdf){
 
 
-        alert("PDF system is not ready");
+        alert("PDF آماده نیست");
 
 
         return;
@@ -817,7 +640,6 @@ function downloadPDF(){
     data.categories.forEach(category=>{
 
 
-
         if(y > 270){
 
 
@@ -831,7 +653,7 @@ function downloadPDF(){
 
 
 
-        pdf.setFontSize(15);
+        pdf.setFontSize(14);
 
 
 
@@ -869,9 +691,15 @@ function downloadPDF(){
 
 
             pdf.text(
-                item.service + " : " + item.price,
+
+                item.service +
+                " : " +
+                item.price,
+
                 25,
+
                 y
+
             );
 
 
@@ -897,13 +725,13 @@ function downloadPDF(){
     );
 
 
-
 }
 
 
 
+
 /* =========================
-   PDF Button Event
+   PDF Button
 ========================= */
 
 
@@ -912,7 +740,7 @@ if(downloadBtn){
 
     downloadBtn.addEventListener(
         "click",
-        (e)=>{
+        function(e){
 
 
             e.preventDefault();
@@ -921,17 +749,14 @@ if(downloadBtn){
             downloadPDF();
 
 
-
         }
     );
 
 
 }
 
-
-
 /* =========================
-   External Link Settings
+   Security Links
 ========================= */
 
 
@@ -955,10 +780,13 @@ function secureLinks(){
     });
 
 
-
 }
+
+
+
+
 /* =========================
-   Start Application
+   Start App
 ========================= */
 
 
@@ -969,12 +797,6 @@ function startApp(){
 
 
     activateSearch();
-
-
-    activateAnimation();
-
-
-    activateBackToTop();
 
 
     secureLinks();
@@ -988,11 +810,12 @@ function startApp(){
 
 
     console.log(
-        "Price List Loaded Successfully"
+        "Price List V4 Loaded Successfully"
     );
 
 
 }
+
 
 
 
