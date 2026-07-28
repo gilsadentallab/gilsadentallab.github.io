@@ -5,7 +5,7 @@ const data = {
     instagram: "https://instagram.com/gilsadentallab",
 
     website: "https://gilsadentallab.github.io",
-
+whatsapp:"https://wa.me/989140503522",
     categories: [
 
         {
