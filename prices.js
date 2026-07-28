@@ -95,7 +95,7 @@ ${category.title}
         `;
 
     });
-
+html+="</div>";
     card.innerHTML=html;
 
     container.appendChild(card);
