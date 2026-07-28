@@ -1,1 +1,58 @@
+/*==================================================
+            GILSA VARIABLES V3
+==================================================*/
 
+:root{
+
+    /* Brand */
+
+    --gold:#d4af37;
+    --gold-light:#f3d46a;
+    --gold-dark:#9b7820;
+
+    /* Background */
+
+    --black:#070707;
+    --dark:#111111;
+    --dark2:#1b1b1b;
+
+    /* Text */
+
+    --white:#ffffff;
+    --text:#d8d8d8;
+    --gray:#888888;
+
+    /* Border */
+
+    --border:rgba(212,175,55,.18);
+
+    /* Radius */
+
+    --radius-sm:10px;
+    --radius:18px;
+    --radius-lg:28px;
+    --radius-xl:40px;
+
+    /* Shadow */
+
+    --shadow-sm:0 8px 20px rgba(0,0,0,.25);
+
+    --shadow:
+    0 15px 40px rgba(0,0,0,.45);
+
+    --shadow-lg:
+    0 25px 70px rgba(0,0,0,.60);
+
+    /* Animation */
+
+    --transition:.35s ease;
+
+    /* Header */
+
+    --header-height:90px;
+
+    /* Container */
+
+    --container:1280px;
+
+}
