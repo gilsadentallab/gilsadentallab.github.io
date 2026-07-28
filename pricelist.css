@@ -312,3 +312,86 @@ text-align:center;
 }
 
 }
+.tools{
+
+width:min(1100px,92%);
+
+margin:40px auto 10px;
+
+}
+
+#searchInput{
+
+width:100%;
+
+padding:18px 25px;
+
+font-size:17px;
+
+font-family:inherit;
+
+border-radius:50px;
+
+border:2px solid #d4af37;
+
+outline:none;
+
+background:white;
+
+transition:.3s;
+
+box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+#searchInput:focus{
+
+box-shadow:0 12px 35px rgba(212,175,55,.25);
+
+}
+
+.price-title{
+
+cursor:pointer;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+user-select:none;
+
+}
+
+.price-title::after{
+
+content:"+";
+
+font-size:28px;
+
+transition:.3s;
+
+}
+
+.price-card.open .price-title::after{
+
+transform:rotate(45deg);
+
+}
+
+.price-content{
+
+overflow:hidden;
+
+max-height:0;
+
+transition:max-height .45s ease;
+
+}
+
+.price-card.open .price-content{
+
+max-height:1000px;
+
+}
