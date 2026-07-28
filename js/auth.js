@@ -38,9 +38,8 @@ function getRegisterData(){
 
     return {
 
-        role:
-        document.querySelector("#registerRole")?.value,
-
+       role:
+document.querySelector("#userType")?.value,
 
         name:
         document.querySelector("#registerName")?.value,
@@ -62,8 +61,8 @@ function getRegisterData(){
         document.querySelector("#clinicName")?.value || "",
 
 
-        clinicAddress:
-        document.querySelector("#clinicAddress")?.value || "",
+      clinicAddress:
+document.querySelector("#registerAddress")?.value || "",
 
 
         location:
