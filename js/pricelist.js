@@ -163,3 +163,4 @@ this.data.whatsapp;
 }
 
 };
+export { PriceList };
