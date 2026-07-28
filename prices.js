@@ -1,7 +1,12 @@
 /* ==========================================
    Gilsa Dental Laboratory
-   Price List V2
+   Price List JS V3
 ========================================== */
+
+
+/* =========================
+   Data
+========================= */
 
 const data = {
 
@@ -12,6 +17,7 @@ const data = {
     website: "https://gilsadentallab.github.io",
 
     whatsapp: "https://wa.me/989140503522",
+
 
     categories: [
 
@@ -34,6 +40,7 @@ const data = {
 
         },
 
+
         {
             title: "ایمپلنت",
 
@@ -53,6 +60,7 @@ const data = {
 
         },
 
+
         {
             title: "E.max",
 
@@ -71,478 +79,773 @@ const data = {
 
 };
 
-/* ==========================================
+
+
+/* =========================
    Elements
-========================================== */
+========================= */
 
-const container = document.getElementById("priceContainer");
+const updateDate =
+document.getElementById("updateDate");
 
-const searchInput = document.getElementById("searchInput");
 
-const updateDate = document.getElementById("updateDate");
+const container =
+document.getElementById("priceContainer");
 
-const instagramBtn = document.getElementById("instagramBtn");
 
-const websiteBtn = document.getElementById("websiteBtn");
+const searchInput =
+document.getElementById("searchInput");
 
-const whatsappBtn = document.getElementById("whatsappBtn");
 
-const downloadBtn = document.getElementById("downloadBtn");
+const instagramBtn =
+document.getElementById("instagramBtn");
 
-const backToTop = document.getElementById("backToTop");
 
-const loader = document.querySelector(".page-loader");
-/* ==========================================
-   Initialize
-========================================== */
+const websiteBtn =
+document.getElementById("websiteBtn");
 
-function initialize() {
 
-    updateDate.textContent = data.update;
+const downloadBtn =
+document.getElementById("downloadBtn");
 
-    instagramBtn.href = data.instagram;
 
-    websiteBtn.href = data.website;
+const whatsappBtn =
+document.getElementById("whatsappBtn");
 
-    whatsappBtn.href = data.whatsapp;
 
-    instagramBtn.target = "_blank";
-    websiteBtn.target = "_blank";
-    whatsappBtn.target = "_blank";
+const backToTop =
+document.getElementById("backToTop");
 
-    renderCards();
+
+const loader =
+document.getElementById("loader");
+/* =========================
+   Initial Setup
+========================= */
+
+function setupPage(){
+
+    // Update Date
+
+    if(updateDate){
+
+        updateDate.textContent = data.update;
+
+    }
+
+
+    // Social Links
+
+    if(instagramBtn){
+
+        instagramBtn.href = data.instagram;
+
+    }
+
+
+    if(websiteBtn){
+
+        websiteBtn.href = data.website;
+
+    }
+
+
+    if(whatsappBtn){
+
+        whatsappBtn.href = data.whatsapp;
+
+    }
+
+
+    // Contact links
+
+    const contactInstagram =
+    document.getElementById("contactInstagram");
+
+
+    const contactWebsite =
+    document.getElementById("contactWebsite");
+
+
+    const contactWhatsapp =
+    document.getElementById("contactWhatsapp");
+
+
+
+    if(contactInstagram){
+
+        contactInstagram.href = data.instagram;
+
+    }
+
+
+    if(contactWebsite){
+
+        contactWebsite.href = data.website;
+
+    }
+
+
+    if(contactWhatsapp){
+
+        contactWhatsapp.href = data.whatsapp;
+
+    }
+
+
+    renderPrices();
 
 }
 
-/* ==========================================
-   Render Cards
-========================================== */
 
-function renderCards() {
+
+/* =========================
+   Render Price Cards
+========================= */
+
+
+function renderPrices(){
+
+
+    if(!container) return;
+
 
     container.innerHTML = "";
 
+
     data.categories.forEach(category => {
 
-        const card = document.createElement("div");
 
-        card.className = "price-card fade-up";
 
-        let html = `
+        const card =
+        document.createElement("div");
 
-            <div class="price-title">
 
-                ${category.title}
+        card.className =
+        "price-card fade-up";
 
-            </div>
 
-            <div class="price-content">
+
+        let content = `
+
+
+        <div class="price-title">
+
+            ${category.title}
+
+        </div>
+
+
+        <div class="price-content">
+
 
         `;
 
+
+
         category.items.forEach(item => {
 
-            html += `
 
-                <div class="price-row">
 
-                    <div class="service">
+            content += `
 
-                        ${item.service}
 
-                    </div>
+            <div class="price-row">
 
-                    <div class="price">
 
-                        ${item.price}
+                <div class="service">
 
-                    </div>
+                    ${item.service}
 
                 </div>
 
+
+
+                <div class="price">
+
+                    ${item.price}
+
+                </div>
+
+
+            </div>
+
+
+
             `;
+
 
         });
 
-        html += `</div>`;
 
-        card.innerHTML = html;
+
+        content += `
+
+        </div>
+
+        `;
+
+
+
+        card.innerHTML = content;
+
 
         container.appendChild(card);
 
+
+
     });
 
-    enableAccordion();
+
+
+    activateAccordion();
+
 
 }
-/* ==========================================
+
+
+
+
+/* =========================
    Accordion
-========================================== */
+========================= */
 
-function enableAccordion() {
 
-    const titles = document.querySelectorAll(".price-title");
+function activateAccordion(){
+
+
+    const titles =
+    document.querySelectorAll(".price-title");
+
+
 
     titles.forEach(title => {
 
-        title.addEventListener("click", () => {
 
-            const card = title.parentElement;
+
+        title.addEventListener("click",()=>{
+
+
+
+            const card =
+            title.parentElement;
+
+
 
             card.classList.toggle("open");
 
+
+
         });
+
+
 
     });
 
+
+
 }
+/* =========================
+   Search System
+========================= */
 
-/* ==========================================
-   Search
-========================================== */
 
-function enableSearch() {
+function activateSearch(){
 
-    searchInput.addEventListener("input", () => {
 
-        const value = searchInput.value.trim().toLowerCase();
+    if(!searchInput) return;
 
-        document.querySelectorAll(".price-card").forEach(card => {
+
+
+    searchInput.addEventListener("input",()=>{
+
+
+        const value =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+
+        const cards =
+        document.querySelectorAll(".price-card");
+
+
+
+        cards.forEach(card=>{
+
 
             let found = false;
 
-            card.querySelectorAll(".price-row").forEach(row => {
 
-                const text = row.innerText.toLowerCase();
 
-                const visible = text.includes(value);
+            const rows =
+            card.querySelectorAll(".price-row");
 
-                row.style.display = visible ? "flex" : "none";
 
-                if (visible) {
 
-                    found = true;
+            rows.forEach(row=>{
+
+
+                const text =
+                row.innerText
+                .toLowerCase();
+
+
+
+                if(text.includes(value)){
+
+
+                    row.style.display="flex";
+
+
+                    found=true;
+
 
                 }
 
+                else{
+
+
+                    row.style.display="none";
+
+
+                }
+
+
+
             });
 
-            card.style.display = found ? "block" : "none";
+
+
+            if(found || value===""){
+
+
+                card.style.display="block";
+
+
+            }
+
+            else{
+
+
+                card.style.display="none";
+
+
+            }
+
+
 
         });
 
+
+
     });
+
+
 
 }
 
-/* ==========================================
+
+
+/* =========================
    Scroll Animation
-========================================== */
+========================= */
 
-function enableScrollAnimation() {
 
-    const observer = new IntersectionObserver(entries => {
+function activateAnimation(){
 
-        entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
+
+    const elements =
+    document.querySelectorAll(".fade-up");
+
+
+
+    const observer =
+    new IntersectionObserver((entries)=>{
+
+
+
+        entries.forEach(entry=>{
+
+
+            if(entry.isIntersecting){
+
 
                 entry.target.classList.add("show");
 
+
             }
+
+
 
         });
 
-    }, {
 
-        threshold: 0.15
+
+    },{
+        threshold:.15
+    });
+
+
+
+    elements.forEach(el=>{
+
+
+        observer.observe(el);
+
 
     });
 
-    document.querySelectorAll(".fade-up").forEach(item => {
 
-        observer.observe(item);
-
-    });
 
 }
-/* ==========================================
+
+
+
+/* =========================
    Loader
-========================================== */
+========================= */
 
-window.addEventListener("load", () => {
 
-    setTimeout(() => {
+window.addEventListener("load",()=>{
 
-        loader.classList.add("hide");
 
-    }, 600);
+
+    if(loader){
+
+
+
+        setTimeout(()=>{
+
+
+            loader.classList.add("hide");
+
+
+        },500);
+
+
+
+    }
+
+
 
 });
 
 
-/* ==========================================
+
+/* =========================
    Back To Top
-========================================== */
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 350) {
-
-        backToTop.classList.add("show");
-
-    } else {
-
-        backToTop.classList.remove("show");
-
-    }
-
-});
-
-backToTop.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-});
+========================= */
 
 
-/* ==========================================
-   Auto Open First Category
-========================================== */
-
-function openFirstCategory() {
-
-    const first = document.querySelector(".price-card");
-
-    if (first) {
-
-        first.classList.add("open");
-
-    }
-
-}
+function activateBackToTop(){
 
 
-/* ==========================================
-   Keyboard Shortcut
-========================================== */
 
-document.addEventListener("keydown", (e) => {
+    if(!backToTop) return;
 
-    if (e.key === "/") {
 
-        e.preventDefault();
 
-        searchInput.focus();
+    window.addEventListener("scroll",()=>{
 
-    }
 
-});
-/* ==========================================
-   Download PDF
-========================================== */
 
-function downloadPDF() {
+        if(window.scrollY > 350){
 
-    if (!window.jspdf) {
 
-        alert("کتابخانه PDF بارگذاری نشده است.");
+            backToTop.classList.add("show");
 
-        return;
-
-    }
-
-    const { jsPDF } = window.jspdf;
-
-    const pdf = new jsPDF({
-
-        orientation: "portrait",
-
-        unit: "mm",
-
-        format: "a4"
-
-    });
-
-    pdf.setFontSize(20);
-
-    pdf.text("Gilsa Dental Laboratory", 20, 20);
-
-    pdf.setFontSize(12);
-
-    pdf.text("Price List", 20, 30);
-
-    pdf.setFontSize(10);
-
-    pdf.text(`Updated : ${data.update}`, 20, 38);
-
-    let y = 50;
-
-    data.categories.forEach(category => {
-
-        if (y > 260) {
-
-            pdf.addPage();
-
-            y = 20;
 
         }
 
-        pdf.setFontSize(15);
+        else{
 
-        pdf.text(category.title, 20, y);
 
-        y += 8;
+            backToTop.classList.remove("show");
 
-        category.items.forEach(item => {
 
-            if (y > 280) {
+        }
 
-                pdf.addPage();
 
-                y = 20;
 
-            }
+    });
 
-            pdf.setFontSize(11);
 
-            pdf.text(`${item.service}`, 25, y);
 
-            pdf.text(`${item.price}`, 120, y);
+    backToTop.addEventListener("click",()=>{
 
-            y += 7;
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
 
         });
 
-        y += 8;
+
 
     });
 
-    pdf.save("Gilsa-Price-List.pdf");
+
 
 }
+/* =========================
+   PDF Download
+========================= */
 
-/* ==========================================
-   Events
-========================================== */
 
-downloadBtn.addEventListener("click", function(e){
+function downloadPDF(){
 
-    e.preventDefault();
 
-    downloadPDF();
+    if(!window.jspdf){
 
-});
 
-/* ==========================================
-   Utilities
-========================================== */
+        alert("PDF system is not ready");
 
-function closeAllCards(){
 
-    document.querySelectorAll(".price-card").forEach(card=>{
+        return;
 
-        card.classList.remove("open");
+
+    }
+
+
+
+    const { jsPDF } =
+    window.jspdf;
+
+
+
+    const pdf =
+    new jsPDF();
+
+
+
+    pdf.setFontSize(18);
+
+
+    pdf.text(
+        "Gilsa Dental Laboratory",
+        20,
+        20
+    );
+
+
+
+    pdf.setFontSize(12);
+
+
+    pdf.text(
+        "Price List",
+        20,
+        32
+    );
+
+
+
+    pdf.text(
+        "Updated: " + data.update,
+        20,
+        42
+    );
+
+
+
+    let y = 55;
+
+
+
+    data.categories.forEach(category=>{
+
+
+
+        if(y > 270){
+
+
+            pdf.addPage();
+
+
+            y = 20;
+
+
+        }
+
+
+
+        pdf.setFontSize(15);
+
+
+
+        pdf.text(
+            category.title,
+            20,
+            y
+        );
+
+
+
+        y += 10;
+
+
+
+        category.items.forEach(item=>{
+
+
+
+            if(y > 280){
+
+
+                pdf.addPage();
+
+
+                y = 20;
+
+
+            }
+
+
+
+            pdf.setFontSize(11);
+
+
+
+            pdf.text(
+                item.service + " : " + item.price,
+                25,
+                y
+            );
+
+
+
+            y += 8;
+
+
+
+        });
+
+
+
+        y += 10;
+
+
 
     });
 
+
+
+    pdf.save(
+        "Gilsa-Price-List.pdf"
+    );
+
+
+
 }
 
-function openAllCards(){
 
-    document.querySelectorAll(".price-card").forEach(card=>{
 
-        card.classList.add("open");
+/* =========================
+   PDF Button Event
+========================= */
+
+
+if(downloadBtn){
+
+
+    downloadBtn.addEventListener(
+        "click",
+        (e)=>{
+
+
+            e.preventDefault();
+
+
+            downloadPDF();
+
+
+
+        }
+    );
+
+
+}
+
+
+
+/* =========================
+   External Link Settings
+========================= */
+
+
+function secureLinks(){
+
+
+    const links =
+    document.querySelectorAll(
+        "a[target='_blank']"
+    );
+
+
+
+    links.forEach(link=>{
+
+
+        link.rel =
+        "noopener noreferrer";
+
 
     });
 
-}
-/* ==========================================
-   Helpers
-========================================== */
 
-function setLink(id, url) {
-
-    const element = document.getElementById(id);
-
-    if (!element || !url) return;
-
-    element.href = url;
-
-    element.target = "_blank";
-
-    element.rel = "noopener noreferrer";
 
 }
+/* =========================
+   Start Application
+========================= */
 
-function debounce(callback, delay = 250) {
 
-    let timer;
+function startApp(){
 
-    return (...args) => {
 
-        clearTimeout(timer);
+    setupPage();
 
-        timer = setTimeout(() => {
 
-            callback(...args);
+    activateSearch();
 
-        }, delay);
 
-    };
+    activateAnimation();
 
-}
 
-/* ==========================================
-   Search Optimization
-========================================== */
+    activateBackToTop();
 
-if (searchInput) {
 
-    const handler = debounce(() => {
+    secureLinks();
 
-        searchInput.dispatchEvent(new Event("input"));
 
-    });
 
-    searchInput.addEventListener("keyup", handler);
+    console.log(
+        "%cGilsa Dental Laboratory",
+        "color:#d4af37;font-size:18px;font-weight:bold;"
+    );
+
+
+    console.log(
+        "Price List Loaded Successfully"
+    );
+
 
 }
 
-/* ==========================================
-   External Links
-========================================== */
 
-setLink("instagramBtn", data.instagram);
 
-setLink("websiteBtn", data.website);
+/* =========================
+   Run
+========================= */
 
-setLink("whatsappBtn", data.whatsapp);
 
-/* ==========================================
-   Error Handler
-========================================== */
-
-window.addEventListener("error", function (event) {
-
-    console.error("Gilsa Error:", event.message);
-
-});
-
-/* ==========================================
-   Version
-========================================== */
-
-console.log("%cGilsa Dental Laboratory", "color:#d4af37;font-size:18px;font-weight:bold;");
-
-console.log("Price List V2 Loaded Successfully");
-
-/* ==========================================
-   End
-========================================== */
+document.addEventListener(
+    "DOMContentLoaded",
+    startApp
+);
