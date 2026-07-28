@@ -324,7 +324,7 @@ export async function loginUser(){
 
 
             else if(
-                userData.role === "laboratory"
+                userData.role === "lab"
             ){
 
                 window.location.href =
