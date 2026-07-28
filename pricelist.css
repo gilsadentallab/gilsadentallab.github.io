@@ -1,3 +1,22 @@
+/* ===========================================
+   Gilsa Dental Laboratory
+   Price List V2
+=========================================== */
+
+:root{
+
+    --gold:#d4af37;
+    --gold-light:#e8c867;
+    --dark:#171717;
+    --white:#ffffff;
+    --gray:#777;
+    --border:#ececec;
+    --shadow:0 15px 40px rgba(0,0,0,.08);
+    --shadow-hover:0 22px 60px rgba(0,0,0,.14);
+    --radius:28px;
+
+}
+
 *{
     margin:0;
     padding:0;
@@ -5,20 +24,47 @@
 }
 
 html{
+
     scroll-behavior:smooth;
+
 }
 
 body{
 
     font-family:'Vazirmatn',sans-serif;
 
-    background:#f5f5f5;
+    background:#f6f6f6;
 
-    color:#222;
+    color:var(--dark);
+
+    overflow-x:hidden;
 
     min-height:100vh;
 
-    overflow-x:hidden;
+    line-height:1.8;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+button,
+input{
+
+    font-family:inherit;
 
 }
 
@@ -29,53 +75,153 @@ body{
     inset:0;
 
     background:
-    radial-gradient(circle at top right,#d4af3720,transparent 35%),
-    radial-gradient(circle at bottom left,#d4af3720,transparent 35%),
-    #f5f5f5;
 
-    z-index:-2;
+    radial-gradient(circle at top right,
+    rgba(212,175,55,.14),
+    transparent 35%),
+
+    radial-gradient(circle at bottom left,
+    rgba(212,175,55,.10),
+    transparent 35%),
+
+    #f6f6f6;
+
+    z-index:-10;
+
+}
+/* ===========================================
+   Loader
+=========================================== */
+
+.page-loader{
+
+    position:fixed;
+    inset:0;
+
+    background:#ffffff;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    gap:20px;
+
+    z-index:9999;
+
+    transition:.6s;
 
 }
 
+.page-loader.hide{
+
+    opacity:0;
+    visibility:hidden;
+
+}
+
+.page-loader img{
+
+    width:110px;
+
+    animation:logoFloat 2.5s ease-in-out infinite;
+
+}
+
+.page-loader span{
+
+    color:var(--gray);
+
+    font-size:18px;
+
+    letter-spacing:2px;
+
+}
+
+@keyframes logoFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+}
+
+/* ===========================================
+   Header
+=========================================== */
+
 header{
 
-    width:100%;
+    width:min(1100px,92%);
 
-    padding:45px 20px;
+    margin:45px auto 35px;
 
     text-align:center;
 
 }
 
+.logo-box{
+
+    width:145px;
+    height:145px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:var(--shadow);
+
+    border:2px solid rgba(212,175,55,.25);
+
+}
+
 .logo{
 
-    width:120px;
-
-    margin-bottom:15px;
+    width:95px;
 
 }
 
 header h1{
 
-    font-size:42px;
+    margin-top:25px;
 
-    color:#d4af37;
+    font-size:46px;
 
     font-weight:800;
 
-    letter-spacing:4px;
+    color:var(--gold);
+
+    letter-spacing:5px;
 
 }
 
 header p{
 
-    color:#777;
+    margin-top:10px;
 
-    margin-top:8px;
+    color:var(--gray);
 
-    font-size:18px;
+    font-size:19px;
 
 }
+
+/* ===========================================
+   Hero
+=========================================== */
 
 .hero{
 
@@ -83,27 +229,49 @@ header p{
 
     margin:auto;
 
-    text-align:center;
+    padding:55px 45px;
 
-    background:rgba(255,255,255,.75);
+    background:rgba(255,255,255,.78);
 
     backdrop-filter:blur(18px);
 
+    border-radius:var(--radius);
+
     border:1px solid rgba(212,175,55,.25);
 
-    border-radius:30px;
+    box-shadow:var(--shadow);
 
-    padding:50px 30px;
+    text-align:center;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 22px;
+
+    background:rgba(212,175,55,.12);
+
+    color:var(--gold);
+
+    border-radius:40px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    margin-bottom:28px;
 
 }
 
 .hero h2{
 
-    font-size:38px;
-
-    color:#111;
+    font-size:42px;
 
     margin-bottom:20px;
 
@@ -111,37 +279,116 @@ header p{
 
 .hero p{
 
-    color:#555;
+    max-width:760px;
 
-    line-height:2;
+    margin:auto;
+
+    color:var(--gray);
 
     font-size:18px;
+
+    line-height:2.1;
 
 }
 
 .update{
 
-    display:inline-block;
+    display:inline-flex;
 
-    margin-top:30px;
+    align-items:center;
 
-    padding:12px 28px;
+    gap:10px;
 
-    border-radius:50px;
+    margin-top:35px;
 
-    background:#d4af37;
+    background:var(--gold);
 
     color:#fff;
+
+    padding:14px 28px;
+
+    border-radius:50px;
 
     font-weight:700;
 
 }
+/* ===========================================
+   Search
+=========================================== */
+
+.tools{
+
+    width:min(1100px,92%);
+
+    margin:45px auto 20px;
+
+}
+
+.search-box{
+
+    position:relative;
+
+}
+
+.search-box i{
+
+    position:absolute;
+
+    right:22px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--gold);
+
+    font-size:18px;
+
+}
+
+#searchInput{
+
+    width:100%;
+
+    height:64px;
+
+    border:none;
+
+    outline:none;
+
+    padding:0 60px 0 20px;
+
+    border-radius:60px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+
+    border:2px solid transparent;
+
+    transition:.35s;
+
+    font-size:17px;
+
+}
+
+#searchInput:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:0 15px 45px rgba(212,175,55,.18);
+
+}
+
+/* ===========================================
+   Price Cards
+=========================================== */
 
 #priceContainer{
 
     width:min(1100px,92%);
 
-    margin:50px auto;
+    margin:30px auto 60px;
 
 }
 
@@ -149,15 +396,15 @@ header p{
 
     background:#fff;
 
-    border-radius:24px;
+    border-radius:26px;
 
-    padding:30px;
+    margin-bottom:24px;
 
-    margin-bottom:25px;
+    overflow:hidden;
 
-    border-right:6px solid #d4af37;
+    border:1px solid rgba(212,175,55,.15);
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:var(--shadow);
 
     transition:.35s;
 
@@ -167,19 +414,89 @@ header p{
 
     transform:translateY(-6px);
 
-    box-shadow:0 18px 45px rgba(0,0,0,.12);
+    box-shadow:var(--shadow-hover);
 
 }
 
 .price-title{
 
-    font-size:26px;
+    display:flex;
 
-    color:#222;
+    justify-content:space-between;
 
-    margin-bottom:20px;
+    align-items:center;
+
+    padding:24px 28px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    font-size:24px;
 
     font-weight:700;
+
+    color:var(--dark);
+
+    transition:.3s;
+
+}
+
+.price-title:hover{
+
+    color:var(--gold);
+
+}
+
+.price-title::after{
+
+    content:"+";
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:rgba(212,175,55,.15);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:var(--gold);
+
+    font-size:24px;
+
+    transition:.35s;
+
+}
+
+.price-card.open .price-title::after{
+
+    transform:rotate(45deg);
+
+    background:var(--gold);
+
+    color:#fff;
+
+}
+
+.price-content{
+
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .45s ease;
+
+}
+
+.price-card.open .price-content{
+
+    max-height:1200px;
 
 }
 
@@ -191,15 +508,17 @@ header p{
 
     align-items:center;
 
-    padding:14px 0;
+    padding:18px 28px;
 
-    border-bottom:1px solid #eee;
+    border-top:1px solid #f1f1f1;
+
+    transition:.25s;
 
 }
 
-.price-row:last-child{
+.price-row:hover{
 
-    border:none;
+    background:#fcfbf6;
 
 }
 
@@ -207,232 +526,1075 @@ header p{
 
     font-weight:600;
 
+    font-size:17px;
+
 }
 
 .price{
 
-    color:#d4af37;
+    color:var(--gold);
 
     font-weight:800;
 
-    font-size:20px;
+    font-size:18px;
+
+}
+/* ===========================================
+   Quick Links
+=========================================== */
+
+.quick-links{
+
+    width:min(1100px,92%);
+
+    margin:40px auto 60px;
+
+}
+
+.quick-links h3{
+
+    text-align:center;
+
+    font-size:28px;
+
+    margin-bottom:30px;
+
+    color:var(--dark);
 
 }
 
 .buttons{
 
-    width:min(1100px,92%);
+    display:grid;
 
-    margin:60px auto;
-
-    display:flex;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 
     gap:20px;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
 
 }
 
 .buttons a{
 
-    text-decoration:none;
+    background:#fff;
 
-    background:#111;
+    border-radius:22px;
 
-    color:white;
+    padding:22px;
 
-    padding:16px 34px;
+    display:flex;
 
-    border-radius:60px;
+    align-items:center;
 
-    transition:.3s;
+    justify-content:center;
+
+    gap:14px;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid rgba(212,175,55,.15);
+
+    transition:.35s;
 
     font-weight:700;
+
+    font-size:17px;
 
 }
 
 .buttons a:hover{
 
-    background:#d4af37;
+    background:var(--gold);
+
+    color:#fff;
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-hover);
 
 }
 
-footer{
+.buttons a i{
+
+    font-size:24px;
+
+}
+
+/* ===========================================
+   About Lab
+=========================================== */
+
+.about-lab{
+
+    width:min(1100px,92%);
+
+    margin:70px auto;
+
+}
+
+.about-card{
+
+    background:#fff;
+
+    border-radius:30px;
+
+    padding:50px 35px;
 
     text-align:center;
 
-    padding:35px;
+    box-shadow:var(--shadow);
 
-    color:#777;
-
-}
-
-@media(max-width:768px){
-
-.hero{
-
-padding:35px 20px;
+    border:1px solid rgba(212,175,55,.15);
 
 }
 
-header h1{
+.about-icon{
 
-font-size:34px;
+    width:90px;
 
-}
+    height:90px;
 
-.hero h2{
+    margin:auto;
 
-font-size:30px;
+    border-radius:50%;
 
-}
+    display:flex;
 
-.price-row{
+    justify-content:center;
 
-flex-direction:column;
+    align-items:center;
 
-gap:10px;
+    background:rgba(212,175,55,.12);
 
-}
+    color:var(--gold);
 
-.buttons{
+    font-size:38px;
 
-flex-direction:column;
-
-}
-
-.buttons a{
-
-width:100%;
-
-text-align:center;
+    margin-bottom:25px;
 
 }
 
-}
-.tools{
+.about-card h3{
 
-width:min(1100px,92%);
+    font-size:32px;
 
-margin:40px auto 10px;
-
-}
-
-#searchInput{
-
-width:100%;
-
-padding:18px 25px;
-
-font-size:17px;
-
-font-family:inherit;
-
-border-radius:50px;
-
-border:2px solid #d4af37;
-
-outline:none;
-
-background:white;
-
-transition:.3s;
-
-box-shadow:0 8px 25px rgba(0,0,0,.05);
+    margin-bottom:20px;
 
 }
 
-#searchInput:focus{
+.about-card p{
 
-box-shadow:0 12px 35px rgba(212,175,55,.25);
+    color:var(--gray);
 
-}
+    max-width:700px;
 
-.price-title{
+    margin:auto;
 
-cursor:pointer;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-user-select:none;
+    line-height:2.2;
 
 }
 
-.price-title::after{
+.features{
 
-content:"+";
+    display:grid;
 
-font-size:28px;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 
-transition:.3s;
+    gap:18px;
 
-}
-
-.price-card.open .price-title::after{
-
-transform:rotate(45deg);
+    margin-top:40px;
 
 }
 
-.price-content{
+.feature{
 
-overflow:hidden;
+    background:#fafafa;
 
-max-height:0;
+    border-radius:18px;
 
-transition:max-height .45s ease;
+    padding:22px;
+
+    transition:.3s;
+
+}
+
+.feature:hover{
+
+    background:var(--gold);
+
+    color:#fff;
+
+    transform:translateY(-5px);
 
 }
 
-.price-card.open .price-content{
+.feature i{
 
-max-height:1000px;
+    font-size:28px;
+
+    margin-bottom:12px;
+
+    display:block;
 
 }
+
+/* ===========================================
+   WhatsApp
+=========================================== */
+
 #whatsappBtn{
 
-position:fixed;
+    position:fixed;
 
-left:25px;
+    left:25px;
 
-bottom:25px;
+    bottom:25px;
 
-width:65px;
+    width:68px;
 
-height:65px;
+    height:68px;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:#25D366;
+    background:#25D366;
 
-display:flex;
+    color:#fff;
 
-justify-content:center;
+    display:flex;
 
-align-items:center;
+    justify-content:center;
 
-font-size:34px;
+    align-items:center;
 
-color:white;
+    font-size:34px;
 
-text-decoration:none;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
 
-box-shadow:0 10px 30px rgba(0,0,0,.25);
+    z-index:999;
 
-transition:.3s;
-
-z-index:999;
+    transition:.35s;
 
 }
 
 #whatsappBtn:hover{
 
-transform:scale(1.12);
+    transform:scale(1.12) rotate(10deg);
+
+}
+
+/* ===========================================
+   Footer
+=========================================== */
+
+.footer{
+
+    margin-top:80px;
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(212,175,55,.2);
+
+}
+
+.footer-logo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.footer-logo img{
+
+    width:70px;
+
+}
+
+.footer h3{
+
+    font-size:24px;
+
+}
+
+.footer p{
+
+    color:var(--gray);
+
+    margin:12px 0;
+
+}
+
+.footer small{
+
+    color:#999;
+
+    line-height:2;
+
+}
+/* ===========================================
+   Back To Top
+=========================================== */
+
+#backToTop{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--gold);
+
+    color:#fff;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.20);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(20px);
+
+    transition:.35s;
+
+    z-index:998;
+
+}
+
+#backToTop.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+}
+
+#backToTop:hover{
+
+    transform:translateY(-6px);
+
+    background:var(--gold-light);
+
+}
+
+/* ===========================================
+   Scroll Animation
+=========================================== */
+
+.fade-up{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:opacity .7s ease,
+               transform .7s ease;
+
+}
+
+.fade-up.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ===========================================
+   Smooth Card Animation
+=========================================== */
+
+.price-card{
+
+    animation:cardFade .45s ease both;
+
+}
+
+@keyframes cardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================================
+   Hover Effects
+=========================================== */
+
+.logo-box{
+
+    transition:.35s;
+
+}
+
+.logo-box:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.about-card{
+
+    transition:.35s;
+
+}
+
+.about-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+.hero{
+
+    transition:.35s;
+
+}
+
+.hero:hover{
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+/* ===========================================
+   Selection
+=========================================== */
+
+::selection{
+
+    background:var(--gold);
+
+    color:#fff;
+
+}
+
+/* ===========================================
+   Scrollbar
+=========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#efefef;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--gold);
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--gold-light);
+
+}
+/* ===========================================
+   Responsive - Tablet
+=========================================== */
+
+@media (max-width:992px){
+
+    header{
+
+        margin-top:35px;
+
+    }
+
+    .logo-box{
+
+        width:125px;
+        height:125px;
+
+    }
+
+    .logo{
+
+        width:82px;
+
+    }
+
+    header h1{
+
+        font-size:38px;
+        letter-spacing:3px;
+
+    }
+
+    .hero{
+
+        padding:45px 30px;
+
+    }
+
+    .hero h2{
+
+        font-size:34px;
+
+    }
+
+    .about-card{
+
+        padding:40px 25px;
+
+    }
+
+    .features{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+/* ===========================================
+   Responsive - Mobile
+=========================================== */
+
+@media (max-width:768px){
+
+    body{
+
+        font-size:15px;
+
+    }
+
+    .hero{
+
+        padding:35px 22px;
+
+        border-radius:22px;
+
+    }
+
+    .hero-badge{
+
+        font-size:13px;
+
+        padding:8px 18px;
+
+    }
+
+    .hero h2{
+
+        font-size:28px;
+
+    }
+
+    .hero p{
+
+        font-size:15px;
+
+    }
+
+    .update{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .price-title{
+
+        font-size:20px;
+
+        padding:20px;
+
+    }
+
+    .price-row{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:8px;
+
+        padding:16px 20px;
+
+    }
+
+    .buttons{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .about-card h3{
+
+        font-size:26px;
+
+    }
+
+    .features{
+
+        grid-template-columns:1fr;
+
+    }
+
+    #whatsappBtn{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:30px;
+
+        left:18px;
+
+        bottom:18px;
+
+    }
+
+    #backToTop{
+
+        width:55px;
+
+        height:55px;
+
+        right:18px;
+
+        bottom:18px;
+
+    }
+
+}
+/* ===========================================
+   Premium Effects
+=========================================== */
+
+.hero,
+.about-card,
+.price-card,
+.buttons a{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.hero::before,
+.about-card::before,
+.price-card::before,
+.buttons a::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-130%;
+
+    width:70%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.45),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    transition:1s;
+
+}
+
+.hero:hover::before,
+.about-card:hover::before,
+.price-card:hover::before,
+.buttons a:hover::before{
+
+    left:150%;
+
+}
+
+/* ===========================================
+   Gold Border Animation
+=========================================== */
+
+.price-card{
+
+    border:1px solid rgba(212,175,55,.18);
+
+}
+
+.price-card:hover{
+
+    border-color:rgba(212,175,55,.55);
+
+}
+
+/* ===========================================
+   Gradient Text
+=========================================== */
+
+header h1{
+
+    background:linear-gradient(
+        180deg,
+        #f7de84,
+        #d4af37,
+        #b68d1d
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+/* ===========================================
+   Button Glow
+=========================================== */
+
+.buttons a:hover{
+
+    box-shadow:
+        0 15px 45px rgba(212,175,55,.30),
+        0 0 25px rgba(212,175,55,.25);
+
+}
+
+/* ===========================================
+   Floating Animation
+=========================================== */
+
+.logo-box{
+
+    animation:floating 5s ease-in-out infinite;
+
+}
+
+@keyframes floating{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+}
+
+/* ===========================================
+   Hero Badge
+=========================================== */
+
+.hero-badge{
+
+    box-shadow:0 8px 20px rgba(212,175,55,.18);
+
+}
+
+/* ===========================================
+   Feature Cards
+=========================================== */
+
+.feature{
+
+    border:1px solid transparent;
+
+}
+
+.feature:hover{
+
+    border-color:rgba(255,255,255,.35);
+
+}
+
+/* ===========================================
+   Footer
+=========================================== */
+
+.footer{
+
+    background:linear-gradient(
+        180deg,
+        transparent,
+        rgba(212,175,55,.05)
+    );
+
+}
+
+/* ===========================================
+   Image Quality
+=========================================== */
+
+.logo{
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
+/* ===========================================
+   Final Optimizations
+=========================================== */
+
+/* Focus Accessibility */
+
+a:focus,
+button:focus,
+input:focus{
+
+    outline:3px solid rgba(212,175,55,.35);
+
+    outline-offset:3px;
+
+}
+
+/* Smooth Transitions */
+
+*{
+
+    transition:
+        color .25s,
+        background-color .25s,
+        border-color .25s;
+
+}
+
+/* Better Buttons */
+
+button{
+
+    cursor:pointer;
+
+}
+
+/* Better Input Placeholder */
+
+#searchInput::placeholder{
+
+    color:#999;
+
+}
+
+/* Prevent Image Drag */
+
+img{
+
+    -webkit-user-drag:none;
+
+    user-select:none;
+
+}
+
+/* Hidden Utility */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+/* Fade Utility */
+
+.opacity-0{
+
+    opacity:0;
+
+}
+
+.opacity-1{
+
+    opacity:1;
+
+}
+
+/* Animation Delay Helpers */
+
+.delay-1{
+
+    animation-delay:.15s;
+
+}
+
+.delay-2{
+
+    animation-delay:.30s;
+
+}
+
+.delay-3{
+
+    animation-delay:.45s;
+
+}
+
+/* Desktop Enhancement */
+
+@media (min-width:1200px){
+
+    .hero{
+
+        padding:70px;
+
+    }
+
+    .about-card{
+
+        padding:60px;
+
+    }
+
+}
+
+/* Small Mobile */
+
+@media (max-width:480px){
+
+    header h1{
+
+        font-size:30px;
+
+        letter-spacing:2px;
+
+    }
+
+    .hero h2{
+
+        font-size:24px;
+
+    }
+
+    .hero p{
+
+        font-size:14px;
+
+        line-height:2;
+
+    }
+
+    .price-title{
+
+        font-size:18px;
+
+    }
+
+    .service{
+
+        font-size:15px;
+
+    }
+
+    .price{
+
+        font-size:16px;
+
+    }
+
+    .quick-links h3{
+
+        font-size:22px;
+
+    }
+
+    .about-card{
+
+        padding:30px 20px;
+
+    }
+
+    .about-card h3{
+
+        font-size:22px;
+
+    }
+
+}
+
+/* Print */
+
+@media print{
+
+    body{
+
+        background:#fff;
+
+    }
+
+    .background,
+    #whatsappBtn,
+    #backToTop,
+    .page-loader{
+
+        display:none !important;
+
+    }
+
+    .hero,
+    .price-card,
+    .about-card{
+
+        box-shadow:none;
+
+        border:1px solid #ddd;
+
+    }
 
 }
