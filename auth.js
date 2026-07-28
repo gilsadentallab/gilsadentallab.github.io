@@ -1,14 +1,15 @@
 /*==================================================
-        GILSA AUTH.JS
-        CLEAN VERSION
+        GILSA AUTH SYSTEM V3
+        USER LOGIN / REGISTER SYSTEM
 ==================================================*/
 
 
 document.addEventListener("DOMContentLoaded",()=>{
 
 
+
 /*========================
- ELEMENTS
+        ELEMENTS
 ========================*/
 
 
@@ -16,11 +17,11 @@ const authModal =
 document.getElementById("authModal");
 
 
-const openAuthButtons =
-document.querySelectorAll(".open-auth");
+const openButtons =
+document.querySelectorAll(".auth-btn,.open-auth");
 
 
-const closeAuth =
+const closeBtn =
 document.querySelector(".close-auth");
 
 
@@ -52,11 +53,11 @@ document.getElementById("showLogin");
 
 
 /*========================
- OPEN AUTH
+        OPEN MODAL
 ========================*/
 
 
-openAuthButtons.forEach(btn=>{
+openButtons.forEach(btn=>{
 
 
 btn.addEventListener("click",(e)=>{
@@ -65,10 +66,26 @@ btn.addEventListener("click",(e)=>{
 e.preventDefault();
 
 
+
+if(isLoggedIn()){
+
+
+openDashboard();
+
+
+return;
+
+
+}
+
+
+
 authModal?.classList.add("active");
 
 
+
 });
+
 
 
 });
@@ -78,14 +95,14 @@ authModal?.classList.add("active");
 
 
 /*========================
- CLOSE AUTH
+        CLOSE MODAL
 ========================*/
 
 
-closeAuth?.addEventListener("click",()=>{
+closeBtn?.addEventListener("click",()=>{
 
 
-authModal.classList.remove("active");
+authModal?.classList.remove("active");
 
 
 });
@@ -93,10 +110,11 @@ authModal.classList.remove("active");
 
 
 
+
 authModal?.addEventListener("click",(e)=>{
 
 
-if(e.target === authModal){
+if(e.target===authModal){
 
 
 authModal.classList.remove("active");
@@ -105,15 +123,15 @@ authModal.classList.remove("active");
 }
 
 
+
 });
 
 
 
 
 
-
 /*========================
- SWITCH LOGIN REGISTER
+        SWITCH BOX
 ========================*/
 
 
@@ -131,6 +149,7 @@ registerBox.style.display="block";
 
 
 
+
 showLogin?.addEventListener("click",()=>{
 
 
@@ -142,9 +161,14 @@ loginBox.style.display="block";
 
 });
 
-/*========================
-        REGISTER SYSTEM
-========================*/
+
+
+
+
+
+/*==================================================
+        REGISTER
+==================================================*/
 
 
 registerForm?.addEventListener("submit",(e)=>{
@@ -154,38 +178,76 @@ e.preventDefault();
 
 
 
-const type =
-document.getElementById("userType")?.value;
+
+const user={
+
+
+id:Date.now(),
+
+
+type:
+document.getElementById("userType").value,
+
+
+name:
+document.getElementById("registerName").value.trim(),
+
+
+username:
+document.getElementById("registerUsername").value.trim(),
+
+
+password:
+document.getElementById("registerPassword").value.trim(),
+
+
+mobile:
+document.getElementById("registerMobile").value.trim(),
 
 
 
-const name =
-document.getElementById("registerName")?.value.trim();
+clinicName:
+document.getElementById("clinicName")?.value || "",
+
+
+labName:
+document.getElementById("labName")?.value || "",
+
+
+managerName:
+document.getElementById("managerName")?.value || "",
+
+
+landline:
+document.getElementById("landline")?.value || "",
+
+
+address:
+document.getElementById("registerAddress")?.value || "",
+
+
+location:
+document.getElementById("registerLocation")?.value || "",
+
+
+created:
+new Date().toLocaleDateString("fa-IR")
 
 
 
-const username =
-document.getElementById("registerUsername")?.value.trim();
+};
 
-
-
-const password =
-document.getElementById("registerPassword")?.value.trim();
-
-
-
-const mobile =
-document.getElementById("registerMobile")?.value.trim();
 
 
 
 
 
 if(
-!name ||
-!username ||
-!password ||
-!mobile
+!user.name ||
+!user.username ||
+!user.password ||
+!user.mobile
+
 ){
 
 
@@ -204,89 +266,43 @@ return;
 
 
 
-let extraData={};
+let users =
 
+JSON.parse(
 
+localStorage.getItem("gilsaUsers")
 
+)
 
-
-if(type==="dentist"){
-
-
-
-extraData={
-
-
-clinicName:
-
-document.getElementById("clinicName")?.value || "",
-
-
-
-address:
-
-document.getElementById("registerAddress")?.value || "",
-
-
-
-location:
-
-document.getElementById("registerLocation")?.value || ""
-
-
-
-};
-
-
-
-}
+|| [];
 
 
 
 
 
 
+const exists =
 
+users.find(u=>
 
-if(type==="lab"){
+u.username===user.username
 
-
-
-extraData={
-
-
-labName:
-
-document.getElementById("labName")?.value || "",
+);
 
 
 
-managerName:
-
-document.getElementById("managerName")?.value || "",
 
 
 
-landline:
-
-document.getElementById("landline")?.value || "",
+if(exists){
 
 
-
-address:
-
-document.getElementById("registerAddress")?.value || "",
-
+alert(
+"این نام کاربری قبلا ثبت شده است"
+);
 
 
-location:
-
-document.getElementById("registerLocation")?.value || ""
-
-
-
-};
-
+return;
 
 
 }
@@ -296,38 +312,7 @@ document.getElementById("registerLocation")?.value || ""
 
 
 
-
-const user={
-
-
-id:Date.now(),
-
-
-type:type,
-
-
-name:name,
-
-
-username:username,
-
-
-password:password,
-
-
-mobile:mobile,
-
-
-...extraData,
-
-
-date:new Date().toLocaleDateString("fa-IR")
-
-
-
-};
-
-
+users.push(user);
 
 
 
@@ -335,32 +320,26 @@ date:new Date().toLocaleDateString("fa-IR")
 
 localStorage.setItem(
 
-"gilsaUser",
+"gilsaUsers",
 
-JSON.stringify(user)
+JSON.stringify(users)
 
 );
+
 
 
 
 
 
 alert(
-
 "ثبت نام با موفقیت انجام شد"
-
 );
 
 
 
 
 
-
 registerForm.reset();
-
-
-
-
 
 
 registerBox.style.display="none";
@@ -371,10 +350,9 @@ loginBox.style.display="block";
 
 
 });
-  
-/*========================
+        /*==================================================
         LOGIN SYSTEM
-========================*/
+==================================================*/
 
 
 loginForm?.addEventListener("submit",(e)=>{
@@ -385,12 +363,10 @@ e.preventDefault();
 
 
 
-
 const username =
 
 document.getElementById("loginUsername")
-?.value.trim();
-
+.value.trim();
 
 
 
@@ -398,39 +374,36 @@ document.getElementById("loginUsername")
 const password =
 
 document.getElementById("loginPassword")
-?.value.trim();
+.value.trim();
 
 
 
 
 
 
-if(
-!username ||
-!password
-){
-
-
-alert(
-"نام کاربری و رمز عبور را وارد کنید"
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-
-const savedUser =
+let users =
 
 JSON.parse(
 
-localStorage.getItem("gilsaUser")
+localStorage.getItem("gilsaUsers")
+
+)
+
+|| [];
+
+
+
+
+
+
+
+const user =
+
+users.find(u=>
+
+u.username===username &&
+
+u.password===password
 
 );
 
@@ -439,13 +412,12 @@ localStorage.getItem("gilsaUser")
 
 
 
-if(!savedUser){
+
+if(!user){
 
 
 alert(
-
-"کاربری وجود ندارد، ابتدا ثبت نام کنید"
-
+"نام کاربری یا رمز عبور اشتباه است"
 );
 
 
@@ -454,19 +426,6 @@ return;
 
 }
 
-
-
-
-
-
-
-if(
-
-savedUser.username === username &&
-
-savedUser.password === password
-
-){
 
 
 
@@ -484,15 +443,13 @@ localStorage.setItem(
 
 
 
-
 localStorage.setItem(
 
 "gilsaCurrentUser",
 
-JSON.stringify(savedUser)
+JSON.stringify(user)
 
 );
-
 
 
 
@@ -510,11 +467,8 @@ alert(
 
 
 
-
 authModal?.classList.remove(
-
 "active"
-
 );
 
 
@@ -522,8 +476,111 @@ authModal?.classList.remove(
 
 
 
+updateUserUI();
 
-updateAuthButton();
+
+
+});
+
+
+
+
+
+
+
+
+
+/*==================================================
+        CHECK LOGIN
+==================================================*/
+
+
+function isLoggedIn(){
+
+
+return (
+
+localStorage.getItem("gilsaLogin")==="true"
+
+&&
+
+localStorage.getItem("gilsaCurrentUser")
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+        UPDATE USER UI
+==================================================*/
+
+
+function updateUserUI(){
+
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem("gilsaCurrentUser")
+
+);
+
+
+
+
+if(!user)
+
+return;
+
+
+
+
+
+
+
+const authBtn =
+
+document.querySelector(".auth-btn");
+
+
+
+
+
+if(authBtn){
+
+
+
+authBtn.innerHTML =
+
+`
+
+👤 ${user.name}
+
+`;
+
+
+
+authBtn.classList.add(
+"logged"
+);
+
+
+
+}
+
+
 
 
 
@@ -547,8 +604,8 @@ document.getElementById("dashType");
 
 if(dashName)
 
-dashName.innerHTML =
-savedUser.name;
+dashName.innerHTML=user.name;
+
 
 
 
@@ -556,36 +613,56 @@ savedUser.name;
 
 if(dashType)
 
+
 dashType.innerHTML =
 
-savedUser.type==="dentist"
+user.type==="lab"
 
 ?
 
-"دندانپزشک"
+"لابراتوار"
 
 :
 
-"لابراتوار";
-
-
-
-
-
+"دندانپزشک";
 
 
 
 }
 
 
-else{
+
+
+
+
+
+
+
+/*==================================================
+        OPEN DASHBOARD
+==================================================*/
+
+
+function openDashboard(){
+
+
+
+const dashboard =
+
+document.getElementById("dashboard");
+
+
+
+
+if(!dashboard){
 
 
 alert(
-
-"نام کاربری یا رمز عبور اشتباه است"
-
+"داشبورد پیدا نشد"
 );
+
+
+return;
 
 
 }
@@ -593,89 +670,42 @@ alert(
 
 
 
+
+window.scrollTo({
+
+top:dashboard.offsetTop,
+
+behavior:"smooth"
 
 });
 
 
 
 
-
-
-
-/*========================
-        UPDATE HEADER
-========================*/
-
-
-function updateAuthButton(){
-
-
-
-const btn =
-
-document.querySelector(".open-auth");
-
-
-
-
-
-const login =
-
-localStorage.getItem("gilsaLogin");
-
-
-
-
-
-const user =
-
-JSON.parse(
-
-localStorage.getItem("gilsaCurrentUser")
-
+dashboard.classList.add(
+"active"
 );
 
 
 
 
-
-
-if(
-
-btn &&
-
-login==="true" &&
-
-user
-
-){
-
-
-
-btn.innerHTML =
-
-`
-
-👤 ${user.name}
-
-`;
-
-
-
-btn.classList.add("logged");
-
-
-}
-
-
+updateUserUI();
 
 
 
 }
 
-/*========================
-        LOGOUT SYSTEM
-========================*/
+
+
+
+
+
+
+
+
+/*==================================================
+        LOGOUT
+==================================================*/
 
 
 const logoutBtn =
@@ -687,6 +717,8 @@ document.getElementById("logoutBtn");
 
 
 logoutBtn?.addEventListener("click",()=>{
+
+
 
 
 
@@ -705,10 +737,9 @@ localStorage.removeItem(
 
 
 
+
 alert(
-
-"از حساب کاربری خارج شدید"
-
+"از حساب خارج شدید"
 );
 
 
@@ -729,21 +760,32 @@ location.reload();
 
 
 
-/*========================
-        CHECK LOGIN
-========================*/
+
+/*==================================================
+        PAGE LOAD
+==================================================*/
 
 
-function checkLogin(){
+if(isLoggedIn()){
+
+
+updateUserUI();
+
+
+}
 
 
 
-const login =
 
-localStorage.getItem(
-"gilsaLogin"
-);
 
+
+});
+/*==================================================
+        DASHBOARD CONNECTOR V3
+==================================================*/
+
+
+function loadDashboard(){
 
 
 
@@ -751,9 +793,7 @@ const user =
 
 JSON.parse(
 
-localStorage.getItem(
-"gilsaCurrentUser"
-)
+localStorage.getItem("gilsaCurrentUser")
 
 );
 
@@ -761,62 +801,55 @@ localStorage.getItem(
 
 
 
+if(!user)
 
-if(
-
-login==="true" && user
-
-){
-
-
-
-updateAuthButton();
-
-
-
-
-const dashName =
-
-document.getElementById(
-"dashName"
-);
-
-
-
-
-const dashType =
-
-document.getElementById(
-"dashType"
-);
+return;
 
 
 
 
 
-if(dashName)
-
-dashName.innerHTML =
-user.name;
 
 
+const nameBox =
+
+document.getElementById("dashName");
 
 
 
-if(dashType)
+const typeBox =
+
+document.getElementById("dashType");
 
 
-dashType.innerHTML =
 
-user.type==="dentist"
+
+
+
+
+if(nameBox)
+
+nameBox.innerHTML = user.name;
+
+
+
+
+
+
+if(typeBox){
+
+
+typeBox.innerHTML =
+
+user.type==="lab"
 
 ?
 
-"دندانپزشک"
+"لابراتوار"
 
 :
 
-"لابراتوار";
+"دندانپزشک";
 
 
 
@@ -825,6 +858,103 @@ user.type==="dentist"
 
 
 
+
+
+
+/* USER INFO */
+
+const userInfo =
+
+document.querySelector(".dashboard-user");
+
+
+
+if(userInfo){
+
+
+
+userInfo.dataset.username =
+
+user.username;
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+/*==================================================
+        DASHBOARD MENU
+==================================================*/
+
+
+
+const dashboardMenu =
+
+document.querySelectorAll(
+".dashboard-sidebar li"
+);
+
+
+
+
+
+
+dashboardMenu.forEach(item=>{
+
+
+
+item.addEventListener(
+"click",
+()=>{
+
+
+
+
+
+dashboardMenu.forEach(i=>{
+
+i.classList.remove("active");
+
+});
+
+
+
+
+
+item.classList.add("active");
+
+
+
+
+
+
+const text =
+
+item.innerText;
+
+
+
+
+
+
+
+if(text.includes("سفارش جدید")){
+
+
+document.querySelector(".order-btn")
+?.click();
+
+
+
 }
 
 
@@ -832,31 +962,27 @@ user.type==="dentist"
 
 
 
+if(text.includes("سفارش‌های من")){
 
 
-/*========================
-        ACCOUNT BUTTON
-========================*/
+if(typeof renderMyOrders==="function"){
 
 
-document.querySelector(".open-auth")
-?.addEventListener("click",()=>{
+renderMyOrders();
 
 
-
-if(
-
-localStorage.getItem("gilsaLogin")==="true"
-
-){
-
-
-
-window.location.href="#dashboard";
+}
 
 
 
 }
+
+
+
+
+
+
+});
 
 
 
@@ -869,15 +995,83 @@ window.location.href="#dashboard";
 
 
 
-/*========================
-        RUN
-========================*/
+
+/*==================================================
+        LAB ACCESS CONTROL
+==================================================*/
 
 
-checkLogin();
+function checkLabPanel(){
+
+
+
+const user =
+
+JSON.parse(
+
+localStorage.getItem("gilsaCurrentUser")
+
+);
 
 
 
 
-});
-                      
+
+if(!user)
+
+return;
+
+
+
+
+
+
+
+
+if(user.type==="lab"){
+
+
+
+document.body.classList.add(
+"lab-user"
+);
+
+
+
+}
+
+else{
+
+
+
+document.body.classList.add(
+"dentist-user"
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+        RUN DASHBOARD
+==================================================*/
+
+
+loadDashboard();
+
+
+checkLabPanel();
+
+
