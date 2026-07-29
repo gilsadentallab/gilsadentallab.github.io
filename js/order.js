@@ -2,7 +2,9 @@
                 ORDER MODULE V4
 ==================================================*/
 
-
+import { Storage } from "./storage.js";
+import { Utils } from "./utils.js";
+import { Auth } from "./auth.js";
 const Order = {
 
 
