@@ -104,6 +104,8 @@ const Storage = {
 };
 
 
+export {
 
+    Storage
 
-export { Storage };
+};
