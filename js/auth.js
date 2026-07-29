@@ -584,7 +584,15 @@ export const Auth = {
         console.log(
             "Auth V4 Started"
         );
+console.log(
+    "Register Form:",
+    document.querySelector("#registerForm")
+);
 
+console.log(
+    "Firebase Auth:",
+    auth
+);
 
         checkAuthState();
 
