@@ -34,7 +34,8 @@ import { Utils } from "./utils.js";
 
 import { Storage } from "./storage.js";
 
-
+window.Utils = Utils;
+window.Storage = Storage;
 
 document.addEventListener(
 
