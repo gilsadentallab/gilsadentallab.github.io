@@ -1,15 +1,19 @@
-// auth.js V4
-// Firebase Authentication + Firestore
+/*==================================================
+                GILSA AUTH V4
+        Firebase Authentication + Firestore
+==================================================*/
+
 
 import { auth, db } from "./firebase.js";
+
 
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
-} 
-from 
+}
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
@@ -22,63 +26,82 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// تبدیل username به ایمیل داخلی Firebase
+
+
 
 function createFirebaseEmail(username){
 
-    return username.trim().toLowerCase()
-    + "@gilsa.local";
+    return username
+    .trim()
+    .toLowerCase()
+    +
+    "@gilsa.local";
 
 }
 
 
-// گرفتن اطلاعات فرم ثبت نام
+
+
+
 
 function getRegisterData(){
 
+
     return {
 
-       role:
-document.querySelector("#userType")?.value,
+
+        role:
+        document.querySelector("#userType")?.value || "",
+
 
         name:
-        document.querySelector("#registerName")?.value,
+        document.querySelector("#registerName")?.value || "",
 
 
         username:
-        document.querySelector("#registerUsername")?.value,
+        document.querySelector("#registerUsername")?.value || "",
 
 
         password:
-        document.querySelector("#registerPassword")?.value,
+        document.querySelector("#registerPassword")?.value || "",
 
 
         mobile:
-        document.querySelector("#registerMobile")?.value,
+        document.querySelector("#registerMobile")?.value || "",
 
 
         clinicName:
         document.querySelector("#clinicName")?.value || "",
 
 
-      clinicAddress:
-document.querySelector("#registerAddress")?.value || "",
+        clinicAddress:
+        document.querySelector("#registerAddress")?.value || "",
 
 
         location:
         document.querySelector("#registerLocation")?.value || ""
 
+
     };
 
+
 }
-// ===============================
-// Register User
-// ===============================
-
-export async function registerUser(){
 
 
-    const data = getRegisterData();
+
+
+
+
+
+
+async function registerUser(){
+
+
+
+    const data =
+    getRegisterData();
+
+
 
 
     if(
@@ -87,62 +110,77 @@ export async function registerUser(){
         !data.role
     ){
 
-        alert("لطفاً اطلاعات ضروری را کامل کنید");
+        alert(
+            "اطلاعات ضروری را کامل کنید"
+        );
+
         return;
 
     }
 
 
 
+
     try{
 
 
-        const email = createFirebaseEmail(
+        const email =
+        createFirebaseEmail(
             data.username
         );
 
 
 
-        // ساخت حساب Firebase
-
-        const userCredential =
+        const result =
         await createUserWithEmailAndPassword(
+
             auth,
+
             email,
+
             data.password
+
         );
 
 
 
-        const user =
-        userCredential.user;
+        const uid =
+        result.user.uid;
 
 
 
-        // ذخیره اطلاعات در Firestore
 
         await setDoc(
+
             doc(
                 db,
                 "users",
-                user.uid
+                uid
             ),
+
             {
 
-                uid:user.uid,
+
+                uid:uid,
+
 
                 role:data.role,
 
+
                 name:data.name,
 
+
                 username:data.username,
+
 
                 mobile:data.mobile,
 
 
                 clinicName:data.clinicName,
 
+
                 clinicAddress:data.clinicAddress,
+
 
                 location:data.location,
 
@@ -150,7 +188,10 @@ export async function registerUser(){
                 createdAt:
                 new Date()
 
+
             }
+
+
         );
 
 
@@ -160,10 +201,8 @@ export async function registerUser(){
         );
 
 
-        console.log(
-            "New User:",
-            user.uid
-        );
+
+        return true;
 
 
 
@@ -171,17 +210,18 @@ export async function registerUser(){
     catch(error){
 
 
+
         console.error(error);
 
 
 
         if(
-            error.code === 
+            error.code ===
             "auth/email-already-in-use"
         ){
 
             alert(
-            "این نام کاربری قبلاً ثبت شده است"
+                "این نام کاربری قبلا ثبت شده است"
             );
 
         }
@@ -193,7 +233,7 @@ export async function registerUser(){
         ){
 
             alert(
-            "رمز عبور باید حداقل ۶ کاراکتر باشد"
+                "رمز عبور حداقل ۶ کاراکتر باشد"
             );
 
         }
@@ -201,29 +241,44 @@ export async function registerUser(){
 
         else{
 
+
             alert(
-            "خطا در ثبت نام"
+                "خطا در ثبت نام"
             );
 
+
         }
+
 
     }
 
 
 }
-// ===============================
-// Login User
-// ===============================
 
-export async function loginUser(){
+
+
+
+
+
+
+
+
+
+async function loginUser(){
+
 
 
     const username =
-    document.querySelector("#loginUsername")?.value;
+    document.querySelector("#loginUsername")
+    ?.value;
+
 
 
     const password =
-    document.querySelector("#loginPassword")?.value;
+    document.querySelector("#loginPassword")
+    ?.value;
+
+
 
 
 
@@ -242,6 +297,9 @@ export async function loginUser(){
 
 
 
+
+
+
     try{
 
 
@@ -250,32 +308,43 @@ export async function loginUser(){
 
 
 
-        // ورود به Firebase
 
-        const userCredential =
+        const result =
         await signInWithEmailAndPassword(
+
             auth,
+
             email,
+
             password
+
         );
 
 
 
-        const user =
-        userCredential.user;
+
+        const uid =
+        result.user.uid;
 
 
 
-        // گرفتن اطلاعات پروفایل
 
         const userDoc =
         await getDoc(
+
             doc(
+
                 db,
+
                 "users",
-                user.uid
+
+                uid
+
             )
+
         );
+
+
 
 
 
@@ -284,17 +353,21 @@ export async function loginUser(){
         ){
 
 
+
             const userData =
             userDoc.data();
 
 
 
-            // ذخیره موقت اطلاعات کاربر
 
             sessionStorage.setItem(
+
                 "gilsaUser",
+
                 JSON.stringify(userData)
+
             );
+
 
 
 
@@ -304,20 +377,12 @@ export async function loginUser(){
 
 
 
-            console.log(
-                "Logged User:",
-                userData
-            );
-
-
-
-            // انتقال بر اساس نقش
 
             if(
                 userData.role === "dentist"
             ){
 
-                window.location.href =
+                location.href =
                 "dentist-dashboard.html";
 
             }
@@ -327,7 +392,7 @@ export async function loginUser(){
                 userData.role === "lab"
             ){
 
-                window.location.href =
+                location.href =
                 "lab-dashboard.html";
 
             }
@@ -335,20 +400,24 @@ export async function loginUser(){
 
             else{
 
-                window.location.href =
+                location.href =
                 "dashboard.html";
 
             }
 
 
 
-        }
 
+            return userData;
+
+
+
+        }
         else{
 
 
             alert(
-                "اطلاعات پروفایل پیدا نشد"
+                "پروفایل کاربر پیدا نشد"
             );
 
 
@@ -363,71 +432,14 @@ export async function loginUser(){
         console.error(error);
 
 
-
-        if(
-            error.code ===
-            "auth/invalid-credential"
-        ){
-
-            alert(
+        alert(
             "نام کاربری یا رمز عبور اشتباه است"
-            );
+        );
 
-        }
-
-
-        else{
-
-            alert(
-            "خطا در ورود"
-            );
-
-        }
 
     }
 
 
-}
-// ===============================
-// Logout User
-// ===============================
-
-export async function logoutUser(){
-
-
-    try{
-
-
-        await signOut(auth);
-
-
-
-        sessionStorage.removeItem(
-            "gilsaUser"
-        );
-
-
-
-        alert(
-            "از حساب خارج شدید"
-        );
-
-
-
-        window.location.href =
-        "index.html";
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "خطا در خروج از حساب"
-        );
-
-    }
 
 }
 
@@ -435,67 +447,86 @@ export async function logoutUser(){
 
 
 
-// ===============================
-// Current User Listener
-// ===============================
 
-export function checkAuthState(){
+
+
+
+async function logoutUser(){
+
+
+
+    await signOut(auth);
+
+
+
+    sessionStorage.removeItem(
+        "gilsaUser"
+    );
+
+
+
+    location.href =
+    "index.html";
+
+
+}
+
+
+
+
+
+
+
+
+
+function checkAuthState(){
+
 
 
     onAuthStateChanged(
+
         auth,
-        async (user)=>{
+
+        async(user)=>{
 
 
             if(user){
 
 
-                console.log(
-                    "Firebase User:",
-                    user.uid
-                );
-
-
-
-                const userDoc =
+                const snap =
                 await getDoc(
+
                     doc(
+
                         db,
+
                         "users",
+
                         user.uid
+
                     )
+
                 );
 
 
 
                 if(
-                    userDoc.exists()
+                    snap.exists()
                 ){
 
 
-                    const userData =
-                    userDoc.data();
-
-
-
                     sessionStorage.setItem(
+
                         "gilsaUser",
-                        JSON.stringify(userData)
+
+                        JSON.stringify(
+                            snap.data()
+                        )
+
                     );
 
 
-
                 }
-
-
-            }
-
-            else{
-
-
-                console.log(
-                    "No User Logged In"
-                );
 
 
             }
@@ -505,16 +536,19 @@ export function checkAuthState(){
 
     );
 
+
 }
 
 
 
 
-// ===============================
-// Get Current User Data
-// ===============================
 
-export function getCurrentUser(){
+
+
+
+
+function getCurrentUser(){
+
 
 
     const user =
@@ -524,104 +558,147 @@ export function getCurrentUser(){
 
 
 
-    if(user){
-
-
-        return JSON.parse(user);
-
-
-    }
-
-
-    return null;
+    return user
+    ?
+    JSON.parse(user)
+    :
+    null;
 
 
 }
-// ===============================
-// Core Module Export
-// ===============================
+
+
+
+
+
+
+
+
 
 export const Auth = {
 
 
     init(){
 
+
         console.log(
-            "Auth V4 Initialized"
+            "Auth V4 Started"
         );
 
 
-        const loginForm =
-        document.querySelector("#loginForm");
-
-
-        if(loginForm){
-
-            loginForm.addEventListener(
-                "submit",
-                (e)=>{
-
-                    e.preventDefault();
-
-                    loginUser();
-
-                }
-
-            );
-
-        }
+        checkAuthState();
 
 
 
-        const registerForm =
-        document.querySelector("#registerForm");
 
+        document
+        .querySelector("#loginForm")
+        ?.addEventListener(
 
-        if(registerForm){
+            "submit",
 
-            registerForm.addEventListener(
-                "submit",
-                (e)=>{
+            e=>{
 
-                    e.preventDefault();
+                e.preventDefault();
 
-                    registerUser();
+                this.login();
 
-                }
+            }
 
-            );
-
-        }
+        );
 
 
 
-        const logout =
-        document.querySelector("#logoutBtn");
 
 
-        if(logout){
+        document
+        .querySelector("#registerForm")
+        ?.addEventListener(
 
-            logout.addEventListener(
-                "click",
-                logoutUser
-            );
+            "submit",
 
-        }
+            e=>{
+
+                e.preventDefault();
+
+                this.register();
+
+            }
+
+        );
+
+
+
+
+        document
+        .querySelector("#logoutBtn")
+        ?.addEventListener(
+
+            "click",
+
+            ()=>this.logout()
+
+        );
 
 
 
     },
 
 
-    loginUser,
 
-    registerUser,
 
-    logoutUser,
 
-    checkAuthState,
+    login(){
 
-    getCurrentUser
+        return loginUser();
+
+    },
+
+
+
+
+
+    register(){
+
+        return registerUser();
+
+    },
+
+
+
+
+
+    logout(){
+
+        return logoutUser();
+
+    },
+
+
+
+
+
+    isLogin(){
+
+
+        return !!sessionStorage.getItem(
+            "gilsaUser"
+        );
+
+
+    },
+
+
+
+
+
+    current(){
+
+
+        return getCurrentUser();
+
+
+    }
 
 
 };
