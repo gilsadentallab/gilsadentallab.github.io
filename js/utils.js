@@ -121,6 +121,8 @@ const Utils = {
 
 };
 
+export {
 
+    Utils
 
-export { Utils };
+};
