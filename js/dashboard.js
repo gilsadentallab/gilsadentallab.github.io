@@ -1,7 +1,9 @@
 /*==================================================
                 DASHBOARD MODULE V3
 ==================================================*/
-
+import { Storage } from "./storage.js";
+import { Utils } from "./utils.js";
+import { Auth } from "./auth.js";
 const Dashboard = {
 
     init(){
